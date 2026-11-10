@@ -1,0 +1,2290 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-05",
+  "note": "蔚蓝档案专有名词中日对照。手工条目为人工核对（high）；角色条目来自 gamekee 全站条目别名（medium，待抽查）。",
+  "entries": [
+    {
+      "zh": "空崎日奈",
+      "ja": "空崎ヒナ",
+      "kana": "そらさきヒナ",
+      "aliases": ["日奈", "ヒナ", "Hina"],
+      "category": "character",
+      "confidence": "high"
+    },
+    {
+      "zh": "老师",
+      "ja": "先生",
+      "kana": "せんせい",
+      "aliases": ["Sensei"],
+      "category": "address",
+      "confidence": "high"
+    },
+    {
+      "zh": "阿罗娜",
+      "ja": "アロナ",
+      "kana": "アロナ",
+      "aliases": ["Arona"],
+      "category": "character",
+      "confidence": "high"
+    },
+    {
+      "zh": "普拉娜",
+      "ja": "プラナ",
+      "kana": "プラナ",
+      "aliases": ["Plana"],
+      "category": "character",
+      "confidence": "high"
+    },
+    {
+      "zh": "沙勒",
+      "ja": "シャーレ",
+      "kana": "シャーレ",
+      "aliases": ["Schale"],
+      "category": "organization",
+      "confidence": "high"
+    },
+    {
+      "zh": "风纪委员会",
+      "ja": "風紀委員会",
+      "kana": "ふうきいいんかい",
+      "aliases": ["风纪委"],
+      "category": "organization",
+      "confidence": "high"
+    },
+    {
+      "zh": "补习部",
+      "ja": "補習部",
+      "kana": "ほしゅうぶ",
+      "aliases": ["补课部"],
+      "category": "organization",
+      "confidence": "high"
+    },
+    {
+      "zh": "格黑娜学园",
+      "ja": "ゲヘナ学園",
+      "kana": "ゲヘナがくえん",
+      "aliases": ["格黑娜", "Gehenna"],
+      "category": "school",
+      "confidence": "high"
+    },
+    {
+      "zh": "崔尼蒂综合学园",
+      "ja": "トリニティ総合学園",
+      "kana": "トリニティそうごうがくえん",
+      "aliases": ["崔尼蒂", "Trinity"],
+      "category": "school",
+      "confidence": "high"
+    },
+    {
+      "zh": "千年科学学园",
+      "ja": "ミレニアムサイエンススクール",
+      "kana": "ミレニアムサイエンススクール",
+      "aliases": ["千年", "Millennium"],
+      "category": "school",
+      "confidence": "high"
+    },
+    {
+      "zh": "阿拜多斯高中",
+      "ja": "アビドス高等学校",
+      "kana": "アビドスこうとうがっこう",
+      "aliases": ["阿拜多斯", "Abydos"],
+      "category": "school",
+      "confidence": "high"
+    },
+    {
+      "zh": "百鬼夜行联合学院",
+      "ja": "百鬼夜行連合学院",
+      "kana": "ひゃっきやこうれんごうがくいん",
+      "aliases": ["百鬼夜行", "Hyakkiyako"],
+      "category": "school",
+      "confidence": "high"
+    },
+    {
+      "zh": "山海经高级中学",
+      "ja": "山海経高級中学校",
+      "kana": "せんがいきょうこうきゅうちゅうがっこう",
+      "aliases": ["山海经", "Shanhaijing"],
+      "category": "school",
+      "confidence": "high"
+    },
+    {
+      "zh": "红冬联邦学园",
+      "ja": "レッドウィンター連邦学園",
+      "kana": "レッドウィンターれんぽうがくえん",
+      "aliases": ["红冬", "Red Winter"],
+      "category": "school",
+      "confidence": "high"
+    },
+    {
+      "zh": "盖玛特里亚",
+      "ja": "ゲマトリア",
+      "kana": "ゲマトリア",
+      "aliases": ["Gematria"],
+      "category": "organization",
+      "confidence": "medium"
+    },
+    {
+      "zh": "凯撒",
+      "ja": "カイザー",
+      "kana": "カイザー",
+      "aliases": ["Kaiser"],
+      "category": "organization",
+      "confidence": "medium"
+    },
+    {
+      "zh": "光环",
+      "ja": "ハロー",
+      "kana": "ハロー",
+      "aliases": ["Halo"],
+      "category": "term",
+      "confidence": "medium"
+    },
+    {
+      "zh": "日富美(赛车)",
+      "ja": "ヒフミ",
+      "aliases": ["Hifumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "梓(赛车)",
+      "ja": "アズサ",
+      "aliases": ["Azusa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日奈",
+      "ja": "ヒナ",
+      "aliases": ["Hina"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "伊织",
+      "ja": "イオリ",
+      "aliases": ["Iori"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日奈(泳装)",
+      "ja": "ヒナ（水着）",
+      "aliases": ["Hina (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日奈(礼服)",
+      "ja": "ヒナ（ドレス）",
+      "aliases": ["Hina (Dress)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "亚子",
+      "ja": "アコ",
+      "aliases": ["Ako"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "亚子(礼服)",
+      "ja": "アコ（ドレス）",
+      "aliases": ["Ako (Dress)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "伊织(泳装)",
+      "ja": "イオリ（水着）",
+      "aliases": ["Iori (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "千夏",
+      "ja": "チナツ",
+      "aliases": ["Chinatsu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "千夏(温泉)",
+      "ja": "チナツ（温泉）",
+      "aliases": ["Chinatsu (Hot Spring)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "濑名",
+      "ja": "セナ",
+      "aliases": ["Sena"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "濑名(私服)",
+      "ja": "セナ（私服）",
+      "aliases": ["Sena(Casual)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "真琴",
+      "ja": "マコト",
+      "aliases": ["Makoto"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "真琴(泳装)",
+      "ja": "マコト",
+      "aliases": ["Makoto"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "伊吕波",
+      "ja": "イロハ",
+      "aliases": ["Iroha"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "伊吕波(泳装)",
+      "ja": "イロハ",
+      "aliases": ["Iroha"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "伊吹",
+      "ja": "イブキ",
+      "aliases": ["Ibuki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "伊吹(泳装)",
+      "ja": "イブキ",
+      "aliases": ["Ibuki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "皋月",
+      "ja": "サツキ",
+      "aliases": ["Satsuki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "皋月(泳装)",
+      "ja": "サツキ",
+      "aliases": ["Satsuki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "千秋",
+      "ja": "チアキ",
+      "aliases": ["Chiaki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "千秋(泳装)",
+      "ja": "チアキ",
+      "aliases": ["Chiaki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "阿露",
+      "ja": "アル",
+      "aliases": ["Aru"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "阿露(正月)",
+      "ja": "アル（正月）",
+      "aliases": ["Aru (New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "阿露(礼服)",
+      "ja": "アル(ドレス)",
+      "aliases": ["Aru (Dress)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "睦月",
+      "ja": "ムツキ",
+      "aliases": ["Mutsuki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "睦月(正月)",
+      "ja": "ムツキ（正月）",
+      "aliases": ["Mutsuki (New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "睦月(礼服)",
+      "ja": "ムツキ",
+      "aliases": ["Mutsuki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "佳代子",
+      "ja": "カヨコ",
+      "aliases": ["Kayoko"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "佳代子(正月)",
+      "ja": "カヨコ（正月）",
+      "aliases": ["Kayoko (New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "佳代子(礼服)",
+      "ja": "カヨコ（ドレス）",
+      "aliases": ["Kayoko (Dress)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "遥香",
+      "ja": "ハルカ",
+      "aliases": ["Haruka"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "遥香(正月)",
+      "ja": "ハルカ（正月）",
+      "aliases": ["Haruka(New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "遥香(礼服)",
+      "ja": "ハルカ",
+      "aliases": ["Haruka"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "晴奈",
+      "ja": "ハルナ",
+      "aliases": ["Haruna"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "晴奈(体操服)",
+      "ja": "ハルナ（体操服）",
+      "aliases": ["Haruna (Sportswear)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "晴奈(正月)",
+      "ja": "ハルナ（正月）",
+      "aliases": ["Haruna (New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "淳子",
+      "ja": "ジュンコ",
+      "aliases": ["Junko"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "淳子(正月)",
+      "ja": "ジュンコ（正月）",
+      "aliases": ["Junko (New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "明里",
+      "ja": "アカリ",
+      "aliases": ["Akari"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "明里(正月)",
+      "ja": "アカリ（正月）",
+      "aliases": ["Akari(New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "泉",
+      "ja": "イズミ",
+      "aliases": ["Izumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "泉(泳装)",
+      "ja": "イズミ（水着）",
+      "aliases": ["Izumi (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "泉(正月)",
+      "ja": "イズミ",
+      "aliases": ["Izumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "枫香",
+      "ja": "フウカ",
+      "aliases": ["Fuuka"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "枫香(正月)",
+      "ja": "フウカ（正月）",
+      "aliases": ["Fuuka (New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "朱莉",
+      "ja": "ジュリ",
+      "aliases": ["Juri"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "朱莉(打工)",
+      "ja": "ジュリ（アルバイト）",
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "霞",
+      "ja": "カスミ",
+      "aliases": ["Kasumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "霞(泳装)",
+      "ja": "カスミ",
+      "aliases": ["Kasumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "惠",
+      "ja": "メグ",
+      "aliases": ["Megu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "绮良良",
+      "ja": "キララ",
+      "aliases": ["Kirara"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "优香",
+      "ja": "ユウカ",
+      "aliases": ["Yuuka"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "优香(体操服)",
+      "ja": "ユウカ（体操服）",
+      "aliases": ["Yuuka (Sportswear)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "优香(睡衣)",
+      "ja": "ユウカ（睡衣）",
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "诺亚",
+      "ja": "ノア",
+      "aliases": ["noa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "小雪",
+      "ja": "コユキ",
+      "aliases": ["Koyuki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "小雪(睡衣)",
+      "ja": "コユキ",
+      "aliases": ["Koyuki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "莉音",
+      "ja": "リオ",
+      "aliases": ["Rio"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "莉音(临战)",
+      "ja": "リオ",
+      "aliases": ["Rio"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "妮露",
+      "ja": "ネル",
+      "aliases": ["Neru"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "妮露(兔女郎)",
+      "ja": "ネル（バニーガール）",
+      "aliases": ["Neru (Bunny Girl)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "妮露(制服)",
+      "ja": "ネル（制服）",
+      "aliases": ["Neru(School Uniform)", "jk"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "明日奈",
+      "ja": "アスナ",
+      "aliases": ["asuna"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "明日奈(兔女郎)",
+      "ja": "アスナ（バニーガール）",
+      "aliases": ["Asuna (Bunny Girl)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "明日奈(制服)",
+      "ja": "アスナ（制服）",
+      "aliases": ["Asuna(School Uniform)", "jk"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "花凛",
+      "ja": "カリン",
+      "aliases": ["Karin"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "花凛(兔女郎)",
+      "ja": "カリン（バニーガール）",
+      "aliases": ["Karin (Bunny Girl)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "花凛(制服)",
+      "ja": "カリン（制服）",
+      "aliases": ["jk", "Karin(School Uniform)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "朱音",
+      "ja": "アカネ",
+      "aliases": ["akane"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "朱音(兔女郎)",
+      "ja": "アカネ（バニーガール）",
+      "aliases": ["Akane (Bunny Girl)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "朱音(制服)",
+      "ja": "アカネ",
+      "aliases": ["jk", "akane"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "时",
+      "ja": "トキ",
+      "aliases": ["toki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "时(兔女郎)",
+      "ja": "トキ（バニーガール）",
+      "aliases": ["Toki (Bunny Girl)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "时(临战)",
+      "ja": "トキ",
+      "aliases": ["toki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "歌原",
+      "ja": "ウタハ",
+      "aliases": ["Utaha"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "歌原(应援团)",
+      "ja": "ウタハ（応援団）",
+      "aliases": ["Utaha (Cheerleader)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "琴里",
+      "ja": "コトリ",
+      "aliases": ["Kotori"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "琴里(应援团)",
+      "ja": "コトリ（応援団）",
+      "aliases": ["Kotori (Cheerleader)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "响",
+      "ja": "ヒビキ",
+      "aliases": ["hibiki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "响(应援团)",
+      "ja": "ヒビキ（応援団）",
+      "aliases": ["Hibiki (Cheerleader)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "柚子",
+      "ja": "ユズ",
+      "aliases": ["Yuzu", "uzqueen"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "柚子(女仆)",
+      "ja": "ユズ（メイド）",
+      "aliases": ["Yuzu (Maid)", "uzqueen"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "柚子(临战)",
+      "ja": "ユズ",
+      "aliases": ["Yuzu", "uzqueen"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "桃井",
+      "ja": "モモイ",
+      "aliases": ["Momoi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "桃井(女仆)",
+      "ja": "モモイ（メイド）",
+      "aliases": ["Momoi (Maid)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "绿",
+      "ja": "ミドリ",
+      "aliases": ["Midori"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "绿(女仆)",
+      "ja": "ミドリ（メイド）",
+      "aliases": ["Midori (Maid)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "爱丽丝",
+      "ja": "アリス",
+      "aliases": ["arisu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "爱丽丝(女仆)",
+      "ja": "アリス（メイド）",
+      "aliases": ["Arisu (Maid)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "爱丽丝(临战)",
+      "ja": "アリス",
+      "aliases": ["arisu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "柯伊",
+      "ja": "ケイ",
+      "aliases": ["kei", "key", "amas"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "艾米",
+      "ja": "エイミ",
+      "aliases": ["Eimi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "艾米(泳装)",
+      "ja": "エイミ（水着）",
+      "aliases": ["Eimi (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "艾米(临战)",
+      "ja": "エイミ",
+      "aliases": ["Eimi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日鞠",
+      "ja": "ヒマリ",
+      "aliases": ["otto", "Himari"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日鞠(临战)",
+      "ja": "ヒマリ",
+      "aliases": ["otto", "Himari"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "千寻",
+      "ja": "チヒロ",
+      "aliases": ["Chihiro"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "真纪",
+      "ja": "マキ",
+      "aliases": ["maki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "真纪(野营)",
+      "ja": "マキ（キャンプ）",
+      "aliases": ["Maki(Camping)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "晴",
+      "ja": "ハレ",
+      "aliases": ["Hare"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "晴(野营)",
+      "ja": "ハレ（キャンプ）",
+      "aliases": ["Hare (Camping)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "小玉",
+      "ja": "コタマ",
+      "aliases": ["Kotama"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "小玉(野营)",
+      "ja": "コタマ（キャンプ）",
+      "aliases": ["Kotama (Camping)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "堇",
+      "ja": "スミレ",
+      "aliases": ["Sumire"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "堇(打工)",
+      "ja": "スミレ（アルバイト）",
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "莱伊",
+      "ja": "レイ",
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "未花",
+      "ja": "ミカ",
+      "aliases": ["mika"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "未花(泳装)",
+      "ja": "ミカ（水着）",
+      "aliases": ["Mika(Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "渚",
+      "ja": "ナギサ",
+      "aliases": ["Nagisa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "渚(泳装)",
+      "ja": "ナギサ（水着）",
+      "aliases": ["Nagisa(Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "圣娅",
+      "ja": "セイア",
+      "aliases": ["Seia"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "圣娅(泳装)",
+      "ja": "セイア（水着）",
+      "aliases": ["Seia (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "鹤城",
+      "ja": "ツルギ",
+      "aliases": ["Tsurugi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "鹤城(泳装)",
+      "ja": "ツルギ（水着）",
+      "aliases": ["Tsurugi (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "莲见",
+      "ja": "ハスミ",
+      "aliases": ["Hasumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "莲见(体操服)",
+      "ja": "ハスミ（体操服）",
+      "aliases": ["Hasumi (Sportswear)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "莲见(泳装)",
+      "ja": "ハスミ（水着）",
+      "aliases": ["Hasumi (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "真白",
+      "ja": "マシロ",
+      "aliases": ["Mashiro"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "真白(泳装)",
+      "ja": "マシロ（水着）",
+      "aliases": ["Mashiro (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "一花",
+      "ja": "イチカ",
+      "aliases": ["Ichika"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "一花(泳装)",
+      "ja": "イチカ（水着）",
+      "aliases": ["Ichika(Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "小春",
+      "ja": "コハル",
+      "aliases": ["Koharu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "小春(泳装)",
+      "ja": "コハル（水着）",
+      "aliases": ["Koharu (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "梓",
+      "ja": "アズサ",
+      "aliases": ["Azusa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "梓(泳装)",
+      "ja": "アズサ（水着）",
+      "aliases": ["Azusa (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日富美",
+      "ja": "ヒフミ",
+      "aliases": ["Hifumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日富美(泳装)",
+      "ja": "ヒフミ（水着）",
+      "aliases": ["Hifumi (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "花子",
+      "ja": "ハナコ",
+      "aliases": ["Hanako"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "花子(泳装)",
+      "ja": "ハナコ（水着）",
+      "aliases": ["Hanako (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日向",
+      "ja": "ヒナタ",
+      "aliases": ["Hinata"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日向(泳装)",
+      "ja": "ヒナタ（水着）",
+      "aliases": ["Hinata (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "樱子",
+      "ja": "サクラコ",
+      "aliases": ["Sakurako"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "樱子(偶像)",
+      "ja": "サクラコ（アイドル）",
+      "aliases": ["Sakurako(idol)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "玛丽",
+      "ja": "マリー",
+      "aliases": ["Mari"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "玛丽(体操服)",
+      "ja": "マリー（体操服）",
+      "aliases": ["Mari (Sportswear)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "玛丽(偶像)",
+      "ja": "マリー（アイドル）",
+      "aliases": ["Mari(idol)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "美祢",
+      "ja": "ミネ",
+      "aliases": ["Mine"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "美祢(偶像)",
+      "ja": "ミネ（アイドル）",
+      "aliases": ["Mine(idol)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "芹娜",
+      "ja": "セリナ",
+      "aliases": ["Serina"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "芹娜(圣诞)",
+      "ja": "セリナ（クリスマス）",
+      "aliases": ["Serina (Christmas)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "花绘",
+      "ja": "ハナエ",
+      "aliases": ["Hanae"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "花绘(圣诞)",
+      "ja": "ハナエ（クリスマス）",
+      "aliases": ["Hanae (Christmas)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "夏",
+      "ja": "ナツ",
+      "aliases": ["Natsu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "夏(乐队)",
+      "ja": "ナツ（バンド）",
+      "aliases": ["Natsu(Band)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "好美",
+      "ja": "ヨシミ",
+      "aliases": ["Yoshimi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "好美(乐队)",
+      "ja": "ヨシミ（バンド）",
+      "aliases": ["Yoshimi (Band)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "爱莉",
+      "ja": "アイリ",
+      "aliases": ["Airi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "爱莉(乐队)",
+      "ja": "アイリ（バンド）",
+      "aliases": ["Airi (Band)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "和纱",
+      "ja": "カズサ",
+      "aliases": ["Kazusa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "和纱(乐队)",
+      "ja": "カズサ（バンド）",
+      "aliases": ["Kazusa (Band)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "玲纱",
+      "ja": "レイサ",
+      "aliases": ["Reisa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "玲纱(魔法)",
+      "ja": "レイサ（マジカル）",
+      "aliases": ["Reisa(Magical)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "铃美",
+      "ja": "スズミ",
+      "aliases": ["Suzumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "铃美(魔法)",
+      "ja": "スズミ（マジカル）",
+      "aliases": ["Suzumi(Magical)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "忧",
+      "ja": "ウイ",
+      "aliases": ["Ui", "ui"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "忧(泳装)",
+      "ja": "ウイ（水着）",
+      "aliases": ["Ui (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "志美子",
+      "ja": "シミコ",
+      "aliases": ["Shimiko"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "兰舞",
+      "ja": "ラブ",
+      "aliases": ["Rabu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "纱织",
+      "ja": "サオリ",
+      "aliases": ["saori"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "纱织(泳装)",
+      "ja": "サオリ（水着",
+      "aliases": ["saori (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "纱织(礼服)",
+      "ja": "サオリ",
+      "aliases": ["saori"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "亚津子",
+      "ja": "アツコ",
+      "aliases": ["Atsuko"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "亚津子(泳装)",
+      "ja": "アツコ（水着）",
+      "aliases": ["Atsuko (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "美咲",
+      "ja": "ミサキ",
+      "aliases": ["misaki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "美咲(泳装)",
+      "ja": "ミサキ",
+      "aliases": ["misaki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日和",
+      "ja": "ヒヨリ",
+      "aliases": ["Hiyori"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "日和(泳装)",
+      "ja": "ヒヨリ（水着）",
+      "aliases": ["Hiyori(Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "昴",
+      "ja": "スバル",
+      "aliases": ["Subaru"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "星野",
+      "ja": "ホシノ",
+      "aliases": ["Hoshino"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "星野(泳装)",
+      "ja": "ホシノ（水着）",
+      "aliases": ["Hoshino (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "星野(临战·防御型)",
+      "ja": "ホシノ（臨戦）",
+      "aliases": ["Hoshino (Combat)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "星野(临战·攻击型)",
+      "ja": "ホシノ（臨戦）",
+      "aliases": ["Hoshino (Combat)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "白子",
+      "ja": "シロコ",
+      "aliases": ["xcw", "Shiroko"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "白子(骑行)",
+      "ja": "シロコ（ライディング）",
+      "aliases": ["Shiroko (Riding)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "白子(泳装)",
+      "ja": "シロコ（水着）",
+      "aliases": ["xcw", "Shiroko (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "白子*恐怖",
+      "ja": "シロコ*テラー",
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "野宫",
+      "ja": "ノノミ",
+      "aliases": ["nnm", "Nonomi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "野宫(泳装)",
+      "ja": "ノノミ（水着）",
+      "aliases": ["Nonomi (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "芹香",
+      "ja": "セリカ",
+      "aliases": ["Serika"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "芹香(正月)",
+      "ja": "セリカ（正月）",
+      "aliases": ["Serika (New Year)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "芹香(泳装)",
+      "ja": "セリカ（水着）",
+      "aliases": ["Serika (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "绫音",
+      "ja": "アヤネ",
+      "aliases": ["Ayane"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "绫音(泳装)",
+      "ja": "アヤネ（水着）",
+      "aliases": ["Ayane (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "光",
+      "ja": "ヒカリ",
+      "aliases": ["Hikari"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "望",
+      "ja": "ノゾミ",
+      "aliases": ["Nozomi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "青叶",
+      "ja": "アオバ",
+      "aliases": ["Aoba"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "若藻",
+      "ja": "ワカモ",
+      "aliases": ["Wakamo"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "若藻(泳装)",
+      "ja": "ワカモ（水着）",
+      "aliases": ["Wakamo (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "果穗",
+      "ja": "カホ",
+      "aliases": ["Kaho"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "妮娅",
+      "ja": "ニヤ",
+      "aliases": ["Niya"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "千世",
+      "ja": "チセ",
+      "aliases": ["Chise"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "千世(泳装)",
+      "ja": "チセ（水着）",
+      "aliases": ["Chise (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "紫",
+      "ja": "ユカリ",
+      "aliases": ["Yukari"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "紫(泳装)",
+      "ja": "ユカリ（水着）",
+      "aliases": ["Yukari (Swimsuit)i"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "莲华",
+      "ja": "レンゲ",
+      "aliases": ["Renge"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "莲华(泳装)",
+      "ja": "レンゲ（水着）",
+      "aliases": ["Renge(Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "桔梗",
+      "ja": "キキョウ",
+      "aliases": ["Kikyou"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "桔梗(泳装)",
+      "ja": "キキョウ（水着）",
+      "aliases": ["Kikyou(Swimsuit)i"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "名草",
+      "ja": "ナグサ",
+      "aliases": ["Nagusa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "名草(泳装)",
+      "ja": "ナグサ",
+      "aliases": ["Nagusa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "满",
+      "ja": "ミチル",
+      "aliases": ["Michiru"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "满(礼服)",
+      "ja": "ミチル",
+      "aliases": ["Michiru"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "月咏",
+      "ja": "ツクヨ",
+      "aliases": ["Tsukuyo"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "月咏(礼服)",
+      "ja": "ツクヨ",
+      "aliases": ["Tsukuyo"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "泉奈",
+      "ja": "イズナ",
+      "aliases": ["Izuna"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "泉奈(泳装)",
+      "ja": "イズナ（水着）",
+      "aliases": ["Izuna (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "静子",
+      "ja": "シズコ",
+      "aliases": ["Shizuko"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "静子(泳装)",
+      "ja": "シズコ（水着）",
+      "aliases": ["Shizuko (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "海香",
+      "ja": "ウミカ",
+      "aliases": ["Umika"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "菲娜",
+      "ja": "フィーナ",
+      "aliases": ["Pina"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "菲娜(导游)",
+      "ja": "フィーナ(ガイド)",
+      "aliases": ["Pina (Guide)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "椿",
+      "ja": "ツバキ",
+      "aliases": ["Tsubaki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "椿(导游)",
+      "ja": "ツバキ(ガイド)",
+      "aliases": ["Tsubaki (Guide)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "三森",
+      "ja": "ミモリ",
+      "aliases": ["Mimori"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "三森(泳装)",
+      "ja": "ミモリ（水着）",
+      "aliases": ["Mimori (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "枫",
+      "ja": "カエデ",
+      "aliases": ["Kaede"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "妃咲",
+      "ja": "キサキ",
+      "aliases": ["Kisaki", "ksk"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "妃咲(泳装)",
+      "ja": "キサキ",
+      "aliases": ["Kisaki", "ksk"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "南",
+      "ja": "ミナ",
+      "aliases": ["Mina"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "瑠美",
+      "ja": "ルミ",
+      "aliases": ["Rumi"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "丽情",
+      "ja": "レイジョ",
+      "aliases": ["Reizyo"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "瞬",
+      "ja": "シュン",
+      "aliases": ["Shun"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "瞬(小)",
+      "ja": "シュン",
+      "aliases": ["Shun (Kid)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "瞬(泳装)",
+      "ja": "シュン",
+      "aliases": ["Shun"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "雪玲(泳装)",
+      "ja": "シュン",
+      "aliases": ["Shun (Kid)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "心奈",
+      "ja": "ココナ",
+      "aliases": ["Kokona"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "纱绫",
+      "ja": "サヤ",
+      "aliases": ["Saya"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "纱绫(私服)",
+      "ja": "サヤ（私服）",
+      "aliases": ["Saya (Casual)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "切里诺",
+      "ja": "チェリノ",
+      "aliases": ["Cherino"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "切里诺(温泉)",
+      "ja": "チェリノ（温泉）",
+      "aliases": ["Cherino (Hot Spring)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "巴",
+      "ja": "トモエ",
+      "aliases": ["Tomoe"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "巴(旗袍)",
+      "ja": "トモエ(チーパオ)",
+      "aliases": ["Tomoe(Qipao)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "玛丽娜",
+      "ja": "マリナ",
+      "aliases": ["Marina"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "玛丽娜(旗袍)",
+      "ja": "マリナ (チーパオ)",
+      "aliases": ["Marina(Qipao)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "和香",
+      "ja": "ノドカ",
+      "aliases": ["Nodoka"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "和香(温泉)",
+      "ja": "ノドカ（温泉）",
+      "aliases": ["Nodoka (Hot Spring)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "时雨",
+      "ja": "シグレ",
+      "aliases": ["Shigure"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "时雨(温泉)",
+      "ja": "シグレ（温泉）",
+      "aliases": ["Shigure (Hot Spring)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "艾莉娜",
+      "ja": "エリナ",
+      "aliases": ["Erina"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "安娜",
+      "ja": "アンナ",
+      "aliases": ["Anna"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "实梨",
+      "ja": "ミノリ",
+      "aliases": ["Minori"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "梅露",
+      "ja": "メル",
+      "aliases": ["Meru", "Meruri"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "红叶",
+      "ja": "モミジ",
+      "aliases": ["Momiji"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "贵音",
+      "ja": "タカネ",
+      "aliases": ["Takane", "desuwa"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "八云",
+      "ja": "ヤクモ",
+      "aliases": ["Yakumo"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "康娜",
+      "ja": "カンナ",
+      "aliases": ["Kanna"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "康娜(泳装)",
+      "ja": "カンナ（水着）",
+      "aliases": ["Kanna (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "桐乃",
+      "ja": "キリノ",
+      "aliases": ["Kirino"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "桐乃(泳装)",
+      "ja": "キリノ（水着）",
+      "aliases": ["Kirino"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "吹雪",
+      "ja": "フブキ",
+      "aliases": ["Fubuki", "fbk"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "吹雪(泳装)",
+      "ja": "フブキ（水着）",
+      "aliases": ["Fubuki (Swimsuit)", "fbk"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "宫子",
+      "ja": "ミヤコ",
+      "aliases": ["Miyako"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "宫子(泳装)",
+      "ja": "ミヤコ（水着）",
+      "aliases": ["Miyako (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "咲",
+      "ja": "サキ",
+      "aliases": ["saki"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "咲(泳装)",
+      "ja": "サキ（水着）",
+      "aliases": ["Saki (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "美游",
+      "ja": "ミユ",
+      "aliases": ["Miyu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "美游(泳装)",
+      "ja": "ミユ（水着）",
+      "aliases": ["Miyu (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "萌绘",
+      "ja": "モエ",
+      "aliases": ["moe"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "萌绘(泳装)",
+      "ja": "モエ（水着）",
+      "aliases": ["moe (Swimsuit)"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "心",
+      "ja": "ココロ",
+      "aliases": ["Kokoro"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "琴音",
+      "ja": "コトネ",
+      "aliases": ["Kotone"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "绘里",
+      "ja": "エリ",
+      "aliases": ["Eri"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "鹿江",
+      "ja": "カノエ",
+      "aliases": ["Kanoe"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "美代",
+      "ja": "ミヨ",
+      "aliases": ["Miyo"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "冬",
+      "ja": "フユ",
+      "aliases": ["Fuyu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "律",
+      "ja": "リツ",
+      "aliases": ["Ritsu"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    },
+    {
+      "zh": "初音未来",
+      "ja": "初音ミク",
+      "aliases": ["miku"],
+      "category": "character",
+      "confidence": "medium",
+      "source": "gamekee"
+    }
+  ]
+}

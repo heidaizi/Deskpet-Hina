@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: ws: http:"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>空崎日奈设置</title>
+  </head>
+  <body>
+    <main class="settings-shell">
+      <header class="hero">
+        <div class="eyebrow">M5 · OFFICIAL Q-STYLE 3D</div>
+        <h1>空崎日奈设置</h1>
+        <p id="character-summary">好感成长按互动质量、全局结算冷却和每日上限推进。</p>
+      </header>
+
+      <nav class="settings-tabs" role="tablist" aria-label="设置分类">
+        <button
+          class="settings-tab is-active"
+          type="button"
+          role="tab"
+          id="tab-button-appearance"
+          data-tab="appearance"
+          aria-selected="true"
+          aria-controls="tab-appearance"
+        >
+          形象
+        </button>
+        <button
+          class="settings-tab"
+          type="button"
+          role="tab"
+          id="tab-button-relationship"
+          data-tab="relationship"
+          aria-selected="false"
+          aria-controls="tab-relationship"
+        >
+          关系
+        </button>
+        <button
+          class="settings-tab"
+          type="button"
+          role="tab"
+          id="tab-button-behavior"
+          data-tab="behavior"
+          aria-selected="false"
+          aria-controls="tab-behavior"
+        >
+          行为
+        </button>
+        <button
+          class="settings-tab"
+          type="button"
+          role="tab"
+          id="tab-button-ai"
+          data-tab="ai"
+          aria-selected="false"
+          aria-controls="tab-ai"
+        >
+          AI
+        </button>
+        <button
+          class="settings-tab"
+          type="button"
+          role="tab"
+          id="tab-button-data"
+          data-tab="data"
+          aria-selected="false"
+          aria-controls="tab-data"
+        >
+          数据
+        </button>
+      </nav>
+
+      <div
+        class="tab-panel is-active"
+        id="tab-appearance"
+        role="tabpanel"
+        aria-labelledby="tab-button-appearance"
+      >
+        <section class="panel" aria-labelledby="renderer-title">
+          <span class="section-kicker">CHARACTER RENDERER</span>
+          <h2 id="renderer-title">形象渲染</h2>
+          <p class="panel-copy">2D 占位与官方日奈 Q 版 3D 均可切换，状态和互动保持同步。</p>
+          <div class="renderer-options" id="renderer-options"></div>
+        </section>
+
+        <section class="panel model-panel" aria-labelledby="model-panel-title">
+          <span class="section-kicker">MODEL DISPLAY</span>
+          <h2 id="model-panel-title">模型大小与动作</h2>
+
+          <label class="range-setting" for="model-scale">
+            <span>
+              <strong>3D 模型大小</strong>
+              <output id="model-scale-value" for="model-scale">100%</output>
+            </span>
+            <input id="model-scale" type="range" min="0.3" max="1" step="0.05" value="1" />
+            <small>调整后会同步更新点击热区，并自动保存。</small>
+          </label>
+
+          <div class="action-preview">
+            <label for="model-action">
+              <strong>官方动作试演</strong>
+              <small>模型自带的 23 段 AnimationClip 都可以单独播放。</small>
+            </label>
+            <div class="action-preview-controls">
+              <select id="model-action" aria-label="选择官方 3D 动作"></select>
+              <button id="preview-model-action" class="button secondary" type="button">播放</button>
+            </div>
+            <p class="action-preview-status" id="model-action-status">
+              切换到 3D 后即可试演全部动作。
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <div
+        class="tab-panel"
+        id="tab-relationship"
+        role="tabpanel"
+        aria-labelledby="tab-button-relationship"
+      >
+        <section class="panel relationship-panel" aria-labelledby="relationship-title">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">RELATIONSHIP</span>
+              <h2 id="relationship-title">关系状态</h2>
+            </div>
+            <div class="level-chip" id="affection-level">Lv.1</div>
+          </div>
+
+          <div class="affection-title" id="affection-title">保持距离</div>
+          <p class="unlock-note" id="relationship-stage">关系阶段：认识</p>
+          <div class="progress-row">
+            <span>好感经验</span>
+            <span id="affection-xp">0 / 8</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill affection-fill" id="affection-progress"></div>
+          </div>
+          <p class="unlock-note" id="affection-unlock">正在读取关系解锁进度…</p>
+
+          <div class="metrics">
+            <article class="metric">
+              <span class="metric-label">心情</span>
+              <strong id="mood-value">62</strong>
+              <div class="mini-track"><i id="mood-progress"></i></div>
+            </article>
+            <article class="metric">
+              <span class="metric-label">精力</span>
+              <strong id="energy-value">78</strong>
+              <div class="mini-track"><i id="energy-progress"></i></div>
+            </article>
+            <article class="metric">
+              <span class="metric-label">今日互动</span>
+              <strong id="interaction-value">0</strong>
+              <span class="metric-note" id="daily-gain-note">好感 +0 / 12</span>
+            </article>
+            <article class="metric">
+              <span class="metric-label">当前情绪</span>
+              <strong id="emotion-dominant">平静</strong>
+              <span class="metric-note" id="emotion-fatigue">疲劳 22</span>
+            </article>
+            <article class="metric">
+              <span class="metric-label">耐心</span>
+              <strong id="emotion-patience">68</strong>
+              <div class="mini-track"><i id="emotion-patience-progress"></i></div>
+            </article>
+            <article class="metric">
+              <span class="metric-label">社交电量</span>
+              <strong id="emotion-social-battery">55</strong>
+              <div class="mini-track"><i id="emotion-social-progress"></i></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel memory-panel" id="memory-panel" aria-labelledby="memory-title">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">EPISODIC MEMORY</span>
+              <h2 id="memory-title">情节记忆</h2>
+            </div>
+            <div class="level-chip" id="memory-count">0</div>
+          </div>
+          <p class="panel-copy">
+            只记录专注、深夜、返回和关系升级等结构化经历，不保存窗口标题、选中文字或代码正文。
+          </p>
+          <div class="memory-list" id="memory-list"></div>
+          <p class="resource-note" id="memory-status">正在读取记忆…</p>
+          <div class="button-row compact">
+            <button id="clear-memory" class="button secondary" type="button">清空全部记忆</button>
+          </div>
+        </section>
+      </div>
+
+      <div
+        class="tab-panel"
+        id="tab-behavior"
+        role="tabpanel"
+        aria-labelledby="tab-button-behavior"
+      >
+        <section class="panel" aria-labelledby="behavior-title">
+          <span class="section-kicker">CONTROLS</span>
+          <h2 id="behavior-title">行为控制</h2>
+
+          <label class="setting-row" for="presence-autonomy-enabled">
+            <span>
+              <strong>允许日奈主动行动</strong>
+              <small>关闭后保留点击、拖拽和用户主动 AI，但停止自主动作、场景对白和主动规划。</small>
+            </span>
+            <input id="presence-autonomy-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="presence-intensity">
+            <span>
+              <strong>主动陪伴强度</strong>
+              <small>克制模式更安静，平衡为默认，活泼模式会增加动作和主动对白频率。</small>
+            </span>
+            <select id="presence-intensity">
+              <option value="quiet">克制</option>
+              <option value="balanced">平衡</option>
+              <option value="lively">活泼</option>
+            </select>
+          </label>
+
+          <label class="setting-row" for="pause-interactions">
+            <span>
+              <strong>暂停互动</strong>
+              <small>保留自动动画，但点击和拖拽暂不改变状态。</small>
+            </span>
+            <input id="pause-interactions" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="random-voice-enabled">
+            <span>
+              <strong>随机语音与动作</strong>
+              <small>空闲时偶尔播放官方日语语音，并配合对应的官方动作。</small>
+            </span>
+            <input id="random-voice-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="tts-engine">
+            <span>
+              <strong>语音引擎</strong>
+              <small
+                >Irodori 为离线引擎；AivisSpeech 需要本机引擎在 10101
+                端口运行，失败自动回退。</small
+              >
+            </span>
+            <select id="tts-engine">
+              <option value="irodori">Irodori（默认）</option>
+              <option value="aivis">AivisSpeech</option>
+            </select>
+          </label>
+
+          <label class="setting-row" for="tts-quality">
+            <span>
+              <strong>语音质量档位</strong>
+              <small>
+                三档都保留降噪，只调整采样步数：质量 24 步 / 平衡 16 步 / 速度 12 步。
+              </small>
+            </span>
+            <select id="tts-quality">
+              <option value="quality">质量优先</option>
+              <option value="balanced">平衡</option>
+              <option value="speed">速度优先</option>
+            </select>
+          </label>
+
+          <label class="setting-row" for="local-tts-enabled">
+            <span>
+              <strong>本地 TTS 补全</strong>
+              <small>没有官方语音的对白使用日奈 Irodori 声线；服务按需加载。</small>
+            </span>
+            <input id="local-tts-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="presence-memory-enabled">
+            <span>
+              <strong>连续记忆</strong>
+              <small>
+                仅保存最近主动对白的文本指纹、受控标签和本地时间，不保存台词正文；用于返回问候和防重复。
+              </small>
+            </span>
+            <input id="presence-memory-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="presence-emotion-enabled">
+            <span>
+              <strong>情绪惯性</strong>
+              <small>
+                让耐心、疲劳、社交电量和情绪变化具有惯性，并影响动作、语音和主动行为权重。
+              </small>
+            </span>
+            <input id="presence-emotion-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="always-on-top">
+            <span>
+              <strong>始终保持置顶</strong>
+              <small>关闭后，其他窗口可以覆盖桌宠。</small>
+            </span>
+            <input id="always-on-top" type="checkbox" />
+          </label>
+        </section>
+
+        <section class="panel" aria-labelledby="context-title">
+          <span class="section-kicker">TIME & SCENE</span>
+          <h2 id="context-title">时间与场景感知</h2>
+          <p class="panel-copy">日奈会参考本地时间、周末、系统空闲和前台应用类别调整主动行为。</p>
+          <div class="resource-grid">
+            <div class="resource-card">
+              <span>本地时间</span>
+              <strong id="context-clock">读取中</strong>
+            </div>
+            <div class="resource-card">
+              <span>当前时段</span>
+              <strong id="context-period">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>前台场景</span>
+              <strong id="context-scene">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>前台应用</span>
+              <strong id="context-app">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>系统状态</span>
+              <strong id="context-system">—</strong>
+            </div>
+          </div>
+          <p class="resource-note">
+            日常场景只读取前台应用名称用于本地分类；不会自动上传。窗口标题、选中文字和 DeepSeek
+            请求只能由你在下方主动触发。
+          </p>
+        </section>
+      </div>
+
+      <div class="tab-panel" id="tab-ai" role="tabpanel" aria-labelledby="tab-button-ai">
+        <section class="panel ai-panel" id="ai-panel" aria-labelledby="ai-title">
+          <span class="section-kicker">CLOUD AI</span>
+          <h2 id="ai-title">DeepSeek 情境对话</h2>
+          <div class="button-row compact">
+            <button id="open-chat-window" class="button secondary" type="button">
+              打开对话窗口
+            </button>
+          </div>
+          <p class="panel-copy">
+            默认只有你主动触发时才会请求
+            DeepSeek。开启主动规划后，仅高价值本地事件会发送筛选后的场景、情绪与记忆摘要；
+            窗口标题和选中文字仍必须单独开启，并在发送前预览。
+          </p>
+
+          <label class="setting-row" for="ai-enabled">
+            <span>
+              <strong>启用 DeepSeek</strong>
+              <small>关闭后快捷键和托盘 AI 入口不会发送任何云端请求。</small>
+            </span>
+            <input id="ai-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="ai-proactive-enabled">
+            <span>
+              <strong>允许日奈主动规划</strong>
+              <small>
+                仅在高价值场景发送本地摘要、情绪和已筛选记忆；每小时最多 4 次，失败时回退固定台词。
+              </small>
+            </span>
+            <input id="ai-proactive-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="intelligence-level">
+            <span>
+              <strong>主动行为智能程度</strong>
+              <small> 基础：保持固定预算；自适应：按效用函数决定是否开口，专注时更克制。 </small>
+            </span>
+            <select id="intelligence-level">
+              <option value="off">关闭</option>
+              <option value="basic">基础</option>
+              <option value="adaptive">自适应</option>
+            </select>
+          </label>
+
+          <label class="setting-row" for="conversation-memory-enabled">
+            <span>
+              <strong>记住最近对话</strong>
+              <small>
+                仅在本机保存最近几轮问答，用于接住上一句；不保存原始选中文字的完整内容。
+              </small>
+            </span>
+            <input id="conversation-memory-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="ai-window-title-enabled">
+            <span>
+              <strong>允许读取窗口标题</strong>
+              <small>标题可能包含文档名或网页主题，默认关闭。</small>
+            </span>
+            <input id="ai-window-title-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="ai-selected-text-enabled">
+            <span>
+              <strong>允许读取选中文字</strong>
+              <small>只在按下“解释选中文字”时读取一次，不轮询剪贴板。</small>
+            </span>
+            <input id="ai-selected-text-enabled" type="checkbox" />
+          </label>
+
+          <div class="ai-key-row">
+            <label for="deepseek-key">
+              <strong>DeepSeek API Key</strong>
+              <small>使用 macOS 安全存储加密，不会回传到页面。</small>
+            </label>
+            <input
+              id="deepseek-key"
+              type="password"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="sk-…"
+            />
+            <div class="button-row compact">
+              <button id="save-deepseek-key" class="button primary" type="button">保存 Key</button>
+              <button id="delete-deepseek-key" class="button secondary" type="button">
+                删除 Key
+              </button>
+              <button id="request-accessibility" class="button secondary" type="button">
+                授权辅助功能
+              </button>
+            </div>
+          </div>
+
+          <p class="resource-note" id="ai-status">正在读取 AI 状态…</p>
+          <div class="button-row">
+            <button id="ai-analyze-task" class="button secondary" type="button">
+              分析当前任务
+            </button>
+            <button id="ai-analyze-selection" class="button secondary" type="button">
+              解释选中文字
+            </button>
+          </div>
+          <p class="resource-note">快捷键：分析当前任务 ⌘⌥⇧D · 解释选中文字 ⌘⌥⇧S</p>
+
+          <div class="ai-preview" id="ai-preview" hidden>
+            <div class="section-title-row">
+              <div>
+                <span class="section-kicker">PRIVACY PREVIEW</span>
+                <h3>本次将发送</h3>
+              </div>
+              <strong id="ai-preview-mode">—</strong>
+            </div>
+            <dl class="ai-context-list">
+              <div>
+                <dt>应用类别</dt>
+                <dd id="ai-context-scene">—</dd>
+              </div>
+              <div>
+                <dt>本地时段</dt>
+                <dd id="ai-context-time">—</dd>
+              </div>
+              <div>
+                <dt>窗口标题</dt>
+                <dd id="ai-context-title">未包含</dd>
+              </div>
+            </dl>
+            <label class="ai-selection-preview" for="ai-selected-preview">
+              <span>选中文字</span>
+              <textarea
+                id="ai-selected-preview"
+                readonly
+                rows="6"
+                maxlength="4000"
+                placeholder="系统无法读取选区时，请从目标应用复制后在此按 ⌘V 粘贴。"
+              ></textarea>
+            </label>
+            <p class="resource-note" id="ai-preview-note"></p>
+            <div class="button-row">
+              <button id="send-ai-context" class="button primary" type="button" disabled>
+                发送给日奈
+              </button>
+              <button id="cancel-ai-context" class="button secondary" type="button" disabled>
+                取消
+              </button>
+              <button id="remember-ai-context" class="button secondary" type="button">
+                记住这段
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel resource-panel" aria-labelledby="resource-title">
+          <span class="section-kicker">AI RUNTIME</span>
+          <h2 id="resource-title">AI 与运行资源</h2>
+          <p class="panel-copy">日奈声线按需加载。睡眠时释放模型，长期不用会自动卸载。</p>
+          <div class="resource-grid">
+            <div class="resource-card">
+              <span>声线服务</span>
+              <strong id="resource-tts-state">读取中</strong>
+            </div>
+            <div class="resource-card">
+              <span>TTS 内存</span>
+              <strong id="resource-tts-memory">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>桌宠内存 / CPU</span>
+              <strong id="resource-app-usage">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>语音缓存</span>
+              <strong id="resource-cache">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>推理日志</span>
+              <strong id="resource-log">—</strong>
+            </div>
+          </div>
+          <div class="resource-grid" aria-label="主动行为运行遥测">
+            <div class="resource-card">
+              <span>场景采样 / 决策</span>
+              <strong id="telemetry-decisions">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>静默比例</span>
+              <strong id="telemetry-silent-ratio">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>表现 / 语音</span>
+              <strong id="telemetry-performed">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>重复抑制</span>
+              <strong id="telemetry-repeats">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>动作 / 语音打断</span>
+              <strong id="telemetry-interruptions">—</strong>
+            </div>
+            <div class="resource-card">
+              <span>运行时长</span>
+              <strong id="telemetry-uptime">—</strong>
+            </div>
+          </div>
+          <div class="button-row">
+            <button id="preload-tts" class="button secondary" type="button">预加载声线</button>
+            <button id="unload-tts" class="button secondary" type="button">立即释放模型</button>
+          </div>
+          <p class="resource-note" id="resource-note">正在读取资源状态…</p>
+        </section>
+      </div>
+
+      <div class="tab-panel" id="tab-data" role="tabpanel" aria-labelledby="tab-button-data">
+        <section class="panel" aria-labelledby="data-title">
+          <span class="section-kicker">LOCAL DATA</span>
+          <h2 id="data-title">本地数据</h2>
+          <p class="panel-copy">状态以 JSON 保存在当前用户的应用数据目录中，不会上传网络。</p>
+          <div class="button-row">
+            <button id="open-data-directory" class="button secondary" type="button">
+              打开存档目录
+            </button>
+            <button id="reset-state" class="button danger" type="button">重置角色状态</button>
+            <button id="clear-conversation-memory" class="button secondary" type="button">
+              清除对话记忆
+            </button>
+          </div>
+        </section>
+
+        <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
+
+        <p class="resource-note" id="semantic-summary">
+          语义记忆：0 条（仅记录你明确要求记住的内容）。
+        </p>
+
+        <p class="resource-note" id="last-error">没有记录到主进程异常。</p>
+
+        <footer>
+          <span id="app-version">Deskpet</span>
+          <span id="rule-count">正在读取规则…</span>
+        </footer>
+      </div>
+    </main>
+
+    <script type="module" src="./src/settings.ts"></script>
+  </body>
+</html>

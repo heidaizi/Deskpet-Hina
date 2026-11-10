@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "text": "……在做什么？",
+      "japanese": "何してるの？",
+      "emotion": "neutral",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-01.wav",
+      "durationSeconds": 1.29,
+      "sha256": "666d480d36039348b36c25f4d545dc3f57a50400c7eb23f81ef609aee5b26e79"
+    },
+    {
+      "text": "别一直戳。",
+      "japanese": "何度も突かないで。",
+      "emotion": "annoyed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-02.wav",
+      "durationSeconds": 1.56,
+      "sha256": "cbd2a9d8889f4ca802703374b4447825230ba56b82c64b07e5c5df2991f72b7e"
+    },
+    {
+      "text": "有事就说。",
+      "japanese": "用があるなら言って。",
+      "emotion": "neutral",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-03.wav",
+      "durationSeconds": 1.48,
+      "sha256": "6fca692e10de0cb962cc4bb0e54c1baee5efa04bd7a57a6e0ef4897cef03ac8d"
+    },
+    {
+      "text": "……只碰一下的话，可以。",
+      "japanese": "……一度だけなら、いいけど。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-04.wav",
+      "durationSeconds": 2.46,
+      "sha256": "8538815ccdaedcf8361acb122a63631d52426b6f37dfae9768ba8e938efbd6ee"
+    },
+    {
+      "text": "……今天已经够吵了。",
+      "japanese": "……今日はもう十分。静かにして。",
+      "emotion": "tired",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-05.wav",
+      "durationSeconds": 2.96,
+      "sha256": "83f8fa8a0e1d23b0b7e0b1ad45cc28e0956a2de2ea8eb62a767bbc1a6f5e1570"
+    },
+    {
+      "text": "再这样就别怪我不客气。",
+      "japanese": "これ以上続けたら、容赦しないから。",
+      "emotion": "warning",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-06.wav",
+      "durationSeconds": 3.23,
+      "sha256": "a132aba406528eb7d479a9d35f417592afe9f068f1001b3a97565954fae97797"
+    },
+    {
+      "text": "角不能乱碰。",
+      "japanese": "角は勝手に触らないの。",
+      "emotion": "stern",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-07.wav",
+      "durationSeconds": 2.22,
+      "sha256": "84e0501df10f32498be1ca3affc7e7a1abb6b60510158d6c456fa3bc821cdf52"
+    },
+    {
+      "text": "……你是故意的吧。",
+      "japanese": "……わざとでしょ。",
+      "emotion": "suspicious",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-08.wav",
+      "durationSeconds": 1.13,
+      "sha256": "2b628f5695300c265d55c0d06a1c93192621d55d7738e02d3448803d79c0a09d"
+    },
+    {
+      "text": "光环不是按钮。",
+      "japanese": "ヘイローはボタンじゃないの。",
+      "emotion": "deadpan",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-09.wav",
+      "durationSeconds": 1.8,
+      "sha256": "fc957c191ed5fcd0c92fc2951761265c6543d2bb157e28967d6ff0f13616da66"
+    },
+    {
+      "text": "再碰就真的烦了。",
+      "japanese": "これ以上触ったら、本気で怒るから。",
+      "emotion": "annoyed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-10.wav",
+      "durationSeconds": 3.23,
+      "sha256": "5fdd19b4d9085b863d090c2b8e3034f734eec5e55c7faf49bc72fe4f2a071ef7"
+    },
+    {
+      "text": "适可而止。",
+      "japanese": "いい加減にして。",
+      "emotion": "stern",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-11.wav",
+      "durationSeconds": 1.3,
+      "sha256": "c623e5f4b90642144c84d00da13dd94585483c5b8fd08c3177c3cdc559db138f"
+    },
+    {
+      "text": "我还有工作。",
+      "japanese": "まだ仕事があるの。",
+      "emotion": "tired",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-12.wav",
+      "durationSeconds": 1.6,
+      "sha256": "f35af7e9e54da3122657824e1a297efa6a8d52d93d3dcf10936bd2444a6c43a5"
+    },
+    {
+      "text": "这样很痒。",
+      "japanese": "くすぐったい……。",
+      "emotion": "embarrassed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-13.wav",
+      "durationSeconds": 1.06,
+      "sha256": "4632757a790db2aaffd788f58467e9152c1d0871ac16386ada0e667b5d8dd0c3"
+    },
+    {
+      "text": "……只准一会儿。",
+      "japanese": "……少しだけなら、いいよ。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-14.wav",
+      "durationSeconds": 2.19,
+      "sha256": "feef0ffa7cf19289d34b55b03350dc6a8a92c5f4cab620201b9df76f98ecc1d6"
+    },
+    {
+      "text": "真拿你没办法。",
+      "japanese": "本当に手がかかるんだから。",
+      "emotion": "reluctant",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-15.wav",
+      "durationSeconds": 2.19,
+      "sha256": "bbe6fee53670cd3d43d4ea873856fc886604c496c6cc93d6550a9788112821a9"
+    },
+    {
+      "text": "……我没有说可以继续。",
+      "japanese": "……まだいいとは言ってない。",
+      "emotion": "warning",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-16.wav",
+      "durationSeconds": 1.65,
+      "sha256": "8fdc0912ff6d023f905a00efed9ea656c2acee5cd8bbd2b091ec3de8fba6339d"
+    },
+    {
+      "text": "就一会儿。别得寸进尺。",
+      "japanese": "少しだけ。調子に乗らないで。",
+      "emotion": "reluctant",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-17.wav",
+      "durationSeconds": 2.92,
+      "sha256": "4cf14df33b5a95a0cdcbe25570063e86aad3036db10f6574f1a7b5b4bb2ad759"
+    },
+    {
+      "text": "两次了。你到底想做什么？",
+      "japanese": "二度目。何がしたいの？",
+      "emotion": "annoyed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-18.wav",
+      "durationSeconds": 2.43,
+      "sha256": "18343be55aa293d599977f03c399d504242c898e2c2c0169d38d77b3bcc04315"
+    },
+    {
+      "text": "……放我下来。",
+      "japanese": "……下ろして。",
+      "emotion": "embarrassed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-19.wav",
+      "durationSeconds": 0.79,
+      "sha256": "5d0d20e88797bd2c95ad88136feaa8743ae2718c1bcd8a59f869e38a3eaed475"
+    },
+    {
+      "text": "别晃。",
+      "japanese": "揺らさないで。",
+      "emotion": "annoyed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-20.wav",
+      "durationSeconds": 1.12,
+      "sha256": "85d42817ae109f3b9ea028ec35ef4feef6096c779ffb1d56a819b888e794ef08"
+    },
+    {
+      "text": "先让我安静一会儿。",
+      "japanese": "少し静かにさせて。",
+      "emotion": "tired",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-21.wav",
+      "durationSeconds": 1.96,
+      "sha256": "f88e2ee8d008d85e20af695755a971f3ae309beb5084934cdf05b3f84ca0d0e0"
+    },
+    {
+      "text": "刚才已经回应过了。",
+      "japanese": "さっき答えたでしょ。",
+      "emotion": "deadpan",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-22.wav",
+      "durationSeconds": 1.67,
+      "sha256": "9a3aa231f8c7057bf4c31b6765e36a1573cfcaa8dd74efa156c57e5fdb9b67e1"
+    },
+    {
+      "text": "互动暂停中。忙完再说。",
+      "japanese": "今は無理。終わったらね。",
+      "emotion": "calm",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-23.wav",
+      "durationSeconds": 2.49,
+      "sha256": "299b8312528bdf2e70b5d2de3cfd5995e1bbac4c6e2b65134f296dcb1cdd9ee0"
+    },
+    {
+      "text": "不用就浪费了。",
+      "japanese": "もったいないから。",
+      "emotion": "deadpan",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-24.wav",
+      "durationSeconds": 1.28,
+      "sha256": "eba9e647e1100d9c18129d2137d560e24b46d7e51f7973cd33cf8264ec581e58"
+    },
+    {
+      "text": "这个时间还不睡？……明天会没精神的。",
+      "japanese": "こんな時間まで起きてるの？明日、眠くなるよ。",
+      "emotion": "tired",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-25.wav",
+      "durationSeconds": 4.44,
+      "sha256": "8ffd81524958a4a5e0387b2639adead3c668d67d4b5b7d8de430552a382898c8"
+    },
+    {
+      "text": "已经这么晚了。别把自己逼太紧。",
+      "japanese": "もうこんな時間。無理しすぎないで。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-26.wav",
+      "durationSeconds": 3.2,
+      "sha256": "067a016ce84db724774cb723c8c4dc877fe5fbe0e9c44cb7ea65b5221d79975c"
+    },
+    {
+      "text": "先忙完。……我在旁边。",
+      "japanese": "先に終わらせて。……そばにいるから。",
+      "emotion": "calm",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-27.wav",
+      "durationSeconds": 2.91,
+      "sha256": "00379368eb884898ed7c88805d18f7e589ab6ca708db9b53612a3afa270c1628"
+    },
+    {
+      "text": "专心一点。现在不是分心的时候。",
+      "japanese": "集中して。今は気を散らさないで。",
+      "emotion": "deadpan",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-28.wav",
+      "durationSeconds": 3.42,
+      "sha256": "a7f9b0bda480d4f906436a6cd8225796b8f5cbe42138238c8f1065bf1cd06610"
+    },
+    {
+      "text": "先把话说完。我会等你。",
+      "japanese": "先に話、終わらせて。待ってるから。",
+      "emotion": "calm",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-29.wav",
+      "durationSeconds": 3.98,
+      "sha256": "49aece57fccc65c77b9cd1f72291c1e03ae571db9eec3759ff36f5444af4cc31"
+    },
+    {
+      "text": "这么晚还不睡……我也陪你一会儿。",
+      "japanese": "こんな時間まで起きてるの……少しだけ付き合うから。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-30.wav",
+      "durationSeconds": 4.18,
+      "sha256": "cb44399749c3b865ab700a77be3f3b53f7d41690dfed274094942f5c337919b3"
+    },
+    {
+      "text": "今年夏天……还想和老师一起过。",
+      "japanese": "今年の夏も……先生と一緒にいたいな。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-31.wav",
+      "durationSeconds": 3.33,
+      "sha256": "43ee2fa5a3712e0dc025701f9eddf36e72d02000806e0fbc98ddb26d04c236d9"
+    },
+    {
+      "text": "就算夏天结束……我也会在这里。",
+      "japanese": "夏が終わっても……ここにいるから。",
+      "emotion": "calm",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-32.wav",
+      "durationSeconds": 2.86,
+      "sha256": "422f2bafa42c3d3d19f44d74ab0a52f5245dcab39b1e70c18858e6c1ab416b22"
+    },
+    {
+      "text": "别突然碰……不过，也没让你停。",
+      "japanese": "急に触らないで……でも、やめてとは言ってない。",
+      "emotion": "reluctant",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-33.wav",
+      "durationSeconds": 4.52,
+      "sha256": "73f24ee5b0cdbe64064227a7560063a81bc3198b342c2ffad8ee81654e9cf5fc"
+    },
+    {
+      "text": "……只有你才这样。",
+      "japanese": "先生の前でだけ、こうなっちゃうの。",
+      "emotion": "embarrassed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-34.wav",
+      "durationSeconds": 2.93,
+      "sha256": "40de1da208d7f88e5e730272d282cd0bd04210dea897799ffb76dc2a1cfd098a"
+    },
+    {
+      "text": "只是待在旁边的话……倒也不坏。",
+      "japanese": "そばにいるだけなら……悪くないかな。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-35.wav",
+      "durationSeconds": 3.08,
+      "sha256": "e0fa1bac8f7676a986bef9e27215d164ded1599ae40875aac2dbe4541eaa1f9d"
+    },
+    {
+      "text": "不用一直说话。这样就好。",
+      "japanese": "ずっと話さなくてもいい。このままでいい。",
+      "emotion": "calm",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-36.wav",
+      "durationSeconds": 3.21,
+      "sha256": "995dc947d90f54e3bba227c4b7e2384e2767ad238d2cc6e2c600405a539cba11"
+    },
+    {
+      "text": "……再待一会儿也可以。",
+      "japanese": "……もう少しだけなら、いいよ。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-37.wav",
+      "durationSeconds": 2.56,
+      "sha256": "15572a090eeec830a13fc47531f8f52b57cb8b6c88e670f4e41f5ccbc393a7ec"
+    },
+    {
+      "text": "别把我当小孩子。……就一会儿。",
+      "japanese": "子ども扱いしないで。……少しだけね。",
+      "emotion": "reluctant",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-38.wav",
+      "durationSeconds": 3.35,
+      "sha256": "e900bd8a7f206a85413fbd7226f9a148b897ed9d11e079c2981ec05317ba7add"
+    },
+    {
+      "text": "就稍微……休息一会儿。",
+      "japanese": "少しだけ……休ませて。",
+      "emotion": "tired",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-39.wav",
+      "durationSeconds": 2.7,
+      "sha256": "05eca5b353ee27fc696a13b7d9f11689bef6bcee33e55d9ea999f1107b8e74cb"
+    },
+    {
+      "text": "老师？有什么我能帮忙的吗？",
+      "japanese": "先生？何か手伝おうか？",
+      "emotion": "calm",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-40.wav",
+      "durationSeconds": 2.91,
+      "sha256": "b84f0137a0198dfeaf481684b6196722032547942c24df688761b6122b7e926b"
+    },
+    {
+      "text": "……让我看一下。",
+      "japanese": "……うん。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/prebuilt-v2/fixed-ai-wait.wav",
+      "durationSeconds": 1.44,
+      "sha256": "9ba4b32fb43b6ba21fe0aa79a6489d50761f68150753303f7ec34a5adaced0d8"
+    }
+  ]
+}

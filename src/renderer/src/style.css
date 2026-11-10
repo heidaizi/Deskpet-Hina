@@ -1,0 +1,92 @@
+:root {
+  color-scheme: light;
+  font-family: 'Avenir Next', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#app {
+  position: relative;
+  cursor: default;
+}
+
+#pet-canvas {
+  position: absolute;
+  top: var(--model-offset-y, 0);
+  left: 0;
+  display: block;
+  width: 340px;
+  height: 460px;
+  touch-action: none;
+}
+
+#bubble {
+  position: absolute;
+  z-index: 5;
+  top: auto;
+  bottom: var(--bubble-bottom, 18px);
+  left: 50%;
+  width: max-content;
+  max-width: var(--bubble-max-width, 245px);
+  padding: var(--bubble-padding-y, 10px) var(--bubble-padding-x, 14px);
+  border: 1px solid rgb(109 87 181 / 18%);
+  border-radius: var(--bubble-border-radius, 16px) var(--bubble-border-radius, 16px)
+    var(--bubble-border-radius, 16px) 5px;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: 0 10px 28px rgb(42 28 84 / 16%);
+  color: #3c355b;
+  font-size: var(--bubble-font-size, 13px);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px) scale(0.96);
+  transform-origin: 50% 100%;
+  transition:
+    bottom 160ms ease,
+    max-width 160ms ease,
+    padding 160ms ease,
+    border-radius 160ms ease,
+    font-size 160ms ease,
+    opacity 150ms ease,
+    transform 180ms cubic-bezier(0.2, 0.9, 0.3, 1.15);
+}
+
+#bubble[data-visible='true'] {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+#bubble::after {
+  position: absolute;
+  bottom: -7px;
+  left: 22px;
+  width: 13px;
+  height: 13px;
+  border-right: 1px solid rgb(109 87 181 / 18%);
+  border-bottom: 1px solid rgb(109 87 181 / 18%);
+  background: rgb(255 255 255 / 94%);
+  content: '';
+  transform: rotate(45deg);
+}

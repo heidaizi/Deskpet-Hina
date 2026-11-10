@@ -1,0 +1,22 @@
+# Dependencies / build output
+node_modules/
+out/
+dist/
+build/
+test-results/
+playwright-report/
+*.log
+.DS_Store
+
+# Private character assets — never commit
+assets/characters/**/private/*
+!assets/characters/**/private/README.md
+
+# Personal development log (not published)
+DEV_LOG.md
+
+# Screenshots and material that contain character artwork
+docs/acceptance/m*.png
+
+# Local caches
+.cache/

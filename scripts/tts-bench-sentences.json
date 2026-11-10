@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "note": "TTS 选型基准集：覆盖日常交互会说的四种长度与四种情绪。",
+  "sentences": [
+    { "id": "short-1", "category": "short", "text": "先生、おかえりなさい。" },
+    { "id": "short-2", "category": "short", "text": "少し休みましょう。" },
+    { "id": "short-3", "category": "short", "text": "そこは危ないです。" },
+    { "id": "short-4", "category": "short", "text": "無理しないでください。" },
+    { "id": "short-5", "category": "short", "text": "……見てますよ。" },
+
+    {
+      "id": "medium-1",
+      "category": "medium",
+      "text": "今日の作業はここまでにしましょうか。明日の予定も確認しておきます。"
+    },
+    {
+      "id": "medium-2",
+      "category": "medium",
+      "text": "そのコードは一度テストを書いたほうが安心できますよ。"
+    },
+    {
+      "id": "medium-3",
+      "category": "medium",
+      "text": "風紀委員会の仕事が一段落したので、少しだけ休憩します。"
+    },
+    {
+      "id": "medium-4",
+      "category": "medium",
+      "text": "画面をずっと見ていると目が疲れます。少し遠くを見てください。"
+    },
+    {
+      "id": "medium-5",
+      "category": "medium",
+      "text": "先生が集中しているのは分かっていますが、水を飲む時間は必要です。"
+    },
+
+    {
+      "id": "long-1",
+      "category": "long",
+      "text": "先生、今日の作業はここまでにしましょうか。明日の予定も確認しておきます。無理はしないでくださいね。"
+    },
+    {
+      "id": "long-2",
+      "category": "long",
+      "text": "この変更は一見小さく見えますが、影響範囲は広いので、まずはテストを追加してから進めたほうが安全です。"
+    },
+    {
+      "id": "long-3",
+      "category": "long",
+      "text": "補習部の活動は今日で終わりですが、来週からは新しい課題が始まります。準備は明日の午前中に済ませておきます。"
+    },
+    {
+      "id": "long-4",
+      "category": "long",
+      "text": "深夜まで起きていると、明日の集中力に響きます。今日はもう休んで、続きは朝に回しましょう。"
+    },
+    {
+      "id": "long-5",
+      "category": "long",
+      "text": "先生が作っているものを全部は分かりませんが、少なくともここまでの進み方は丁寧でした。あと少しだけ確認しましょう。"
+    },
+
+    {
+      "id": "emotion-1",
+      "category": "emotion",
+      "emotion": "annoyed",
+      "text": "……何度も同じことを言わせないでください。"
+    },
+    {
+      "id": "emotion-2",
+      "category": "emotion",
+      "emotion": "embarrassed",
+      "text": "そ、そんなに見つめないでください。集中できません。"
+    },
+    {
+      "id": "emotion-3",
+      "category": "emotion",
+      "emotion": "tired",
+      "text": "はあ……今日は少し、疲れました。"
+    },
+    {
+      "id": "emotion-4",
+      "category": "emotion",
+      "emotion": "soft",
+      "text": "よく頑張りましたね、先生。少しだけ褒めてあげます。"
+    },
+    {
+      "id": "emotion-5",
+      "category": "emotion",
+      "emotion": "stern",
+      "text": "そのやり方では後で必ず困ります。今のうちに直しましょう。"
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "note": "已确认的中日译文，用于精确复用与相似参考",
+  "entries": [
+    {
+      "zh": "这件泳装，不奇怪吗……？",
+      "ja": "この水着、 変じゃないかな……？",
+      "source": "official",
+      "clip": "Cafe_monolog_1"
+    },
+    {
+      "zh": "倒也不是期待，或者一直盼着……。那个，只有一点点而已……。",
+      "ja": "別に期待とか、 楽しみにしてたわけじゃ……。 その、ほんの 少しくらいしか……。",
+      "source": "official",
+      "clip": "Lobby_2"
+    },
+    {
+      "zh": "夏季训练合宿。没想到今年会和老师一起……有点新鲜。",
+      "ja": "夏のトレーニング合宿。 まさか今年は、 先生と一緒だなんて…… ……ちょっと新鮮。",
+      "source": "official",
+      "clip": "EventLobby_3"
+    },
+    {
+      "zh": "唉，真是的……！",
+      "ja": "ハァ、まったく…！",
+      "source": "official",
+      "clip": "Battle_Damage_2"
+    },
+    {
+      "zh": "差不多该放弃了吧？",
+      "ja": "そろそろ諦めたら？",
+      "source": "official",
+      "clip": "ExSkill_Level_1"
+    },
+    {
+      "zh": "也许是训练的缘故……身体有点发沉。",
+      "ja": "トレーニングの せいか…… 少し体がだるい。",
+      "source": "official",
+      "clip": "Cafe_monolog_2"
+    },
+    {
+      "zh": "训练固然好，但休息也很重要？……确实这也很有道理。可是，我不能偷懒。",
+      "ja": "トレーニングもいいけど、 休息も大事？ ……確かにそれも正論。 でも、私がサボる わけにはいかないから。",
+      "source": "official",
+      "clip": "Lobby_3"
+    },
+    {
+      "zh": "有什么我能做的……？谢谢你，老师。光是这么说，我就很高兴。",
+      "ja": "何かできること……？ ありがとう、先生。 そう言ってくれるだけで、 私は嬉しい。",
+      "source": "official",
+      "clip": "Lobby_4"
+    },
+    {
+      "zh": "直到这个夏天结束的最后一刻……我都会在老师身边，帮助你。",
+      "ja": "この夏が終わる、 最後の瞬間まで……。 私がすぐそばで、 先生のことを助けるから。",
+      "source": "official",
+      "clip": "Lobby_5"
+    },
+    {
+      "zh": "今年夏天，也能和老师在一起呢。",
+      "ja": "今年の夏も、先生と一緒にいられるんだね。",
+      "source": "official",
+      "clip": "Relationship_Up_1"
+    },
+    {
+      "zh": "唉……还在啊？",
+      "ja": "はあ……まだいるの？",
+      "source": "official",
+      "clip": "Battle_Move_2"
+    },
+    {
+      "zh": "诶，总之先一起跳进海里吧？等、等一下老师！我、我还没做好心理准备……！",
+      "ja": "えっ、取り合えず 一緒に海に飛び込もう？ ちょ、ちょっと待って先生！ こ、心の準備が……！",
+      "source": "official",
+      "clip": "Season_Birthday_2"
+    },
+    {
+      "zh": "……在做什么？",
+      "ja": "何してるの？",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "别一直戳。",
+      "ja": "何度も突かないで。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "有事就说。",
+      "ja": "用があるなら言って。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……只碰一下的话，可以。",
+      "ja": "……一度だけなら、いいけど。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……今天已经够吵了。",
+      "ja": "……今日はもう十分。静かにして。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "再这样就别怪我不客气。",
+      "ja": "これ以上続けたら、容赦しないから。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "角不能乱碰。",
+      "ja": "角は勝手に触らないの。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……你是故意的吧。",
+      "ja": "……わざとでしょ。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "光环不是按钮。",
+      "ja": "ヘイローはボタンじゃないの。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "再碰就真的烦了。",
+      "ja": "これ以上触ったら、本気で怒るから。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "适可而止。",
+      "ja": "いい加減にして。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "我还有工作。",
+      "ja": "まだ仕事があるの。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "这样很痒。",
+      "ja": "くすぐったい……。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……只准一会儿。",
+      "ja": "……少しだけなら、いいよ。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "真拿你没办法。",
+      "ja": "本当に手がかかるんだから。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……我没有说可以继续。",
+      "ja": "……まだいいとは言ってない。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "就一会儿。别得寸进尺。",
+      "ja": "少しだけ。調子に乗らないで。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "两次了。你到底想做什么？",
+      "ja": "二度目。何がしたいの？",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……放我下来。",
+      "ja": "……下ろして。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "别晃。",
+      "ja": "揺らさないで。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "先让我安静一会儿。",
+      "ja": "少し静かにさせて。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "刚才已经回应过了。",
+      "ja": "さっき答えたでしょ。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "互动暂停中。忙完再说。",
+      "ja": "今は無理。終わったらね。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "不用就浪费了。",
+      "ja": "もったいないから。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "这个时间还不睡？……明天会没精神的。",
+      "ja": "こんな時間まで起きてるの？明日、眠くなるよ。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "已经这么晚了。别把自己逼太紧。",
+      "ja": "もうこんな時間。無理しすぎないで。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "先忙完。……我在旁边。",
+      "ja": "先に終わらせて。……そばにいるから。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "专心一点。现在不是分心的时候。",
+      "ja": "集中して。今は気を散らさないで。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "先把话说完。我会等你。",
+      "ja": "先に話、終わらせて。待ってるから。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "这么晚还不睡……我也陪你一会儿。",
+      "ja": "こんな時間まで起きてるの……少しだけ付き合うから。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "今年夏天……还想和老师一起过。",
+      "ja": "今年の夏も……先生と一緒にいたいな。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "就算夏天结束……我也会在这里。",
+      "ja": "夏が終わっても……ここにいるから。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "别突然碰……不过，也没让你停。",
+      "ja": "急に触らないで……でも、やめてとは言ってない。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……只有你才这样。",
+      "ja": "先生の前でだけ、こうなっちゃうの。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "只是待在旁边的话……倒也不坏。",
+      "ja": "そばにいるだけなら……悪くないかな。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "不用一直说话。这样就好。",
+      "ja": "ずっと話さなくてもいい。このままでいい。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……再待一会儿也可以。",
+      "ja": "……もう少しだけなら、いいよ。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "别把我当小孩子。……就一会儿。",
+      "ja": "子ども扱いしないで。……少しだけね。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "就稍微……休息一会儿。",
+      "ja": "少しだけ……休ませて。",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "老师？有什么我能帮忙的吗？",
+      "ja": "先生？何か手伝おうか？",
+      "source": "prebuilt",
+      "clip": null
+    },
+    {
+      "zh": "……让我看一下。",
+      "ja": "……うん。",
+      "source": "prebuilt",
+      "clip": null
+    }
+  ]
+}

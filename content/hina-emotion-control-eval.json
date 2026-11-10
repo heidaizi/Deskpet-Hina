@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Same-text, same-seed emotion controllability check. Compare checkpoints only with identical files and generation settings.",
+  "items": [
+    {
+      "emotion": "neutral",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。抑揚を抑えた、自然でクールな話し方。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "tired",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。疲れていて少し眠そう。声に力がなく、ゆっくり話す。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "soft",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。先生にだけ心を緩めた、控えめで柔らかな話し方。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "happy",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。静かな喜びと達成感を含み、少しだけ声が明るい。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "embarrassed",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。照れて少し慌て、強がりながら声が上ずる。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "annoyed",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。呆れや不機嫌を抑え、短く鋭く返す。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "stern",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。冷静で凛とした命令口調。強い意志を込める。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "sad",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。悔しさや寂しさをこらえ、静かに低く話す。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "surprised",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。不意を突かれて息をのみ、少し慌てた声。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "playful",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。皮肉や軽い茶化しを混ぜた、冷静で少し遊びのある声。",
+      "seed": 20261024
+    }
+  ]
+}

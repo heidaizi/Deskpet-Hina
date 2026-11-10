@@ -1,0 +1,39 @@
+{
+  "scenarios": [
+    {
+      "name": "8h-balanced-development",
+      "durationHours": 8,
+      "sampleIntervalSeconds": 15,
+      "intensity": "balanced",
+      "seed": 5607,
+      "interactionEveryMinutes": 11,
+      "interruptEveryNthDelivery": 7,
+      "segments": [
+        { "durationHours": 2, "app": "Visual Studio Code", "idleSeconds": 0 },
+        { "durationHours": 1, "app": "Google Chrome", "idleSeconds": 0 },
+        { "durationHours": 3, "app": "Visual Studio Code", "idleSeconds": 0 },
+        { "durationHours": 2, "app": "Obsidian", "idleSeconds": 0 }
+      ],
+      "sleepWindows": [{ "startHour": 5, "durationMinutes": 15 }]
+    },
+    {
+      "name": "24h-lively-mixed-scenes",
+      "durationHours": 24,
+      "sampleIntervalSeconds": 15,
+      "intensity": "lively",
+      "seed": 5719,
+      "interactionEveryMinutes": 17,
+      "interruptEveryNthDelivery": 9,
+      "segments": [
+        { "durationHours": 4, "app": "Visual Studio Code", "idleSeconds": 0 },
+        { "durationHours": 2, "app": "Google Chrome", "idleSeconds": 0 },
+        { "durationHours": 2, "app": "Obsidian", "idleSeconds": 0 },
+        { "durationHours": 3, "app": "Terminal", "idleSeconds": 0 },
+        { "durationHours": 3, "app": "Google Chrome", "idleSeconds": 0 },
+        { "durationHours": 3, "app": "Visual Studio Code", "idleSeconds": 0 },
+        { "durationHours": 7, "app": "Obsidian", "idleSeconds": 0 }
+      ],
+      "sleepWindows": [{ "startHour": 12, "durationMinutes": 45 }]
+    }
+  ]
+}

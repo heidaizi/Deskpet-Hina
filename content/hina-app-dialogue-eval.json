@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "purpose": "All Chinese dialogue entries that currently use local Irodori TTS.",
+  "modelRevision": "hina-caption-lora275-run3-450-denoise45",
+  "items": [
+    {
+      "sample_id": "app-dialogue:01",
+      "display_text": "……在做什么？",
+      "emotion": "neutral",
+      "text": "……何をしてるの？",
+      "caption": "落ち着いた低めの女性話者。少し気だるげだが、先生には自然に話しかける。",
+      "duration_scale": 1.04,
+      "seed": 1900545219
+    },
+    {
+      "sample_id": "app-dialogue:02",
+      "display_text": "别一直戳。",
+      "emotion": "annoyed",
+      "text": "そんなに何度も突かないで。",
+      "caption": "落ち着いた低めの女性話者。迷惑そうに眉をひそめ、短く不機嫌に言う。",
+      "duration_scale": 0.98,
+      "seed": 1537860545
+    },
+    {
+      "sample_id": "app-dialogue:03",
+      "display_text": "有事就说。",
+      "emotion": "neutral",
+      "text": "用があるなら、言って。",
+      "caption": "落ち着いた低めの女性話者。少し気だるげだが、先生には自然に話しかける。",
+      "duration_scale": 0.98,
+      "seed": 1696570372
+    },
+    {
+      "sample_id": "app-dialogue:04",
+      "display_text": "……只碰一下的话，可以。",
+      "emotion": "soft",
+      "text": "……一度だけなら、いいけど。",
+      "caption": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+      "duration_scale": 1.06,
+      "seed": 385921191
+    },
+    {
+      "sample_id": "app-dialogue:05",
+      "display_text": "……今天已经够吵了。",
+      "emotion": "tired",
+      "text": "……今日はもう、うるさい。",
+      "caption": "落ち着いた低めの女性話者。眠そうで声に少し力がなく、ゆっくり話す。",
+      "duration_scale": 1.07,
+      "seed": 2014265134
+    },
+    {
+      "sample_id": "app-dialogue:06",
+      "display_text": "再这样就别怪我不客气。",
+      "emotion": "warning",
+      "text": "これ以上続けるなら、容赦しないから。",
+      "caption": "落ち着いた低めの女性話者。低く抑えた声で、静かに牽制する。",
+      "duration_scale": 0.98,
+      "seed": 1666177250
+    },
+    {
+      "sample_id": "app-dialogue:07",
+      "display_text": "角不能乱碰。",
+      "emotion": "stern",
+      "text": "角は勝手に触らないで。",
+      "caption": "落ち着いた低めの女性話者。静かだが有無を言わせない、冷たく凛とした口調。",
+      "duration_scale": 0.98,
+      "seed": 2104950855
+    },
+    {
+      "sample_id": "app-dialogue:08",
+      "display_text": "……你是故意的吧。",
+      "emotion": "suspicious",
+      "text": "……わざとやってるでしょ。",
+      "caption": "落ち着いた低めの女性話者。疑うように問い返し、語尾を少し伸ばす。",
+      "duration_scale": 1.04,
+      "seed": 110736915
+    },
+    {
+      "sample_id": "app-dialogue:09",
+      "display_text": "光环不是按钮。",
+      "emotion": "deadpan",
+      "text": "ヘイローはボタンじゃない。",
+      "caption": "落ち着いた低めの女性話者。表情を変えず、呆れたように淡々と言う。",
+      "duration_scale": 0.97,
+      "seed": 946657689
+    },
+    {
+      "sample_id": "app-dialogue:10",
+      "display_text": "再碰就真的烦了。",
+      "emotion": "annoyed",
+      "text": "これ以上触ったら、本当に嫌だから。",
+      "caption": "落ち着いた低めの女性話者。迷惑そうに眉をひそめ、短く不機嫌に言う。",
+      "duration_scale": 0.99,
+      "seed": 1950390714
+    },
+    {
+      "sample_id": "app-dialogue:11",
+      "display_text": "适可而止。",
+      "emotion": "stern",
+      "text": "ほどほどにして。",
+      "caption": "落ち着いた低めの女性話者。静かだが有無を言わせない、冷たく凛とした口調。",
+      "duration_scale": 0.95,
+      "seed": 1438378900
+    },
+    {
+      "sample_id": "app-dialogue:12",
+      "display_text": "我还有工作。",
+      "emotion": "tired",
+      "text": "まだ仕事があるから。",
+      "caption": "落ち着いた低めの女性話者。眠そうで声に少し力がなく、ゆっくり話す。",
+      "duration_scale": 1.03,
+      "seed": 2059889911
+    },
+    {
+      "sample_id": "app-dialogue:13",
+      "display_text": "这样很痒。",
+      "emotion": "embarrassed",
+      "text": "くすぐったい……。",
+      "caption": "落ち着いた低めの女性話者。恥ずかしそうに少し慌て、声が上ずる。",
+      "duration_scale": 1.02,
+      "seed": 1873163497
+    },
+    {
+      "sample_id": "app-dialogue:14",
+      "display_text": "……只准一会儿。",
+      "emotion": "soft",
+      "text": "……少しだけなら、いいよ。",
+      "caption": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+      "duration_scale": 1.05,
+      "seed": 906837743
+    },
+    {
+      "sample_id": "app-dialogue:15",
+      "display_text": "真拿你没办法。",
+      "emotion": "reluctant",
+      "text": "本当に手がかかるんだから。",
+      "caption": "落ち着いた低めの女性話者。強がりながらも折れて、少し甘い声。",
+      "duration_scale": 1.06,
+      "seed": 322844897
+    },
+    {
+      "sample_id": "app-dialogue:16",
+      "display_text": "……我没有说可以继续。",
+      "emotion": "warning",
+      "text": "……まだ続けていいとは言ってない。",
+      "caption": "落ち着いた低めの女性話者。低く抑えた声で、静かに牽制する。",
+      "duration_scale": 1.02,
+      "seed": 644044273
+    },
+    {
+      "sample_id": "app-dialogue:17",
+      "display_text": "就一会儿。别得寸进尺。",
+      "emotion": "reluctant",
+      "text": "少しだけ。調子に乗らないで。",
+      "caption": "落ち着いた低めの女性話者。強がりながらも折れて、少し甘い声。",
+      "duration_scale": 1,
+      "seed": 647454100
+    },
+    {
+      "sample_id": "app-dialogue:18",
+      "display_text": "两次了。你到底想做什么？",
+      "emotion": "annoyed",
+      "text": "二度目。いったい何がしたいの？",
+      "caption": "落ち着いた低めの女性話者。迷惑そうに眉をひそめ、短く不機嫌に言う。",
+      "duration_scale": 1.02,
+      "seed": 676270720
+    },
+    {
+      "sample_id": "app-dialogue:19",
+      "display_text": "……放我下来。",
+      "emotion": "embarrassed",
+      "text": "……下ろして。",
+      "caption": "落ち着いた低めの女性話者。恥ずかしそうに少し慌て、声が上ずる。",
+      "duration_scale": 1,
+      "seed": 1304214723
+    },
+    {
+      "sample_id": "app-dialogue:20",
+      "display_text": "别晃。",
+      "emotion": "annoyed",
+      "text": "揺らさないで。",
+      "caption": "落ち着いた低めの女性話者。迷惑そうに眉をひそめ、短く不機嫌に言う。",
+      "duration_scale": 0.96,
+      "seed": 604523267
+    },
+    {
+      "sample_id": "app-dialogue:21",
+      "display_text": "先让我安静一会儿。",
+      "emotion": "tired",
+      "text": "少し静かにさせて。",
+      "caption": "落ち着いた低めの女性話者。眠そうで声に少し力がなく、ゆっくり話す。",
+      "duration_scale": 1.07,
+      "seed": 1109292089
+    },
+    {
+      "sample_id": "app-dialogue:22",
+      "display_text": "刚才已经回应过了。",
+      "emotion": "deadpan",
+      "text": "さっき答えたばかりでしょ。",
+      "caption": "落ち着いた低めの女性話者。表情を変えず、呆れたように淡々と言う。",
+      "duration_scale": 0.98,
+      "seed": 1519576114
+    },
+    {
+      "sample_id": "app-dialogue:23",
+      "display_text": "互动暂停中。忙完再说。",
+      "emotion": "calm",
+      "text": "今はちょっと無理。終わったらね。",
+      "caption": "落ち着いた低めの女性話者。先生を安心させる、穏やかで柔らかい声。",
+      "duration_scale": 1.04,
+      "seed": 1366084665
+    },
+    {
+      "sample_id": "app-dialogue:24",
+      "display_text": "不用就浪费了。",
+      "emotion": "deadpan",
+      "text": "もったいないから。",
+      "caption": "落ち着いた低めの女性話者。表情を変えず、呆れたように淡々と言う。",
+      "duration_scale": 0.98,
+      "seed": 1756219445
+    },
+    {
+      "sample_id": "app-dialogue:25",
+      "display_text": "这个时间还不睡？……明天会没精神的。",
+      "emotion": "tired",
+      "text": "こんな時間まで起きてるの？……明日、眠くなるでしょ。",
+      "caption": "落ち着いた低めの女性話者。眠そうで声に少し力がなく、ゆっくり話す。",
+      "duration_scale": 1.07,
+      "seed": 746212453
+    },
+    {
+      "sample_id": "app-dialogue:26",
+      "display_text": "已经这么晚了。别把自己逼太紧。",
+      "emotion": "soft",
+      "text": "もうこんな時間。無理しすぎないで。",
+      "caption": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+      "duration_scale": 1.06,
+      "seed": 1826810046
+    },
+    {
+      "sample_id": "app-dialogue:27",
+      "display_text": "先忙完。……我在旁边。",
+      "emotion": "calm",
+      "text": "先に終わらせて。……私はそばにいるから。",
+      "caption": "落ち着いた低めの女性話者。先生を安心させる、穏やかで柔らかい声。",
+      "duration_scale": 1.05,
+      "seed": 562112293
+    },
+    {
+      "sample_id": "app-dialogue:28",
+      "display_text": "专心一点。现在不是分心的时候。",
+      "emotion": "deadpan",
+      "text": "集中して。今は気を散らす時じゃないでしょ。",
+      "caption": "落ち着いた低めの女性話者。表情を変えず、呆れたように淡々と言う。",
+      "duration_scale": 1.01,
+      "seed": 624368009
+    },
+    {
+      "sample_id": "app-dialogue:29",
+      "display_text": "先把话说完。我会等你。",
+      "emotion": "calm",
+      "text": "先に話を終わらせて。待ってるから。",
+      "caption": "落ち着いた低めの女性話者。先生を安心させる、穏やかで柔らかい声。",
+      "duration_scale": 1.04,
+      "seed": 672221287
+    },
+    {
+      "sample_id": "app-dialogue:30",
+      "display_text": "这么晚还不睡……我也陪你一会儿。",
+      "emotion": "soft",
+      "text": "こんな時間まで起きてるの……私も少し付き合うから。",
+      "caption": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+      "duration_scale": 1.06,
+      "seed": 275300457
+    },
+    {
+      "sample_id": "app-dialogue:31",
+      "display_text": "今年夏天……还想和老师一起过。",
+      "emotion": "soft",
+      "text": "今年の夏も……先生と一緒に過ごしたいな。",
+      "caption": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+      "duration_scale": 1.05,
+      "seed": 1548400382
+    },
+    {
+      "sample_id": "app-dialogue:32",
+      "display_text": "就算夏天结束……我也会在这里。",
+      "emotion": "calm",
+      "text": "夏が終わっても……私はここにいるよ。",
+      "caption": "落ち着いた低めの女性話者。先生を安心させる、穏やかで柔らかい声。",
+      "duration_scale": 1.04,
+      "seed": 952407282
+    },
+    {
+      "sample_id": "app-dialogue:33",
+      "display_text": "别突然碰……不过，也没让你停。",
+      "emotion": "reluctant",
+      "text": "急に触らないで……でも、やめてとは言ってない。",
+      "caption": "落ち着いた低めの女性話者。強がりながらも折れて、少し甘い声。",
+      "duration_scale": 1.05,
+      "seed": 1199629569
+    },
+    {
+      "sample_id": "app-dialogue:34",
+      "display_text": "……只有你才这样。",
+      "emotion": "embarrassed",
+      "text": "……先生にだけは、こうなるの。",
+      "caption": "落ち着いた低めの女性話者。恥ずかしそうに少し慌て、声が上ずる。",
+      "duration_scale": 1.05,
+      "seed": 1848034089
+    },
+    {
+      "sample_id": "app-dialogue:35",
+      "display_text": "只是待在旁边的话……倒也不坏。",
+      "emotion": "soft",
+      "text": "そばにいるだけなら……悪くないと思う。",
+      "caption": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+      "duration_scale": 1.05,
+      "seed": 1520580281
+    },
+    {
+      "sample_id": "app-dialogue:36",
+      "display_text": "不用一直说话。这样就好。",
+      "emotion": "calm",
+      "text": "ずっと話さなくてもいい。これでいい。",
+      "caption": "落ち着いた低めの女性話者。先生を安心させる、穏やかで柔らかい声。",
+      "duration_scale": 1.03,
+      "seed": 697856538
+    },
+    {
+      "sample_id": "app-dialogue:37",
+      "display_text": "……再待一会儿也可以。",
+      "emotion": "soft",
+      "text": "……もう少しだけなら、いいよ。",
+      "caption": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+      "duration_scale": 1.05,
+      "seed": 215873830
+    },
+    {
+      "sample_id": "app-dialogue:38",
+      "display_text": "别把我当小孩子。……就一会儿。",
+      "emotion": "reluctant",
+      "text": "子ども扱いしないで。……少しだけなら。",
+      "caption": "落ち着いた低めの女性話者。強がりながらも折れて、少し甘い声。",
+      "duration_scale": 1.04,
+      "seed": 1547991548
+    },
+    {
+      "sample_id": "app-dialogue:39",
+      "display_text": "就稍微……休息一会儿。",
+      "emotion": "tired",
+      "text": "少しだけ……休ませて。",
+      "caption": "落ち着いた低めの女性話者。眠そうで声に少し力がなく、ゆっくり話す。",
+      "duration_scale": 1.08,
+      "seed": 1184825381
+    },
+    {
+      "sample_id": "app-dialogue:40",
+      "display_text": "老师？有什么我能帮忙的吗？",
+      "emotion": "calm",
+      "text": "先生？何か手伝えることはある？",
+      "caption": "落ち着いた低めの女性話者。先生を安心させる、穏やかで柔らかい声。",
+      "duration_scale": 1.03,
+      "seed": 28214134
+    }
+  ]
+}

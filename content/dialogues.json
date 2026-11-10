@@ -1,0 +1,311 @@
+{
+  "schemaVersion": 1,
+  "pools": {
+    "head": {
+      "entries": [
+        { "id": "head-1", "text": "……在做什么？", "weight": 3 },
+        { "id": "head-2", "text": "别一直戳。", "weight": 2 },
+        { "id": "head-3", "text": "有事就说。", "weight": 2 },
+        {
+          "id": "head-soft",
+          "text": "……只碰一下的话，可以。",
+          "weight": 2,
+          "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 2 }]
+        },
+        {
+          "id": "head-official-swimsuit",
+          "text": "这件泳装，不奇怪吗……？",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Cafe_monolog_1",
+            "japanese": "この水着、 変じゃないかな……？",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head-official-summer",
+          "text": "倒也不是期待，或者一直盼着……。那个，只有一点点而已……。",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Lobby_2",
+            "japanese": "別に期待とか、 楽しみにしてたわけじゃ……。 その、ほんの 少しくらいしか……。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head-official-camp",
+          "text": "夏季训练合宿。没想到今年会和老师一起……有点新鲜。",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "EventLobby_3",
+            "japanese": "夏のトレーニング合宿。 まさか今年は、 先生と一緒だなんて…… ……ちょっと新鮮。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head-late-night",
+          "text": "这个时间还不睡？……明天会没精神的。",
+          "weight": 8,
+          "conditions": [{ "field": "time.period", "op": "==", "value": "late_night" }]
+        },
+        {
+          "id": "head-night",
+          "text": "已经这么晚了。别把自己逼太紧。",
+          "weight": 7,
+          "conditions": [{ "field": "time.period", "op": "==", "value": "night" }]
+        },
+        {
+          "id": "head-focus",
+          "text": "先忙完。……我在旁边。",
+          "weight": 6,
+          "conditions": [{ "field": "scene.kind", "op": "==", "value": "focus" }]
+        },
+        {
+          "id": "head-development",
+          "text": "专心一点。现在不是分心的时候。",
+          "weight": 6,
+          "conditions": [{ "field": "scene.kind", "op": "==", "value": "development" }]
+        },
+        {
+          "id": "head-communication",
+          "text": "先把话说完。我会等你。",
+          "weight": 6,
+          "conditions": [{ "field": "scene.kind", "op": "==", "value": "communication" }]
+        },
+        {
+          "id": "head-close-night",
+          "text": "这么晚还不睡……我也陪你一会儿。",
+          "weight": 9,
+          "conditions": [
+            { "field": "affectionLevel", "op": ">=", "value": 6 },
+            { "field": "time.period", "op": "==", "value": "late_night" }
+          ]
+        },
+        {
+          "id": "head-summer-promise",
+          "text": "今年夏天……还想和老师一起过。",
+          "weight": 8,
+          "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 7 }]
+        },
+        {
+          "id": "head-stay-together",
+          "text": "就算夏天结束……我也会在这里。",
+          "weight": 9,
+          "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 8 }]
+        }
+      ]
+    },
+    "head_annoyed": {
+      "entries": [
+        { "id": "head-annoyed-1", "text": "……今天已经够吵了。", "weight": 1 },
+        { "id": "head-annoyed-2", "text": "再这样就别怪我不客气。", "weight": 1 },
+        {
+          "id": "head-annoyed-official-sigh",
+          "text": "唉，真是的……！",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Battle_Damage_2",
+            "japanese": "ハァ、まったく…！",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head-annoyed-official-give-up",
+          "text": "差不多该放弃了吧？",
+          "weight": 1,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "ExSkill_Level_1",
+            "japanese": "そろそろ諦めたら？",
+            "translation": "project-cn"
+          }
+        }
+      ]
+    },
+    "horn": {
+      "entries": [
+        { "id": "horn-1", "text": "角不能乱碰。", "weight": 2 },
+        { "id": "horn-2", "text": "……你是故意的吧。", "weight": 1 }
+      ]
+    },
+    "halo": {
+      "entries": [
+        { "id": "halo-1", "text": "光环不是按钮。", "weight": 2 },
+        { "id": "halo-2", "text": "再碰就真的烦了。", "weight": 1 }
+      ]
+    },
+    "body": {
+      "entries": [
+        { "id": "body-1", "text": "适可而止。", "weight": 2 },
+        { "id": "body-2", "text": "我还有工作。", "weight": 1 },
+        { "id": "body-3", "text": "这样很痒。", "weight": 1 },
+        {
+          "id": "body-official-tired",
+          "text": "也许是训练的缘故……身体有点发沉。",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Cafe_monolog_2",
+            "japanese": "トレーニングの せいか…… 少し体がだるい。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "body-official-rest",
+          "text": "训练固然好，但休息也很重要？……确实这也很有道理。可是，我不能偷懒。",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Lobby_3",
+            "japanese": "トレーニングもいいけど、 休息も大事？ ……確かにそれも正論。 でも、私がサボる わけにはいかないから。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "body-official-waste",
+          "text": "不用就浪费了。",
+          "weight": 1,
+          "source": {
+            "page": "https://wiki.biligame.com/ba/HinaSwimsuit",
+            "clip": "StudentProfile.Background",
+            "japanese": "勿体ないから",
+            "translation": "official-cn"
+          }
+        }
+      ]
+    },
+    "body_trusted": {
+      "entries": [
+        { "id": "body-trusted-1", "text": "别突然碰……不过，也没让你停。", "weight": 2 },
+        { "id": "body-trusted-2", "text": "……只有你才这样。", "weight": 1 }
+      ]
+    },
+    "head_close": {
+      "entries": [
+        { "id": "head-close-1", "text": "只是待在旁边的话……倒也不坏。", "weight": 3 },
+        { "id": "head-close-2", "text": "不用一直说话。这样就好。", "weight": 2 }
+      ]
+    },
+    "headpat_basic": {
+      "entries": [
+        { "id": "headpat-basic-1", "text": "……只准一会儿。", "weight": 2 },
+        { "id": "headpat-basic-2", "text": "真拿你没办法。", "weight": 1 }
+      ]
+    },
+    "headpat_trusted": {
+      "entries": [
+        { "id": "headpat-trusted-1", "text": "……再待一会儿也可以。", "weight": 2 },
+        { "id": "headpat-trusted-2", "text": "别把我当小孩子。……就一会儿。", "weight": 1 }
+      ]
+    },
+    "headpat_friendly": {
+      "entries": [
+        { "id": "headpat-friendly-1", "text": "……我没有说可以继续。", "weight": 2 },
+        { "id": "headpat-friendly-2", "text": "就一会儿。别得寸进尺。", "weight": 1 },
+        {
+          "id": "headpat-friendly-official-help",
+          "text": "有什么我能做的……？谢谢你，老师。光是这么说，我就很高兴。",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Lobby_4",
+            "japanese": "何かできること……？ ありがとう、先生。 そう言ってくれるだけで、 私は嬉しい。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "headpat-friendly-official-stay",
+          "text": "直到这个夏天结束的最后一刻……我都会在老师身边，帮助你。",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Lobby_5",
+            "japanese": "この夏が終わる、 最後の瞬間まで……。 私がすぐそばで、 先生のことを助けるから。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "headpat-friendly-official-summer",
+          "text": "今年夏天，也能和老师在一起呢。",
+          "weight": 1,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Relationship_Up_1",
+            "japanese": "今年の夏も、先生と一緒にいられるんだね。",
+            "translation": "project-cn"
+          }
+        }
+      ]
+    },
+    "double_tap": {
+      "entries": [
+        { "id": "double-1", "text": "两次了。你到底想做什么？", "weight": 1 },
+        {
+          "id": "double-official-again",
+          "text": "唉……还在啊？",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Battle_Move_2",
+            "japanese": "はあ……まだいるの？",
+            "translation": "project-cn"
+          }
+        }
+      ]
+    },
+    "drag": {
+      "entries": [
+        { "id": "drag-1", "text": "……放我下来。", "weight": 2 },
+        { "id": "drag-2", "text": "别晃。", "weight": 1 },
+        {
+          "id": "drag-official-wait",
+          "text": "诶，总之先一起跳进海里吧？等、等一下老师！我、我还没做好心理准备……！",
+          "weight": 1,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Season_Birthday_2",
+            "japanese": "えっ、取り合えず 一緒に海に飛び込もう？ ちょ、ちょっと待って先生！ こ、心の準備が……！",
+            "translation": "project-cn"
+          }
+        }
+      ]
+    },
+    "cooldown": {
+      "entries": [
+        { "id": "cooldown-1", "text": "先让我安静一会儿。", "weight": 2 },
+        { "id": "cooldown-2", "text": "刚才已经回应过了。", "weight": 1 },
+        {
+          "id": "cooldown-official-tired",
+          "text": "也许是训练的缘故……身体有点发沉。",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Cafe_monolog_2",
+            "japanese": "トレーニングの せいか…… 少し体がだるい。",
+            "translation": "project-cn"
+          }
+        }
+      ]
+    },
+    "paused": {
+      "entries": [
+        { "id": "paused-1", "text": "互动暂停中。忙完再说。", "weight": 1 },
+        {
+          "id": "paused-official-rest",
+          "text": "训练固然好，但休息也很重要？……确实这也很有道理。可是，我不能偷懒。",
+          "weight": 2,
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
+            "clip": "Lobby_3",
+            "japanese": "トレーニングもいいけど、 休息も大事？ ……確かにそれも正論。 でも、私がサボる わけにはいかないから。",
+            "translation": "project-cn"
+          }
+        }
+      ]
+    }
+  }
+}

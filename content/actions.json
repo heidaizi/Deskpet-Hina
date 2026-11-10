@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "rules": [
+    {
+      "id": "tap_head_low_mood",
+      "trigger": "tap",
+      "area": "head",
+      "priority": 20,
+      "weight": 1,
+      "cooldownMs": 3500,
+      "conditions": [{ "field": "mood", "op": "<", "value": 20 }],
+      "effects": [{ "field": "mood", "delta": -1 }],
+      "animation": "annoyed",
+      "expression": "annoyed",
+      "dialoguePool": "head_annoyed"
+    },
+    {
+      "id": "tap_head",
+      "trigger": "tap",
+      "area": "head",
+      "priority": 10,
+      "weight": 1,
+      "cooldownMs": 2600,
+      "conditions": [{ "field": "mood", "op": ">=", "value": 20 }],
+      "effects": [
+        { "field": "affectionXp", "delta": 1 },
+        { "field": "mood", "delta": 2 }
+      ],
+      "animation": "tap_head",
+      "expression": "embarrassed",
+      "dialoguePool": "head"
+    },
+    {
+      "id": "tap_head_close",
+      "trigger": "tap",
+      "area": "head",
+      "priority": 15,
+      "weight": 1,
+      "cooldownMs": 4000,
+      "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 6 }],
+      "effects": [
+        { "field": "affectionXp", "delta": 1 },
+        { "field": "mood", "delta": 2 }
+      ],
+      "animation": "tap_head",
+      "expression": "happy",
+      "dialoguePool": "head_close"
+    },
+    {
+      "id": "tap_horn",
+      "trigger": "tap",
+      "area": "horn-*",
+      "priority": 20,
+      "weight": 1,
+      "cooldownMs": 4200,
+      "conditions": [],
+      "effects": [
+        { "field": "mood", "delta": -2 },
+        { "field": "energy", "delta": -1 }
+      ],
+      "animation": "tap_horn",
+      "expression": "annoyed",
+      "dialoguePool": "horn"
+    },
+    {
+      "id": "tap_halo",
+      "trigger": "tap",
+      "area": "halo",
+      "priority": 15,
+      "weight": 1,
+      "cooldownMs": 4000,
+      "conditions": [],
+      "effects": [{ "field": "mood", "delta": -1 }],
+      "animation": "tap_halo",
+      "expression": "annoyed",
+      "dialoguePool": "halo"
+    },
+    {
+      "id": "tap_body",
+      "trigger": "tap",
+      "area": "body",
+      "priority": 8,
+      "weight": 1,
+      "cooldownMs": 3000,
+      "conditions": [],
+      "effects": [{ "field": "mood", "delta": 1 }],
+      "animation": "tap_body",
+      "expression": "surprised",
+      "dialoguePool": "body"
+    },
+    {
+      "id": "tap_body_trusted",
+      "trigger": "tap",
+      "area": "body",
+      "priority": 12,
+      "weight": 1,
+      "cooldownMs": 4500,
+      "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 5 }],
+      "effects": [
+        { "field": "affectionXp", "delta": 1 },
+        { "field": "mood", "delta": 2 }
+      ],
+      "animation": "tap_body",
+      "expression": "embarrassed",
+      "dialoguePool": "body_trusted"
+    },
+    {
+      "id": "headpat_friendly",
+      "trigger": "hold",
+      "area": "head",
+      "priority": 30,
+      "weight": 1,
+      "cooldownMs": 18000,
+      "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 4 }],
+      "effects": [
+        { "field": "affectionXp", "delta": 3 },
+        { "field": "mood", "delta": 4 },
+        { "field": "energy", "delta": -1 }
+      ],
+      "animation": "headpat",
+      "expression": "happy",
+      "dialoguePool": "headpat_friendly"
+    },
+    {
+      "id": "headpat_trusted",
+      "trigger": "hold",
+      "area": "head",
+      "priority": 25,
+      "weight": 1,
+      "cooldownMs": 14000,
+      "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 3 }],
+      "effects": [
+        { "field": "affectionXp", "delta": 2 },
+        { "field": "mood", "delta": 3 },
+        { "field": "energy", "delta": -1 }
+      ],
+      "animation": "headpat",
+      "expression": "happy",
+      "dialoguePool": "headpat_trusted"
+    },
+    {
+      "id": "headpat_basic",
+      "trigger": "hold",
+      "area": "head",
+      "priority": 20,
+      "weight": 1,
+      "cooldownMs": 12000,
+      "conditions": [],
+      "effects": [
+        { "field": "affectionXp", "delta": 1 },
+        { "field": "mood", "delta": 2 },
+        { "field": "energy", "delta": -1 }
+      ],
+      "animation": "headpat",
+      "expression": "embarrassed",
+      "dialoguePool": "headpat_basic"
+    },
+    {
+      "id": "double_tap_head",
+      "trigger": "double_tap",
+      "area": "head",
+      "priority": 30,
+      "weight": 1,
+      "cooldownMs": 6000,
+      "conditions": [],
+      "effects": [{ "field": "mood", "delta": -1 }],
+      "animation": "annoyed",
+      "expression": "annoyed",
+      "dialoguePool": "double_tap"
+    },
+    {
+      "id": "drag",
+      "trigger": "drag",
+      "area": "*",
+      "priority": 30,
+      "weight": 1,
+      "cooldownMs": 5000,
+      "conditions": [],
+      "effects": [
+        { "field": "mood", "delta": -2 },
+        { "field": "energy", "delta": -1 }
+      ],
+      "animation": "drag_end",
+      "expression": "annoyed",
+      "dialoguePool": "drag"
+    },
+    {
+      "id": "cooldown_fallback",
+      "trigger": "*",
+      "area": "*",
+      "priority": 0,
+      "weight": 1,
+      "cooldownMs": 0,
+      "fallback": true,
+      "conditions": [],
+      "effects": [],
+      "animation": "annoyed",
+      "expression": "annoyed",
+      "dialoguePool": "cooldown"
+    }
+  ]
+}

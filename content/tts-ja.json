@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 2,
+  "voice": "hina-swimsuit",
+  "modelRevision": "hina-caption-lora275-run3-450-denoise45",
+  "loraAdapter": "~/.local/share/deskpet-tts/outputs/hina-emotion-lora-caption-run2/checkpoint_0000275",
+  "defaultCaption": "落ち着いた低めの女性話者。先生に対して、少し気だるげで親しみのある話し方。",
+  "defaultNumSteps": 16,
+  "defaultSeedVariants": 3,
+  "speakerKvScale": 1.2,
+  "speakerKvMinT": 0.9,
+  "emotionSeedVariants": {
+    "neutral": 3,
+    "tired": 3,
+    "annoyed": 4,
+    "stern": 3,
+    "suspicious": 4,
+    "soft": 3,
+    "embarrassed": 4,
+    "reluctant": 3,
+    "warning": 4,
+    "deadpan": 3,
+    "calm": 3
+  },
+  "captions": {
+    "neutral": "落ち着いた低めの女性話者。少し気だるげだが、先生には自然に話しかける。",
+    "tired": "落ち着いた低めの女性話者。眠そうで声に少し力がなく、ゆっくり話す。",
+    "annoyed": "落ち着いた低めの女性話者。迷惑そうに眉をひそめ、短く不機嫌に言う。",
+    "stern": "落ち着いた低めの女性話者。静かだが有無を言わせない、冷たく凛とした口調。",
+    "suspicious": "落ち着いた低めの女性話者。疑うように問い返し、語尾を少し伸ばす。",
+    "soft": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+    "embarrassed": "落ち着いた低めの女性話者。恥ずかしそうに少し慌て、声が上ずる。",
+    "reluctant": "落ち着いた低めの女性話者。強がりながらも折れて、少し甘い声。",
+    "warning": "落ち着いた低めの女性話者。低く抑えた声で、静かに牽制する。",
+    "deadpan": "落ち着いた低めの女性話者。表情を変えず、呆れたように淡々と言う。",
+    "calm": "落ち着いた低めの女性話者。先生を安心させる、穏やかで柔らかい声。"
+  },
+  "lines": {
+    "……在做什么？": {
+      "text": "何してるの？",
+      "emotion": "neutral",
+      "durationScale": 1.04
+    },
+    "别一直戳。": {
+      "text": "何度も突かないで。",
+      "emotion": "annoyed",
+      "durationScale": 0.98
+    },
+    "有事就说。": {
+      "text": "用があるなら言って。",
+      "emotion": "neutral",
+      "durationScale": 0.98
+    },
+    "……只碰一下的话，可以。": {
+      "text": "……一度だけなら、いいけど。",
+      "emotion": "soft",
+      "durationScale": 1.06
+    },
+    "……今天已经够吵了。": {
+      "text": "……今日はもう十分。静かにして。",
+      "emotion": "tired",
+      "durationScale": 1.07
+    },
+    "再这样就别怪我不客气。": {
+      "text": "これ以上続けたら、容赦しないから。",
+      "emotion": "warning",
+      "durationScale": 0.98
+    },
+    "角不能乱碰。": {
+      "text": "角は勝手に触らないの。",
+      "emotion": "stern",
+      "durationScale": 0.98
+    },
+    "……你是故意的吧。": {
+      "text": "……わざとでしょ。",
+      "emotion": "suspicious",
+      "durationScale": 1.04
+    },
+    "光环不是按钮。": {
+      "text": "ヘイローはボタンじゃないの。",
+      "emotion": "deadpan",
+      "durationScale": 0.97
+    },
+    "再碰就真的烦了。": {
+      "text": "これ以上触ったら、本気で怒るから。",
+      "emotion": "annoyed",
+      "durationScale": 0.99
+    },
+    "适可而止。": {
+      "text": "いい加減にして。",
+      "emotion": "stern",
+      "durationScale": 0.95
+    },
+    "我还有工作。": {
+      "text": "まだ仕事があるの。",
+      "emotion": "tired",
+      "durationScale": 1.03
+    },
+    "这样很痒。": {
+      "text": "くすぐったい……。",
+      "emotion": "embarrassed",
+      "durationScale": 1.02
+    },
+    "……只准一会儿。": {
+      "text": "……少しだけなら、いいよ。",
+      "emotion": "soft",
+      "durationScale": 1.05
+    },
+    "真拿你没办法。": {
+      "text": "本当に手がかかるんだから。",
+      "emotion": "reluctant",
+      "durationScale": 1.06
+    },
+    "……我没有说可以继续。": {
+      "text": "……まだいいとは言ってない。",
+      "emotion": "warning",
+      "durationScale": 1.02
+    },
+    "就一会儿。别得寸进尺。": {
+      "text": "少しだけ。調子に乗らないで。",
+      "emotion": "reluctant",
+      "durationScale": 1
+    },
+    "两次了。你到底想做什么？": {
+      "text": "二度目。何がしたいの？",
+      "emotion": "annoyed",
+      "durationScale": 1.02
+    },
+    "……放我下来。": {
+      "text": "……下ろして。",
+      "emotion": "embarrassed",
+      "durationScale": 1
+    },
+    "别晃。": {
+      "text": "揺らさないで。",
+      "emotion": "annoyed",
+      "durationScale": 0.96
+    },
+    "先让我安静一会儿。": {
+      "text": "少し静かにさせて。",
+      "emotion": "tired",
+      "durationScale": 1.07
+    },
+    "刚才已经回应过了。": {
+      "text": "さっき答えたでしょ。",
+      "emotion": "deadpan",
+      "durationScale": 0.98
+    },
+    "互动暂停中。忙完再说。": {
+      "text": "今は無理。終わったらね。",
+      "emotion": "calm",
+      "durationScale": 1.04
+    },
+    "不用就浪费了。": {
+      "text": "もったいないから。",
+      "emotion": "deadpan",
+      "durationScale": 0.98
+    },
+    "这个时间还不睡？……明天会没精神的。": {
+      "text": "こんな時間まで起きてるの？明日、眠くなるよ。",
+      "emotion": "tired",
+      "durationScale": 1.07
+    },
+    "已经这么晚了。别把自己逼太紧。": {
+      "text": "もうこんな時間。無理しすぎないで。",
+      "emotion": "soft",
+      "durationScale": 1.06
+    },
+    "先忙完。……我在旁边。": {
+      "text": "先に終わらせて。……そばにいるから。",
+      "emotion": "calm",
+      "durationScale": 1.05
+    },
+    "专心一点。现在不是分心的时候。": {
+      "text": "集中して。今は気を散らさないで。",
+      "emotion": "deadpan",
+      "durationScale": 1.01
+    },
+    "先把话说完。我会等你。": {
+      "text": "先に話、終わらせて。待ってるから。",
+      "emotion": "calm",
+      "durationScale": 1.04
+    },
+    "这么晚还不睡……我也陪你一会儿。": {
+      "text": "こんな時間まで起きてるの……少しだけ付き合うから。",
+      "emotion": "soft",
+      "durationScale": 1.06
+    },
+    "今年夏天……还想和老师一起过。": {
+      "text": "今年の夏も……先生と一緒にいたいな。",
+      "emotion": "soft",
+      "durationScale": 1.05
+    },
+    "就算夏天结束……我也会在这里。": {
+      "text": "夏が終わっても……ここにいるから。",
+      "emotion": "calm",
+      "durationScale": 1.04
+    },
+    "别突然碰……不过，也没让你停。": {
+      "text": "急に触らないで……でも、やめてとは言ってない。",
+      "emotion": "reluctant",
+      "durationScale": 1.05
+    },
+    "……只有你才这样。": {
+      "text": "先生の前でだけ、こうなっちゃうの。",
+      "emotion": "embarrassed",
+      "durationScale": 1.05
+    },
+    "只是待在旁边的话……倒也不坏。": {
+      "text": "そばにいるだけなら……悪くないかな。",
+      "emotion": "soft",
+      "durationScale": 1.05
+    },
+    "不用一直说话。这样就好。": {
+      "text": "ずっと話さなくてもいい。このままでいい。",
+      "emotion": "calm",
+      "durationScale": 1.03
+    },
+    "……再待一会儿也可以。": {
+      "text": "……もう少しだけなら、いいよ。",
+      "emotion": "soft",
+      "durationScale": 1.05
+    },
+    "别把我当小孩子。……就一会儿。": {
+      "text": "子ども扱いしないで。……少しだけね。",
+      "emotion": "reluctant",
+      "durationScale": 1.04
+    },
+    "就稍微……休息一会儿。": {
+      "text": "少しだけ……休ませて。",
+      "emotion": "tired",
+      "durationScale": 1.08
+    },
+    "老师？有什么我能帮忙的吗？": {
+      "text": "先生？何か手伝おうか？",
+      "emotion": "calm",
+      "durationScale": 1.03
+    }
+  }
+}

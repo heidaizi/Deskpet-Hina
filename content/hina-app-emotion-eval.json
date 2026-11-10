@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "purpose": "The 11 emotion styles used by the desktop pet on one fixed line.",
+  "modelRevision": "hina-caption-lora275-run3-450-denoise45",
+  "items": [
+    {
+      "sample_id": "app-style:neutral",
+      "emotion": "neutral",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。少し気だるげだが、先生には自然に話しかける。",
+      "duration_scale": 1,
+      "seed": 1381089095
+    },
+    {
+      "sample_id": "app-style:tired",
+      "emotion": "tired",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。眠そうで声に少し力がなく、ゆっくり話す。",
+      "duration_scale": 1,
+      "seed": 485224959
+    },
+    {
+      "sample_id": "app-style:annoyed",
+      "emotion": "annoyed",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。迷惑そうに眉をひそめ、短く不機嫌に言う。",
+      "duration_scale": 1,
+      "seed": 1138079043
+    },
+    {
+      "sample_id": "app-style:stern",
+      "emotion": "stern",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。静かだが有無を言わせない、冷たく凛とした口調。",
+      "duration_scale": 1,
+      "seed": 1236170491
+    },
+    {
+      "sample_id": "app-style:suspicious",
+      "emotion": "suspicious",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。疑うように問い返し、語尾を少し伸ばす。",
+      "duration_scale": 1,
+      "seed": 592451953
+    },
+    {
+      "sample_id": "app-style:soft",
+      "emotion": "soft",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。控えめで照れを含み、柔らかく小さめの声。",
+      "duration_scale": 1,
+      "seed": 2144812836
+    },
+    {
+      "sample_id": "app-style:embarrassed",
+      "emotion": "embarrassed",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。恥ずかしそうに少し慌て、声が上ずる。",
+      "duration_scale": 1,
+      "seed": 118119454
+    },
+    {
+      "sample_id": "app-style:reluctant",
+      "emotion": "reluctant",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。強がりながらも折れて、少し甘い声。",
+      "duration_scale": 1,
+      "seed": 684442185
+    },
+    {
+      "sample_id": "app-style:warning",
+      "emotion": "warning",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。低く抑えた声で、静かに牽制する。",
+      "duration_scale": 1,
+      "seed": 218803929
+    },
+    {
+      "sample_id": "app-style:deadpan",
+      "emotion": "deadpan",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。表情を変えず、呆れたように淡々と言う。",
+      "duration_scale": 1,
+      "seed": 1161801991
+    },
+    {
+      "sample_id": "app-style:calm",
+      "emotion": "calm",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "落ち着いた低めの女性話者。先生を安心させる、穏やかで柔らかい声。",
+      "duration_scale": 1,
+      "seed": 1062322219
+    }
+  ]
+}

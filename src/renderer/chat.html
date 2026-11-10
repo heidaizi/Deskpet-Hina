@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: ws: http:"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>和日奈说话</title>
+  </head>
+  <body>
+    <main class="chat-shell">
+      <header class="chat-header">
+        <div>
+          <div class="eyebrow">DESKPET · CHAT</div>
+          <h1>和日奈说话</h1>
+        </div>
+        <button id="chat-clear" class="ghost" type="button" title="清除对话记录">清除</button>
+      </header>
+
+      <section id="chat-messages" class="chat-messages" aria-live="polite"></section>
+
+      <p id="chat-status" class="chat-status" role="status"></p>
+
+      <form id="chat-form" class="chat-composer">
+        <textarea
+          id="chat-input"
+          rows="2"
+          maxlength="500"
+          placeholder="说点什么…（Enter 发送，Shift + Enter 换行）"
+          aria-label="输入消息"
+        ></textarea>
+        <button id="chat-send" class="send" type="submit">发送</button>
+      </form>
+    </main>
+
+    <script type="module" src="./src/chat.ts"></script>
+  </body>
+</html>

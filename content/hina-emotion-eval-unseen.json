@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Generalization check using captions that do not appear in the LoRA training manifest.",
+  "items": [
+    {
+      "emotion": "neutral",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めで落ち着いた女性の声。感情を誇張せず、静かなテンポで淡々と話す。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "tired",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。眠気と疲れがあり、息を少し漏らしながらゆっくり話す。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "soft",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。大切な相手にだけ見せる、控えめで優しい口調。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "happy",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。落ち着きを保ちながら、小さな喜びを滲ませて話す。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "embarrassed",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。照れ隠しで少し早口になり、声が震える。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "annoyed",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。抑えた苛立ちを含み、冷たく短く言い放つ。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "stern",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。静かな威圧感のある、明確で迷いのない口調。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "sad",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。悲しみをこらえ、力を落とした小さな声で話す。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "surprised",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。急な出来事に驚き、息をのんで声を上ずらせる。",
+      "seed": 20261024
+    },
+    {
+      "emotion": "playful",
+      "text": "先生、少しだけこちらを見て。",
+      "caption": "低めの女性の声。笑いをこらえたような、からかう余裕のある話し方。",
+      "seed": 20261024
+    }
+  ]
+}
