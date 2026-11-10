@@ -77,7 +77,7 @@ src/renderer    Pet window / chat / settings UI
 src/shared      Types shared by main and renderer
 content         Dialogue, affection, glossary, prebuilt TTS manifests
 scripts         Build, packaging and voice-training helpers
-docs            Setup, assets and voice-training guides
+docs            Setup, architecture, perception, voice and dev guides
 ```
 
 ## Testing
@@ -170,7 +170,7 @@ src/renderer    桌宠 / 聊天 / 设置界面
 src/shared      主进程与渲染进程共享类型
 content         对话、好感度、术语表、预生成语音清单
 scripts         构建、打包、语音训练脚本
-docs            部署、素材、语音训练文档
+docs            部署、架构、感知、语音与开发文档
 ```
 
 ## 测试
