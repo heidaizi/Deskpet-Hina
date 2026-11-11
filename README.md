@@ -99,7 +99,7 @@ docs            Setup, architecture, perception, voice and dev guides
 ## Icon
 
 The app icon source lives at `docs/acceptance/hina-app-icon-source.png`
-(artwork by **Gz**, PID **91677457**). `npm run package:app` regenerates the
+(artwork by **冬華なつき**, PID **147582646**). `npm run package:app` regenerates the
 `.icns` from it. See [NOTICE.md](NOTICE.md) for attribution.
 
 ## License
@@ -199,7 +199,7 @@ docs            部署、架构、感知、语音与开发文档
 ## 图标
 
 应用图标源文件位于 `docs/acceptance/hina-app-icon-source.png`
-（作者 **Gz**，PID **91677457**），`npm run package:app` 会由它生成 `.icns`。
+（作者 **冬華なつき**，PID **147582646**），`npm run package:app` 会由它生成 `.icns`。
 署名信息见 [NOTICE.md](NOTICE.md)。
 
 ## 许可证

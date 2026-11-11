@@ -13,7 +13,7 @@ development team.
 
 ## Icon
 
-- App icon artwork: PID **91677457**, author **Gz**.
+- App icon artwork: PID **147582646**, author **冬華なつき** (Fuyuka Natsuki).
 - Used with attribution; all rights remain with the original author.
 
 ## Third-party software
