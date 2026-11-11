@@ -43,19 +43,16 @@ npm install
 assets/characters/hina-swimsuit/private/
 ```
 
-### 2.1 3D 模型（必需，用于 3D 模式）
+### 2.1 3D 模型（已包含）
 
 ```
 assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb
 ```
 
-- 格式：`.glb`（glTF Binary）
-- 文件名必须完全一致
-- 建议使用带骨骼和表情的模型；没有模型时应用会退回 2D 占位模式
-
-素材来源请自行确认授权。第三方模型仓库可参考
-[lihaohong6/BlueArchiveModels](https://github.com/lihaohong6/BlueArchiveModels)
-（非本项目维护，请自行确认使用权限）。
+- 仓库已包含该文件（约 5.5MB），无需额外下载
+- 格式：`.glb`（glTF Binary），文件名需保持一致
+- 仅允许个人、非商业使用，见 `LICENSE-ASSETS.md`
+- 没有模型时应用会退回 2D 占位模式
 
 ### 2.2 官方语音（可选）
 
@@ -104,10 +101,10 @@ export DESKPET_AIVIS_ENGINE="$HOME/path/to/engine"
 export DESKPET_AIVIS_URL="http://127.0.0.1:10101"
 ```
 
-## 4. 放置语音模型
+## 4. 安装语音模型
 
-语音模型 `.aivmx` 由你自己训练或合法获取（见
-[VOICE_TRAINING.md](VOICE_TRAINING.md)），放到：
+从 [GitHub Releases](https://github.com/heidaizi/Deskpet-Hina/releases)
+下载 `hina.aivmx`（约 238MB），放到：
 
 ```
 ~/Library/Application Support/AivisSpeech-Engine/Models/
@@ -118,6 +115,9 @@ export DESKPET_AIVIS_URL="http://127.0.0.1:10101"
 ```
 ~/Library/Application Support/AivisSpeech-Engine/Models/hina.aivmx
 ```
+
+模型仅允许个人、非商业使用（见 `LICENSE-ASSETS.md`）。
+如果想训练自己的模型，见 [VOICE_TRAINING.md](VOICE_TRAINING.md)。
 
 要求与约定：
 

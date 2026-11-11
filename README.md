@@ -5,8 +5,9 @@ renderer, streaming dialogue, local voice synthesis, long-term memory and
 opt-in screen awareness.
 
 > **Unofficial fan project.** Not affiliated with NEXON Games / Yostar.
-> This repository contains **source code only** — no character models, voice
-> clips or trained voice models. See [NOTICE.md](NOTICE.md).
+> The 3D model and the voice model are provided for **personal, non-commercial
+> use only**. Official voice clips and training data are not included.
+> See [LICENSE-ASSETS.md](LICENSE-ASSETS.md) and [NOTICE.md](NOTICE.md).
 
 [中文说明](#中文说明)
 
@@ -44,17 +45,20 @@ npm run dev
 Then follow **[docs/SETUP.md](docs/SETUP.md)** — it covers assets, the
 AivisSpeech engine, voice models, permissions, packaging and autostart.
 
-### What you need to prepare
+### What you need
 
-1. **3D model** — `assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
-2. **Voice model** — a `.aivmx` file placed in
-   `~/Library/Application Support/AivisSpeech-Engine/Models/`
-3. **AivisSpeech Engine** — extracted to `~/Library/Deskpet/engine/` (so that
-   `~/Library/Deskpet/engine/run` exists)
+1. **3D model** — included at
+   `assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
+2. **Voice model** — download from
+   [Releases](https://github.com/heidaizi/Deskpet-Hina/releases) and place the
+   `.aivmx` in `~/Library/Application Support/AivisSpeech-Engine/Models/`
+3. **AivisSpeech Engine** — extract to `~/Library/Deskpet/engine/` so that
+   `~/Library/Deskpet/engine/run` exists
 4. **DeepSeek API key** — Settings → AI
 
-Without assets the app still starts: the renderer falls back to a 2D
-placeholder and voice falls back to macOS `say`.
+The 3D and voice models are licensed for **personal, non-commercial use only**.
+Without them the app still starts: the renderer falls back to 2D and voice
+falls back to macOS `say`.
 
 ## Build & package
 
@@ -95,9 +99,9 @@ The app icon source lives at `docs/acceptance/hina-app-icon-source.png`
 
 ## License
 
-Source code: [MIT](LICENSE). Character IP, icon artwork and third-party
-components: see [NOTICE.md](NOTICE.md). Assets and voice models are **not**
-included and must not be redistributed with this repository.
+Source code: [MIT](LICENSE). Character assets and the voice model:
+[personal, non-commercial use only](LICENSE-ASSETS.md). Character IP, icon
+artwork and third-party components: see [NOTICE.md](NOTICE.md).
 
 ---
 
@@ -106,8 +110,10 @@ included and must not be redistributed with this repository.
 一个 _蔚蓝档案_ **空崎日奈** 的 Electron 桌面宠物：3D/2D 渲染、流式对话、
 本地语音合成、长期记忆，以及可选的屏幕感知。
 
-> **非官方同人项目**，与 NEXON Games / Yostar 无关。本仓库**只包含源代码**，
-> 不含角色模型、官方语音或训练好的语音模型，详见 [NOTICE.md](NOTICE.md)。
+> **非官方同人项目**，与 NEXON Games / Yostar 无关。
+> 仓库内的 3D 模型与语音模型**仅允许个人、非商业使用**；
+> 官方语音与训练数据不包含在内。详见 [LICENSE-ASSETS.md](LICENSE-ASSETS.md)
+> 与 [NOTICE.md](NOTICE.md)。
 
 ## 功能
 
@@ -142,14 +148,17 @@ npm run dev
 然后按 **[docs/SETUP.md](docs/SETUP.md)** 操作：素材、AivisSpeech 引擎、
 语音模型、系统权限、打包与开机自启都写在里面。
 
-### 需要你自备的东西
+### 需要准备的东西
 
-1. **3D 模型** — `assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
-2. **语音模型** — 放到 `~/Library/Application Support/AivisSpeech-Engine/Models/` 的 `.aivmx`
+1. **3D 模型** — 已包含在
+   `assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
+2. **语音模型** — 从 [Releases](https://github.com/heidaizi/Deskpet-Hina/releases)
+   下载 `.aivmx`，放到 `~/Library/Application Support/AivisSpeech-Engine/Models/`
 3. **AivisSpeech 引擎** — 解压到 `~/Library/Deskpet/engine/`，确保存在 `run`
 4. **DeepSeek API Key** — 设置 → AI
 
-没有素材也能启动：渲染会退回 2D 占位图，语音退回 macOS `say`。
+模型素材**仅限个人、非商业使用**。缺模型也能启动：
+渲染退回 2D 占位图，语音退回 macOS `say`。
 
 ## 构建与打包
 
@@ -187,5 +196,6 @@ docs            部署、架构、感知、语音与开发文档
 
 ## 许可证
 
-代码采用 [MIT](LICENSE)。角色 IP、图标与第三方组件见 [NOTICE.md](NOTICE.md)。
-素材与语音模型不随仓库分发，请勿一并转载。
+代码采用 [MIT](LICENSE)。角色素材与语音模型采用
+[个人非商业许可](LICENSE-ASSETS.md)。角色 IP、图标与第三方组件见
+[NOTICE.md](NOTICE.md)。

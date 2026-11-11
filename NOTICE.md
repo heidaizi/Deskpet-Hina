@@ -32,10 +32,12 @@ development team.
 Voice models created with Style-Bert-VITS2 are derivative works of that
 toolchain; check its license before redistributing a trained model.
 
-## Assets you must supply yourself
+## Assets in this repository
 
-- 3D character model (`.glb`)
-- Official voice clips (optional)
-- Voice model (`.aivmx`)
+- **3D model**：`assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
+- **Voice model**：通过 GitHub Release 分发（`.aivmx`）
 
-See `docs/ASSETS.md`. Do not commit these files to this repository.
+以上素材与模型仅允许**个人、非商业**使用，详见
+[LICENSE-ASSETS.md](LICENSE-ASSETS.md)。
+
+官方语音片段、训练数据与其他角色资源**不包含**在本仓库中。

@@ -11,6 +11,10 @@ playwright-report/
 # Private character assets — never commit
 assets/characters/**/private/*
 !assets/characters/**/private/README.md
+# 3D model is distributed with this repository (see LICENSE-ASSETS.md)
+!assets/characters/hina-swimsuit/private/3d/
+!assets/characters/hina-swimsuit/private/3d/official/
+!assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb
 
 # Personal development log (not published)
 DEV_LOG.md
