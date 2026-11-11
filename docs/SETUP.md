@@ -53,6 +53,7 @@ assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb
 - 格式：`.glb`（glTF Binary），文件名需保持一致
 - 仅允许个人、非商业使用，见 `LICENSE-ASSETS.md`
 - 没有模型时应用会退回 2D 占位模式
+- **注意**：当前 2D 形象只是演示占位，最终设计未定，不建议展示或分发
 
 ### 2.2 官方语音（可选）
 

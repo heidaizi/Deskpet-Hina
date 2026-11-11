@@ -8,6 +8,11 @@ opt-in screen awareness.
 > The 3D model and the voice model are provided for **personal, non-commercial
 > use only**. Official voice clips and training data are not included.
 > See [LICENSE-ASSETS.md](LICENSE-ASSETS.md) and [NOTICE.md](NOTICE.md).
+>
+> **2D artwork is a placeholder.** The 2D renderer currently uses a demo model
+> only — the final 2D design is not decided. It is **not recommended** for
+> showcases or redistribution; a proper asset will be provided in a later
+> release.
 
 [中文说明](#中文说明)
 
@@ -114,6 +119,9 @@ artwork and third-party components: see [NOTICE.md](NOTICE.md).
 > 仓库内的 3D 模型与语音模型**仅允许个人、非商业使用**；
 > 官方语音与训练数据不包含在内。详见 [LICENSE-ASSETS.md](LICENSE-ASSETS.md)
 > 与 [NOTICE.md](NOTICE.md)。
+>
+> **2D 形象尚未确定。** 当前 2D 渲染只使用演示模型，最终形象仍在设计中，
+> **不建议**用于展示或分发。后续版本会提供正式素材。
 
 ## 功能
 
