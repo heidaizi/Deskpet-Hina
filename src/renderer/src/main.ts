@@ -22,7 +22,6 @@ import {
   type InteractionEnvelope,
 } from '@shared/interaction-envelope'
 import { MODEL_SCALE_MAX, MODEL_SCALE_MIN } from '@shared/model-animations'
-import { getOfficialVoiceLine } from '@shared/official-voices'
 import { shouldChunkSpeech, splitSpeechText } from '@shared/speech-chunks'
 import { normalizeRendererAction, normalizeRendererExpression } from './renderers/action-map'
 import { GLBPetRenderer } from './renderers/glb-renderer'
@@ -58,6 +57,8 @@ let renderer: PetRenderer | null = null
 let canvas: HTMLCanvasElement | null = null
 let removeCanvasListeners: (() => void) | null = null
 let rendererMode: '2d' | '3d' = '2d'
+let initialRendererApplied = false
+let rendererAssetPath: string | undefined
 let rendererSwitchGeneration = 0
 let interaction: InteractionState | null = null
 let bubbleTimer = 0
@@ -116,7 +117,11 @@ ttsEngine = initialSnapshot.settings.ttsEngine
 settingsReady = true
 await switchRenderer({
   mode: initialSnapshot.settings.rendererMode,
-  assetPath: findRendererAsset(initialSnapshot, initialSnapshot.settings.rendererMode),
+  assetPath: findRendererAsset(
+    initialSnapshot,
+    initialSnapshot.settings.rendererMode,
+    initialSnapshot.settings.rendererId,
+  ),
 })
 
 window.deskpet.onStateChanged((snapshot) => {
@@ -181,12 +186,26 @@ document.body.dataset.ready = 'true'
 markRendererActivity()
 
 window.setTimeout(() => {
-  showBubble('啊，欢迎回来，老师。训练的准备已经做好了。')
-  void playVoice(getOfficialVoiceLine('LogIn_1')?.path)
+  void playOutfitGreeting('login')
 }, 500)
 
+/** 播放当前服装的固定场景语音（官方片段 + 专属台词）。 */
+async function playOutfitGreeting(scene: 'login' | 'return'): Promise<void> {
+  try {
+    const greeting = await window.deskpet.getOutfitGreeting(scene)
+    if (!greeting) {
+      return
+    }
+    renderer?.setExpression(normalizeRendererExpression(greeting.expression))
+    showBubble(greeting.dialogue)
+    await playVoice(greeting.voice)
+  } catch {
+    // 语音素材缺失时保持静默
+  }
+}
+
 async function switchRenderer(command: RendererModeCommand): Promise<void> {
-  if (renderer && rendererMode === command.mode) {
+  if (renderer && rendererMode === command.mode && rendererAssetPath === command.assetPath) {
     return
   }
 
@@ -243,6 +262,16 @@ async function switchRenderer(command: RendererModeCommand): Promise<void> {
 
   renderer = nextRenderer
   rendererMode = resolvedMode
+  rendererAssetPath = command.assetPath
+  if (initialRendererApplied) {
+    // 2D 回退时不播放服装问候，避免覆盖失败提示。
+    if (resolvedMode === '3d') {
+      void playOutfitGreeting('login')
+    }
+  } else {
+    initialRendererApplied = true
+  }
+
   canvas = renderer.getCanvas()
   bindCanvasListeners(canvas)
   applyModelScale(currentModelScale)
@@ -1528,9 +1557,21 @@ function toCanvasPoint(event: MouseEvent | PointerEvent): Point2D {
   }
 }
 
-function findRendererAsset(snapshot: SettingsSnapshot, mode: '2d' | '3d'): string | undefined {
-  return snapshot.character.renderers.find(
-    (renderer) => renderer.mode === mode && renderer.status === 'available',
+function findRendererAsset(
+  snapshot: SettingsSnapshot,
+  mode: '2d' | '3d',
+  rendererId?: string,
+): string | undefined {
+  const byId = rendererId
+    ? snapshot.character.renderers.find(
+        (renderer) => renderer.id === rendererId && renderer.status === 'available',
+      )
+    : undefined
+  return (
+    byId ??
+    snapshot.character.renderers.find(
+      (renderer) => renderer.mode === mode && renderer.status === 'available',
+    )
   )?.assetPath
 }
 

@@ -1,5 +1,5 @@
 import type { PetAnimation, PetExpression } from './types'
-import { getOfficialVoiceLine } from './official-voices'
+import { getOfficialVoiceLine, getOfficialVoiceText } from './official-voices'
 import type { SceneKind, TimePeriod } from './time-scene'
 
 export interface SceneCompanionContext {
@@ -43,6 +43,7 @@ interface PerformanceOptions {
   maxSystemIdleSeconds?: number
   restRecovery?: boolean
   voicePath?: string
+  voiceClip?: string
   modelClip?: string
 }
 
@@ -92,7 +93,7 @@ function officialPerformance(
   }
   return performance(id, line.text, line.action, line.expression, {
     ...options,
-    voicePath: line.path,
+    voiceClip: clip,
     modelClip: line.modelClip,
   })
 }
@@ -259,6 +260,7 @@ export class SceneCompanion {
       maxCooldownMs?: number
       maximumIdleSeconds?: number
       recentLimit?: number
+      getOutfitId?: () => string
     } = {},
   ) {}
 
@@ -294,16 +296,27 @@ export class SceneCompanion {
       return null
     }
 
+    const outfitId = this.options.getOutfitId?.()
+    const voiceLine = selected.voiceClip
+      ? getOfficialVoiceLine(selected.voiceClip, outfitId)
+      : undefined
+    // 该服装没有这段官方语音时直接跳过，避免文字与声音不匹配。
+    if (selected.voiceClip && outfitId && !voiceLine) {
+      return null
+    }
     const recentLimit = Math.max(1, this.options.recentLimit ?? 10)
     this.recentPerformanceIds = [...this.recentPerformanceIds, selected.id].slice(-recentLimit)
     this.nextEligibleAt = context.now + this.nextCooldownMs()
     return {
       id: selected.id,
       scene: context.scene,
-      dialogue: selected.text,
+      dialogue:
+        voiceLine && selected.voiceClip
+          ? (getOfficialVoiceText(selected.voiceClip, outfitId) ?? selected.text)
+          : selected.text,
       action: selected.action,
       expression: selected.expression,
-      voice: selected.voicePath,
+      voice: voiceLine?.path ?? selected.voicePath,
       modelClip: selected.modelClip,
       restRecovery: selected.restRecovery,
       speak: true,

@@ -57,6 +57,19 @@ describe('long term memory', () => {
     const entry = memory.remember('老师：项目叫 Deskpet；日奈：记住了。')!
     expect(memory.buildPrompt([entry])).toContain('你记得和老师聊过')
   })
+
+  it('lists, edits and deletes entries for the memory panel', () => {
+    const memory = create()
+    const entry = memory.remember('老师：项目叫 Deskpet；日奈：记住了。')!
+    expect(memory.list()[0]).toMatchObject({ id: entry.id, text: entry.text })
+
+    memory.update(entry.id, '老师：项目现在叫 Deskpet 2。')
+    expect(memory.list()[0].text).toContain('Deskpet 2')
+
+    memory.delete(entry.id)
+    expect(memory.list()).toHaveLength(0)
+    expect(new LongTermMemory(join(dirs[0])).size()).toBe(0)
+  })
 })
 
 describe('semantic recall', () => {

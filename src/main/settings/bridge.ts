@@ -15,6 +15,11 @@ import { LongTermMemory } from '../domain/memory/long-term-memory'
 import { createEmbeddingService } from '../domain/memory/embedding-service'
 import { UserProfile } from '../domain/memory/user-profile'
 import { RelationshipState } from '../domain/relationship-state'
+import {
+  initOutfitRotationStore,
+  isApplyingRotation,
+  noteManualOutfitChange,
+} from '../domain/outfit-rotation'
 import { FeedbackStore } from '../domain/memory/feedback-store'
 import { SemanticMemoryStore } from '../domain/memory/semantic-memory'
 import { PetStateStore, SettingsStore } from '../domain/persistent-stores'
@@ -27,6 +32,7 @@ import { syncPresenceEmotionSetting, syncPresenceMemorySetting } from '../presen
 import { clearPendingAiContext } from '../ai/bridge'
 import { applyPetWindowEnvelope, getCurrentPetWindowEnvelope } from '../window/pet-window'
 import { refreshTrayMenu, setClickThroughMode } from '../tray/tray'
+import { requestScreenVisionTick } from '../perception/screen-vision'
 
 let aivisEngineStarting = false
 export function initializePetController(): void {
@@ -43,11 +49,13 @@ export function initializePetController(): void {
   state.sceneCompanion = new SceneCompanion(undefined, {
     stableMs: readPositiveNumberEnv('DESKPET_SCENE_STABLE_MS'),
     cooldownMs: readPositiveNumberEnv('DESKPET_SCENE_COOLDOWN_MS'),
+    getOutfitId: () => state.petController?.getSettings().rendererId ?? '',
   })
   state.glossary = loadGlossary(join(app.getAppPath(), 'content', 'glossary.json'))
   state.longTermMemory = new LongTermMemory(app.getPath('userData'))
   state.userProfile = new UserProfile(app.getPath('userData'))
   state.relationshipState = new RelationshipState(app.getPath('userData'))
+  initOutfitRotationStore(app.getPath('userData'))
   const embeddings = createEmbeddingService(app.getPath('userData'))
   state.longTermMemory.setEmbedder(embeddings.embed)
   void embeddings.warmup().then(async (ready) => {
@@ -68,7 +76,11 @@ export function initializePetController(): void {
   const stateStore = new PetStateStore(join(userDataPath, 'pet-state.json'), bundle)
   const settingsStore = new SettingsStore(join(userDataPath, 'settings.json'))
   const engine = new BehaviorEngine(bundle)
-  const dialogueService = new DialogueService(bundle)
+  const dialogueService = new DialogueService(
+    bundle,
+    Math.random,
+    () => state.petController?.getSettings().rendererId || 'hina-swimsuit',
+  )
 
   state.petController = new PetController(
     bundle,
@@ -101,6 +113,9 @@ export function updateAppSettings(
       | 'alwaysOnTop'
       | 'interactionsPaused'
       | 'rendererMode'
+      | 'rendererId'
+      | 'outfitRotationEnabled'
+      | 'outfitRotationDays'
       | 'modelScale'
       | 'randomVoiceEnabled'
       | 'localTtsEnabled'
@@ -112,6 +127,8 @@ export function updateAppSettings(
       | 'aiProactiveEnabled'
       | 'aiWindowTitleEnabled'
       | 'aiSelectedTextEnabled'
+      | 'screenPerceptionEnabled'
+      | 'screenPerceptionPaused'
     >
   >,
 ): SettingsSnapshot | null {
@@ -120,6 +137,7 @@ export function updateAppSettings(
   }
 
   const previousRendererMode = state.petController.getSettings().rendererMode
+  const previousRendererId = state.petController.getSettings().rendererId
   const previousLocalTtsEnabled = state.petController.getSettings().localTtsEnabled
   const previousTtsQuality = state.petController.getSettings().ttsQuality
   const previousPresenceMemoryEnabled = state.petController.getSettings().presenceMemoryEnabled
@@ -127,11 +145,19 @@ export function updateAppSettings(
   const previousPresenceAutonomyEnabled = state.petController.getSettings().presenceAutonomyEnabled
   const previousAiEnabled = state.petController.getSettings().aiEnabled
   const previousProactiveAiEnabled = state.petController.getSettings().aiProactiveEnabled
+  const previousScreenPerceptionEnabled = state.petController.getSettings().screenPerceptionEnabled
+  const previousScreenPerceptionPaused = state.petController.getSettings().screenPerceptionPaused
   const snapshot = state.petController.updateSettings(patch)
   if (state.petWindow && !state.petWindow.isDestroyed()) {
     state.petWindow.setAlwaysOnTop(snapshot.settings.alwaysOnTop, 'floating')
   }
-  if (snapshot.settings.rendererMode !== previousRendererMode) {
+  if (
+    snapshot.settings.rendererMode !== previousRendererMode ||
+    snapshot.settings.rendererId !== previousRendererId
+  ) {
+    if (snapshot.settings.rendererId !== previousRendererId && !isApplyingRotation()) {
+      noteManualOutfitChange()
+    }
     sendRendererModeChange(snapshot)
   }
   if (snapshot.settings.ttsQuality !== previousTtsQuality) {
@@ -164,6 +190,13 @@ export function updateAppSettings(
     state.presenceController?.cancelProactiveAi('settings')
   }
   if (
+    snapshot.settings.screenPerceptionEnabled !== previousScreenPerceptionEnabled ||
+    snapshot.settings.screenPerceptionPaused !== previousScreenPerceptionPaused ||
+    snapshot.settings.aiEnabled !== previousAiEnabled
+  ) {
+    requestScreenVisionTick()
+  }
+  if (
     !snapshot.settings.aiEnabled ||
     (state.pendingAiContext?.preview.mode === 'selection' &&
       !snapshot.settings.aiSelectedTextEnabled)
@@ -183,12 +216,13 @@ export function sendRendererModeChange(snapshot: SettingsSnapshot): void {
   ) {
     return
   }
-  const renderer = snapshot.character.renderers.find(
-    (option) => option.mode === snapshot.settings.rendererMode,
-  )
+  const renderer =
+    snapshot.character.renderers.find((option) => option.id === snapshot.settings.rendererId) ??
+    snapshot.character.renderers.find((option) => option.mode === snapshot.settings.rendererMode)
   state.petWindow.webContents.send('pet:renderer-mode-changed', {
     mode: snapshot.settings.rendererMode,
     assetPath: renderer?.assetPath,
+    scale: renderer?.scale ?? 1,
   })
 }
 

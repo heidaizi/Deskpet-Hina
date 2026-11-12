@@ -57,7 +57,14 @@ Deskpet 是一个 Electron 应用，三个进程/层：
 ### 语音
 
 `domain/local-tts-service.ts` 统一调度：预生成音频 → AivisSpeech →
-macOS `say`。详见 [VOICE.md](VOICE.md)。
+macOS `say`。服装相关的官方语音由 `shared/official-voices-outfit-data.ts`
+按 `rendererId` 解析。详见 [VOICE.md](VOICE.md)。
+
+### 服装
+
+- `content/character.json` 定义三套 3D 模型；
+- `domain/outfit-rotation.ts` 负责每 N 天自动轮换；
+- `domain/outfit-voice.ts` 提供各服装的登录/返回固定台词。
 
 ### 感知
 

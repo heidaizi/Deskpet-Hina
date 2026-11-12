@@ -1,6 +1,6 @@
 {
   "name": "deskpet",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "description": "A macOS desktop pet prototype for Hina (Swimsuit).",
   "main": "./out/main/index.js",
@@ -9,6 +9,7 @@
     "build": "npm run typecheck && electron-vite build",
     "preview": "electron-vite preview",
     "package:app": "npm run build && zsh scripts/package-macos-app.zsh",
+    "signing:check": "zsh scripts/check-signing-identity.zsh",
     "assets:voices": "node scripts/fetch-official-voices.mjs",
     "tts:download-models": "node scripts/download-irodori-models.mjs",
     "tts:prepare-dataset": "node scripts/prepare-hina-tts-dataset.mjs",

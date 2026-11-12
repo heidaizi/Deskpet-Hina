@@ -1,4 +1,5 @@
 import type { PetAnimation, PetExpression } from './types'
+import { OUTFIT_VOICE_PATHS, OUTFIT_VOICE_TEXT } from './official-voices-outfit-data'
 
 export interface OfficialVoiceLine {
   clip: string
@@ -86,8 +87,28 @@ export const OFFICIAL_VOICE_LINES: readonly OfficialVoiceLine[] = [
   ),
 ] as const
 
-export function getOfficialVoiceLine(clip: string | undefined): OfficialVoiceLine | undefined {
-  return OFFICIAL_VOICE_LINES.find((entry) => entry.clip === clip)
+/** 官方语音对应的中文文本（按服装区分）。 */
+export function getOfficialVoiceText(clip: string, outfitId?: string): string | undefined {
+  if (outfitId) {
+    return OUTFIT_VOICE_TEXT[outfitId]?.[clip]
+  }
+  return getOfficialVoiceLine(clip)?.text
+}
+
+export function getOfficialVoiceLine(
+  clip: string | undefined,
+  outfitId?: string,
+): OfficialVoiceLine | undefined {
+  const base = OFFICIAL_VOICE_LINES.find((entry) => entry.clip === clip)
+  if (!base) {
+    return undefined
+  }
+  if (!outfitId) {
+    return base
+  }
+  const outfitPath = OUTFIT_VOICE_PATHS[outfitId]?.[base.clip]
+  // 该服装没有这段官方语音时交给实时合成，避免串用其他服装的声音。
+  return outfitPath ? { ...base, path: outfitPath } : undefined
 }
 
 export function pickRandomOfficialVoiceLine(

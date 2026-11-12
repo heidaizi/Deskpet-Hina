@@ -98,6 +98,9 @@ export function isSettingsPatch(
     | 'alwaysOnTop'
     | 'interactionsPaused'
     | 'rendererMode'
+    | 'rendererId'
+    | 'outfitRotationEnabled'
+    | 'outfitRotationDays'
     | 'modelScale'
     | 'randomVoiceEnabled'
     | 'localTtsEnabled'
@@ -109,6 +112,8 @@ export function isSettingsPatch(
     | 'aiProactiveEnabled'
     | 'aiWindowTitleEnabled'
     | 'aiSelectedTextEnabled'
+    | 'screenPerceptionEnabled'
+    | 'screenPerceptionPaused'
   >
 > {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
@@ -118,6 +123,15 @@ export function isSettingsPatch(
   return Object.entries(patch).every(([key, field]) => {
     if (key === 'rendererMode') {
       return field === '2d' || field === '3d'
+    }
+    if (key === 'rendererId') {
+      return typeof field === 'string' && field.length <= 64
+    }
+    if (key === 'outfitRotationEnabled') {
+      return typeof field === 'boolean'
+    }
+    if (key === 'outfitRotationDays') {
+      return typeof field === 'number' && field >= 1 && field <= 30
     }
     if (key === 'modelScale') {
       return typeof field === 'number' && field >= MODEL_SCALE_MIN && field <= MODEL_SCALE_MAX
@@ -147,6 +161,8 @@ export function isSettingsPatch(
         'aiProactiveEnabled',
         'aiWindowTitleEnabled',
         'aiSelectedTextEnabled',
+        'screenPerceptionEnabled',
+        'screenPerceptionPaused',
         'conversationMemoryEnabled',
       ].includes(key) && typeof field === 'boolean'
     )

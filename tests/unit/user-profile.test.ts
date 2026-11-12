@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -48,5 +48,54 @@ describe('user profile', () => {
     const prompt = profile.buildPrompt()
     expect(prompt).toContain('你对老师的了解')
     expect(prompt).toContain('项目：Deskpet')
+  })
+
+  it('supports manual add, edit, pin and delete', () => {
+    const profile = create()
+    const fact = profile.addManual('project', 'Deskpet 桌面宠物')!
+    expect(fact.source).toBe('manual')
+    profile.setPinned(fact.id, true)
+    expect(profile.buildPrompt()).toContain('（重要）')
+
+    profile.update(fact.id, '新项目名')
+    expect(profile.list()[0].text).toBe('新项目名')
+    expect(profile.list()[0].pinned).toBe(true)
+
+    profile.delete(fact.id)
+    expect(profile.list()).toHaveLength(0)
+  })
+
+  it('migrates old profile facts without source or updated time', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'deskpet-profile-old-'))
+    dirs.push(dir)
+    mkdirSync(join(dir, 'memory'), { recursive: true })
+    writeFileSync(
+      join(dir, 'memory', 'profile.json'),
+      JSON.stringify({
+        schemaVersion: 1,
+        facts: [{ id: 'old', category: 'project', text: '旧项目', createdAt: 1_000 }],
+      }),
+    )
+    const profile = new UserProfile(dir)
+    expect(profile.list()[0]).toMatchObject({
+      text: '旧项目',
+      source: 'auto',
+      pinned: false,
+      createdAt: 1_000,
+      updatedAt: 1_000,
+    })
+  })
+
+  it('restores source, pinned state and updated time from disk', () => {
+    const profile = create()
+    const fact = profile.addManual('preference', '喜欢深色模式')!
+    profile.setPinned(fact.id, true)
+    const reloaded = new UserProfile(dirs[0])
+    expect(reloaded.list()[0]).toMatchObject({
+      text: '喜欢深色模式',
+      source: 'manual',
+      pinned: true,
+    })
+    expect(reloaded.list()[0].updatedAt).toBeGreaterThanOrEqual(reloaded.list()[0].createdAt)
   })
 })

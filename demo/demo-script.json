@@ -1,0 +1,12 @@
+{
+  "steps": [
+    { "type": "note", "text": "开场：桌宠待机" },
+    { "type": "wait", "ms": 3000 },
+    { "type": "chat", "text": "在吗？今天有点累。", "waitForReply": true, "ms": 3500 },
+    { "type": "chat", "text": "你还记得我昨天说过什么吗？", "waitForReply": true, "ms": 3500 },
+    { "type": "settings", "tab": "relationship", "ms": 4500 },
+    { "type": "chat", "text": "你能知道我现在在做什么吗？", "waitForReply": true, "ms": 4000 },
+    { "type": "chat", "text": "用一句话说说你现在的心情。", "waitForReply": true, "ms": 4000 },
+    { "type": "note", "text": "结束：回到桌宠" }
+  ]
+}

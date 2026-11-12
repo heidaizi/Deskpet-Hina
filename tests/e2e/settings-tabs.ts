@@ -1,6 +1,6 @@
 import { expect, type Page } from '@playwright/test'
 
-export type SettingsTabName = 'appearance' | 'relationship' | 'behavior' | 'ai' | 'data'
+export type SettingsTabName = 'appearance' | 'relationship' | 'memory' | 'behavior' | 'ai' | 'data'
 
 /**
  * 设置页是分页结构，操作某个控件前必须先切到它所在的分页，

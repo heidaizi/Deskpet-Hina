@@ -2,7 +2,9 @@
 
 本许可适用于本仓库内的角色素材与语音模型：
 
-- `assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
+- `assets/characters/hina-swimsuit/private/3d/official/swimsuit.glb`
+- `assets/characters/hina-swimsuit/private/3d/official/dress.glb`
+- `assets/characters/hina-swimsuit/private/3d/official/normal.glb`
 - GitHub Release 中提供的语音模型（`.aivmx`）
 
 ## 允许

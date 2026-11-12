@@ -54,6 +54,8 @@ export interface DialogueEntry {
     japanese: string
     translation: 'official-cn' | 'project-cn'
   }
+  /** 仅在这些服装下可用；缺省表示通用。 */
+  outfits?: string[]
 }
 
 export interface DialoguePool {

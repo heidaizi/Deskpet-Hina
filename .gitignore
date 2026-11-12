@@ -14,7 +14,9 @@ assets/characters/**/private/*
 # 3D model is distributed with this repository (see LICENSE-ASSETS.md)
 !assets/characters/hina-swimsuit/private/3d/
 !assets/characters/hina-swimsuit/private/3d/official/
-!assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb
+!assets/characters/hina-swimsuit/private/3d/official/swimsuit.glb
+!assets/characters/hina-swimsuit/private/3d/official/dress.glb
+!assets/characters/hina-swimsuit/private/3d/official/normal.glb
 
 # Personal development log (not published)
 DEV_LOG.md

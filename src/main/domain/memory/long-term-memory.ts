@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { randomUUID } from 'node:crypto'
 import type { Embedder } from './embedding-service'
+import type { LongTermMemoryView } from '../../../shared/memory'
 
 export interface LongTermEntry {
   id: string
@@ -124,6 +125,56 @@ export class LongTermMemory {
     mkdirSync(dirname(this.filePath), { recursive: true })
     const data: MemoryFile = { schemaVersion: 1, entries: this.entries }
     writeFileSync(this.filePath, JSON.stringify(data, null, 2) + '\n')
+  }
+
+  /** 给设置页使用的可编辑视图；不暴露向量。 */
+  list(limit = 50): LongTermMemoryView[] {
+    return this.entries
+      .slice()
+      .sort((left, right) => right.createdAt - left.createdAt)
+      .slice(0, Math.max(1, limit))
+      .map((entry) => ({
+        id: entry.id,
+        text: entry.text,
+        createdAt: entry.createdAt,
+        hits: entry.hits,
+      }))
+  }
+
+  /** 修改一条长期记忆；内容变化后重新计算向量。 */
+  update(id: string, text: string): LongTermMemoryView[] {
+    const target = this.entries.find((entry) => entry.id === id)
+    const trimmed = text.trim().replace(/\s+/gu, ' ').slice(0, MAX_TEXT_CHARS)
+    if (!target || trimmed.length < 4) {
+      return this.list()
+    }
+    const key = normalize(trimmed)
+    const duplicate = this.entries.find((entry) => entry.id !== id && normalize(entry.text) === key)
+    if (duplicate) {
+      duplicate.hits += target.hits
+      duplicate.createdAt = Math.max(duplicate.createdAt, target.createdAt)
+      this.entries = this.entries.filter((entry) => entry.id !== id)
+    } else {
+      target.text = trimmed
+      target.createdAt = Date.now()
+      target.vector = undefined
+    }
+    this.persist()
+    if (!duplicate && this.embedder) {
+      void this.embedder(trimmed).then((vector) => {
+        if (vector && target.text === trimmed) {
+          target.vector = vector.map((value) => Math.round(value * 1e4) / 1e4)
+          this.persist()
+        }
+      })
+    }
+    return this.list()
+  }
+
+  delete(id: string): LongTermMemoryView[] {
+    this.entries = this.entries.filter((entry) => entry.id !== id)
+    this.persist()
+    return this.list()
   }
 
   /** 记录一段对话要点；重复内容会被合并。 */

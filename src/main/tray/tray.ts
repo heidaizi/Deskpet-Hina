@@ -18,6 +18,8 @@ import {
 } from '../config'
 import { openAiContext } from '../ai/bridge'
 import { updateMousePolicyFromCursor } from '../window/mouse'
+import { describeScreenPerception, screenPerceptionTrayTitle } from '../../shared/screen-perception'
+import { getScreenVisionStatus } from '../perception/screen-vision'
 export function createTray(): void {
   state.tray = new Tray(createTrayIcon())
   updateTrayPresentation()
@@ -29,6 +31,7 @@ export function buildMenuTemplate(): MenuItemConstructorOptions[] {
   const stateLabel = snapshot
     ? `Lv.${snapshot.state.affectionLevel} · 心情 ${snapshot.state.mood} · 精力 ${snapshot.state.energy}`
     : '状态加载中'
+  const screenPerception = getScreenVisionStatus()
   return [
     {
       label: state.petVisible ? '隐藏日奈' : '显示日奈',
@@ -86,6 +89,17 @@ export function buildMenuTemplate(): MenuItemConstructorOptions[] {
       },
     },
     {
+      label: `屏幕感知：${describeScreenPerception(screenPerception)}`,
+      enabled: false,
+    },
+    {
+      label: screenPerception.paused ? '继续屏幕感知' : '暂停屏幕感知',
+      enabled: screenPerception.configured,
+      click: () => {
+        updateAppSettings({ screenPerceptionPaused: !screenPerception.paused })
+      },
+    },
+    {
       label: '和日奈说话…',
       click: () => {
         void showChatWindow()
@@ -135,11 +149,14 @@ export function updateTrayPresentation(): void {
     return
   }
 
-  state.tray.setTitle(state.clickThroughMode ? '日奈 · 穿透' : '日奈')
+  const screenPerception = getScreenVisionStatus()
+  state.tray.setTitle(screenPerceptionTrayTitle(screenPerception, state.clickThroughMode))
   state.tray.setToolTip(
     state.clickThroughMode
       ? `Deskpet · 完全鼠标穿透中${state.activeClickThroughShortcut ? ` · ${state.activeClickThroughShortcut.label} 恢复` : ''}`
-      : 'Deskpet · 日奈 M4 VRM 3D 技术接入',
+      : screenPerception.active
+        ? 'Deskpet · 屏幕感知中（每 8 分钟本地预检后分析）'
+        : 'Deskpet · 日奈 M4 VRM 3D 技术接入',
   )
 }
 

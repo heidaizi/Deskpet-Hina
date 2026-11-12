@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "outfits": {
+    "hina-swimsuit": {
+      "login": {
+        "voice": "assets/characters/hina-swimsuit/private/audio/outfit/swimsuit/LogIn_1.ogg",
+        "ja": "ああ、おかえり。先生。トレーニングの準備ならもうできてるよ。",
+        "zh": "啊，欢迎回来，老师。训练的准备已经做好了。",
+        "action": "idle",
+        "expression": "neutral"
+      },
+      "return": {
+        "voice": "assets/characters/hina-swimsuit/private/audio/outfit/swimsuit/EventLobby_2.ogg",
+        "ja": "海には常に危険が伴う。いつどこで事故が起こるか分からないから、気を付けて。その……何かあったら、私のことを呼んでくれれば。",
+        "zh": "海边总是伴随着危险。……要是出了什么事，叫我就好。",
+        "action": "look_at_cursor",
+        "expression": "stern"
+      }
+    },
+    "hina-dress": {
+      "login": {
+        "voice": "assets/characters/hina-swimsuit/private/audio/outfit/dress/LogIn_1.ogg",
+        "ja": "いらっしゃい。先生。何か手伝うことはあるかしら？",
+        "zh": "欢迎，老师。有什么需要我帮忙的吗？",
+        "action": "wave",
+        "expression": "neutral"
+      },
+      "return": {
+        "voice": "assets/characters/hina-swimsuit/private/audio/outfit/dress/EventLobby_1.ogg",
+        "ja": "万魔殿とトラブルがあるたびに困惑させられるけど……今回は、先生がいてくれてよかった。",
+        "zh": "每次和万魔殿起冲突都让人头疼……不过这次有老师在，真是太好了。",
+        "action": "idle",
+        "expression": "soft"
+      }
+    },
+    "hina-normal": {
+      "login": {
+        "voice": "assets/characters/hina-swimsuit/private/audio/outfit/normal/LogIn_1.ogg",
+        "ja": "ああ、待ってたよ。先生。",
+        "zh": "啊，老师，我一直在等你。",
+        "action": "look_at_cursor",
+        "expression": "neutral"
+      },
+      "return": {
+        "voice": "assets/characters/hina-swimsuit/private/audio/outfit/normal/Relationship_Up_2.ogg",
+        "ja": "一緒にいてくれて…ありがとう。先生。",
+        "zh": "……谢谢你陪着我，老师。",
+        "action": "idle",
+        "expression": "soft"
+      }
+    }
+  }
+}

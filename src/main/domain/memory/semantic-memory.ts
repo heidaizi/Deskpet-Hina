@@ -119,6 +119,26 @@ export class SemanticMemoryStore {
       .map((entry) => entry.memory)
   }
 
+  update(id: string, text: string): SemanticMemory[] {
+    const statement = normalize(text)
+    const target = this.memories.find((memory) => memory.id === id)
+    if (!target || !statement) {
+      return this.list()
+    }
+    const duplicate = this.memories.find(
+      (memory) => memory.id !== id && memory.statement === statement,
+    )
+    if (duplicate) {
+      duplicate.at = Date.now()
+      this.memories = this.memories.filter((memory) => memory.id !== id)
+    } else {
+      target.statement = statement
+      target.at = Date.now()
+    }
+    this.persist()
+    return this.list()
+  }
+
   delete(id: string): SemanticMemory[] {
     this.memories = this.memories.filter((memory) => memory.id !== id)
     this.persist()

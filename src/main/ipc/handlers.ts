@@ -7,6 +7,8 @@ import {
 } from '../behavior/decision-bus'
 import { getLastError } from '../system/error-log'
 import { app, ipcMain, shell } from 'electron'
+import { getOutfitGreeting } from '../domain/outfit-voice'
+import { join } from 'node:path'
 import { readFileSync } from 'node:fs'
 import { isAbsolute, relative, resolve } from 'node:path'
 import { randomUUID } from 'node:crypto'
@@ -58,6 +60,10 @@ import {
 } from '../ai/bridge'
 import { IS_E2E, presenceMode } from '../config'
 import { buildMenuTemplate } from '../tray/tray'
+import { getScreenVisionStatus } from '../perception/screen-vision'
+import { getPermissionSnapshot, openPermissionSettings } from '../system/permissions'
+import { isPermissionService, type PermissionSnapshot } from '../../shared/permissions'
+import { isProfileCategory } from '../../shared/memory'
 export function registerIpcHandlers(): void {
   ipcMain.on('pet:hit-areas', (event, areas: unknown) => {
     if (!isPetSender(event.sender) || !Array.isArray(areas)) {
@@ -87,6 +93,19 @@ export function registerIpcHandlers(): void {
         releaseDecision('presence')
       }
     }
+  })
+
+  ipcMain.handle('outfit:greeting', (_event, scene) => {
+    const outfitId =
+      state.petController?.getSettings().rendererId ||
+      state.petController
+        ?.getSettingsSnapshot()
+        .character.renderers.find(
+          (renderer) => renderer.mode === '3d' && renderer.status === 'available',
+        )?.id ||
+      ''
+    const safeScene = scene === 'return' ? 'return' : 'login'
+    return getOutfitGreeting(join(app.getAppPath(), 'content'), outfitId, safeScene)
   })
 
   ipcMain.on('chat:open', () => {
@@ -129,6 +148,17 @@ export function registerIpcHandlers(): void {
     return state.semanticMemory?.list() ?? []
   })
 
+  ipcMain.handle('memory:semantic-update', (event, value: unknown) => {
+    if (!isDeskpetSender(event.sender) || !state.semanticMemory) {
+      throw new Error('Invalid semantic memory request.')
+    }
+    const payload = value as { id?: unknown; text?: unknown }
+    if (typeof payload?.id !== 'string' || typeof payload.text !== 'string') {
+      throw new Error('Invalid semantic memory request.')
+    }
+    return state.semanticMemory.update(payload.id.slice(0, 100), payload.text.slice(0, 400))
+  })
+
   ipcMain.handle('memory:semantic-delete', (event, id: unknown) => {
     if (!isDeskpetSender(event.sender) || typeof id !== 'string') {
       throw new Error('Invalid semantic memory request.')
@@ -142,6 +172,95 @@ export function registerIpcHandlers(): void {
     }
     state.semanticMemory?.clear()
     return state.semanticMemory?.list() ?? []
+  })
+
+  ipcMain.handle('memory:profile-list', (event) => {
+    if (!isDeskpetSender(event.sender)) {
+      throw new Error('Invalid profile memory request.')
+    }
+    return state.userProfile?.list() ?? []
+  })
+
+  ipcMain.handle('memory:profile-add', (event, value: unknown) => {
+    if (!isDeskpetSender(event.sender) || !state.userProfile) {
+      throw new Error('Invalid profile memory request.')
+    }
+    const payload = value as { category?: unknown; text?: unknown }
+    if (!isProfileCategory(payload?.category) || typeof payload.text !== 'string') {
+      throw new Error('Invalid profile memory request.')
+    }
+    state.userProfile.addManual(payload.category, payload.text.slice(0, 200))
+    return state.userProfile.list()
+  })
+
+  ipcMain.handle('memory:profile-update', (event, value: unknown) => {
+    if (!isDeskpetSender(event.sender) || !state.userProfile) {
+      throw new Error('Invalid profile memory request.')
+    }
+    const payload = value as { id?: unknown; text?: unknown }
+    if (typeof payload?.id !== 'string' || typeof payload.text !== 'string') {
+      throw new Error('Invalid profile memory request.')
+    }
+    return state.userProfile.update(payload.id, payload.text.slice(0, 200))
+  })
+
+  ipcMain.handle('memory:profile-delete', (event, id: unknown) => {
+    if (!isDeskpetSender(event.sender) || !state.userProfile || typeof id !== 'string') {
+      throw new Error('Invalid profile memory request.')
+    }
+    return state.userProfile.delete(id)
+  })
+
+  ipcMain.handle('memory:profile-pin', (event, value: unknown) => {
+    if (!isDeskpetSender(event.sender) || !state.userProfile) {
+      throw new Error('Invalid profile memory request.')
+    }
+    const payload = value as { id?: unknown; pinned?: unknown }
+    if (typeof payload?.id !== 'string' || typeof payload.pinned !== 'boolean') {
+      throw new Error('Invalid profile memory request.')
+    }
+    return state.userProfile.setPinned(payload.id, payload.pinned)
+  })
+
+  ipcMain.handle('memory:profile-clear', (event) => {
+    if (!isDeskpetSender(event.sender) || !state.userProfile) {
+      throw new Error('Invalid profile memory request.')
+    }
+    state.userProfile.clear()
+    return state.userProfile.list()
+  })
+
+  ipcMain.handle('memory:longterm-list', (event) => {
+    if (!isDeskpetSender(event.sender)) {
+      throw new Error('Invalid long-term memory request.')
+    }
+    return state.longTermMemory?.list() ?? []
+  })
+
+  ipcMain.handle('memory:longterm-update', (event, value: unknown) => {
+    if (!isDeskpetSender(event.sender) || !state.longTermMemory) {
+      throw new Error('Invalid long-term memory request.')
+    }
+    const payload = value as { id?: unknown; text?: unknown }
+    if (typeof payload?.id !== 'string' || typeof payload.text !== 'string') {
+      throw new Error('Invalid long-term memory request.')
+    }
+    return state.longTermMemory.update(payload.id, payload.text.slice(0, 500))
+  })
+
+  ipcMain.handle('memory:longterm-delete', (event, id: unknown) => {
+    if (!isDeskpetSender(event.sender) || !state.longTermMemory || typeof id !== 'string') {
+      throw new Error('Invalid long-term memory request.')
+    }
+    return state.longTermMemory.delete(id)
+  })
+
+  ipcMain.handle('memory:longterm-clear', (event) => {
+    if (!isDeskpetSender(event.sender) || !state.longTermMemory) {
+      throw new Error('Invalid long-term memory request.')
+    }
+    state.longTermMemory.clear()
+    return state.longTermMemory.list()
   })
 
   ipcMain.handle('memory:conversation-stats', (event) => {
@@ -379,6 +498,23 @@ export function registerIpcHandlers(): void {
     return structuredClone(state.timeSceneContext)
   })
 
+  ipcMain.handle(
+    'permissions:get',
+    async (event, probeAutomation: unknown): Promise<PermissionSnapshot> => {
+      if (!isDeskpetSender(event.sender)) {
+        throw new Error('Permission status is not available to this window.')
+      }
+      return getPermissionSnapshot(probeAutomation === true)
+    },
+  )
+
+  ipcMain.handle('permissions:open', async (event, service: unknown): Promise<void> => {
+    if (!isDeskpetSender(event.sender) || !isPermissionService(service)) {
+      throw new Error('Permission settings request is invalid.')
+    }
+    await openPermissionSettings(service)
+  })
+
   ipcMain.handle('ai:status', async (event): Promise<AiServiceStatus> => {
     if (!isDeskpetSender(event.sender)) {
       throw new Error('AI status is not available to this window.')
@@ -541,6 +677,7 @@ export function registerIpcHandlers(): void {
       presenceLastProactiveAiOutcome: presenceDiagnostics?.lastProactiveAiOutcome ?? null,
       presenceLastProactiveAiIntent: presenceDiagnostics?.lastProactiveAiIntent ?? null,
       presenceTelemetry: state.presenceController?.getTelemetry() ?? emptyPresenceTelemetry(),
+      screenPerception: getScreenVisionStatus(),
       trayReady: Boolean(state.tray && !state.tray.isDestroyed()),
       trayTitle: state.tray?.getTitle() ?? '',
       trayMenuLabels: buildMenuTemplate()

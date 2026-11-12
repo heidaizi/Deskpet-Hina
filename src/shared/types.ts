@@ -1,6 +1,9 @@
 import type { TimeSceneContext } from './time-scene'
 import type { AiContextMode, AiContextPreview, AiSendResult, AiServiceStatus } from './ai-context'
 import type { EpisodicMemory } from './presence'
+import type { ScreenPerceptionStatus } from './screen-perception'
+import type { PermissionService, PermissionSnapshot } from './permissions'
+import type { LongTermMemoryView, ProfileCategory, ProfileFactView } from './memory'
 
 export interface Point2D {
   x: number
@@ -123,6 +126,16 @@ export interface CharacterRendererOption {
   mode: '2d' | '3d'
   status: 'available' | 'planned'
   assetPath?: string
+  /** 模型自身的显示比例修正（默认 1）。 */
+  scale?: number
+}
+
+export interface OutfitGreeting {
+  dialogue: string
+  spokenText: string
+  voice: string
+  action: PetAnimation
+  expression: PetExpression
 }
 
 export interface CharacterInfo {
@@ -176,6 +189,10 @@ export interface AppSettings {
   alwaysOnTop: boolean
   interactionsPaused: boolean
   rendererMode: '2d' | '3d'
+  /** 3D 模型 id；为空时用该模式下的第一个可用模型。 */
+  rendererId: string
+  outfitRotationEnabled: boolean
+  outfitRotationDays: number
   modelScale: number
   randomVoiceEnabled: boolean
   localTtsEnabled: boolean
@@ -187,6 +204,8 @@ export interface AppSettings {
   aiProactiveEnabled: boolean
   aiWindowTitleEnabled: boolean
   aiSelectedTextEnabled: boolean
+  screenPerceptionEnabled: boolean
+  screenPerceptionPaused: boolean
   conversationMemoryEnabled: boolean
   intelligenceLevel: 'off' | 'basic' | 'adaptive'
   ttsQuality: 'quality' | 'balanced' | 'speed'
@@ -236,6 +255,7 @@ export interface PresenceTelemetrySnapshot {
 export interface RendererModeCommand {
   mode: '2d' | '3d'
   assetPath?: string
+  scale?: number
 }
 
 export interface SettingsSnapshot {
@@ -280,6 +300,7 @@ export interface RuntimeInfo {
   presenceLastProactiveAiOutcome: string | null
   presenceLastProactiveAiIntent: string | null
   presenceTelemetry: PresenceTelemetrySnapshot
+  screenPerception: ScreenPerceptionStatus
   trayReady: boolean
   trayTitle: string
   trayMenuLabels: string[]
@@ -372,6 +393,9 @@ export interface DeskpetApi {
         | 'alwaysOnTop'
         | 'interactionsPaused'
         | 'rendererMode'
+        | 'rendererId'
+        | 'outfitRotationEnabled'
+        | 'outfitRotationDays'
         | 'modelScale'
         | 'randomVoiceEnabled'
         | 'localTtsEnabled'
@@ -383,6 +407,8 @@ export interface DeskpetApi {
         | 'aiProactiveEnabled'
         | 'aiWindowTitleEnabled'
         | 'aiSelectedTextEnabled'
+        | 'screenPerceptionEnabled'
+        | 'screenPerceptionPaused'
         | 'conversationMemoryEnabled'
         | 'intelligenceLevel'
         | 'ttsQuality'
@@ -407,13 +433,25 @@ export interface DeskpetApi {
   getConversationStats: () => Promise<{ turns: number }>
   clearConversationMemory: () => Promise<{ turns: number }>
   openChat: () => void
+  getOutfitGreeting: (scene?: 'login' | 'return') => Promise<OutfitGreeting | null>
   getChatHistory: () => Promise<ChatMessageView[]>
   sendChatMessage: (text: string) => Promise<ChatSendResult>
   clearChatHistory: () => Promise<void>
   rememberSemanticMemory: (text: string) => Promise<SemanticMemoryView[]>
   listSemanticMemories: () => Promise<SemanticMemoryView[]>
+  updateSemanticMemory: (id: string, text: string) => Promise<SemanticMemoryView[]>
   deleteSemanticMemory: (id: string) => Promise<SemanticMemoryView[]>
   clearSemanticMemories: () => Promise<SemanticMemoryView[]>
+  listProfileFacts: () => Promise<ProfileFactView[]>
+  addProfileFact: (category: ProfileCategory, text: string) => Promise<ProfileFactView[]>
+  updateProfileFact: (id: string, text: string) => Promise<ProfileFactView[]>
+  deleteProfileFact: (id: string) => Promise<ProfileFactView[]>
+  setProfileFactPinned: (id: string, pinned: boolean) => Promise<ProfileFactView[]>
+  clearProfileFacts: () => Promise<ProfileFactView[]>
+  listLongTermMemories: () => Promise<LongTermMemoryView[]>
+  updateLongTermMemory: (id: string, text: string) => Promise<LongTermMemoryView[]>
+  deleteLongTermMemory: (id: string) => Promise<LongTermMemoryView[]>
+  clearLongTermMemories: () => Promise<LongTermMemoryView[]>
   loadCharacterAsset: (assetPath: string) => Promise<Uint8Array>
   synthesizeLocalSpeech: (
     text: string,
@@ -432,6 +470,8 @@ export interface DeskpetApi {
   preloadLocalTts: () => Promise<TtsResourceStatus>
   onTimeSceneChanged: (callback: (context: TimeSceneContext) => void) => () => void
   onSystemPowerState: (callback: (state: SystemPowerState) => void) => () => void
+  getPermissionStatus: (probeAutomation?: boolean) => Promise<PermissionSnapshot>
+  openPermissionSettings: (service: PermissionService) => Promise<void>
   getAiStatus: () => Promise<AiServiceStatus>
   saveDeepSeekKey: (key: string) => Promise<AiServiceStatus>
   deleteDeepSeekKey: () => Promise<AiServiceStatus>

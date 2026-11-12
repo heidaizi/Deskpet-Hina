@@ -234,6 +234,46 @@
       "text": "先生？何か手伝おうか？",
       "emotion": "calm",
       "durationScale": 1.03
+    },
+    "这身礼服……果然还是有点不习惯。": {
+      "text": "ドレスは……やっぱり少し落ち着かない。",
+      "emotion": "embarrassed",
+      "durationScale": 1.02
+    },
+    "别一直戳啦。": {
+      "text": "ずっと突かないで。",
+      "emotion": "annoyed",
+      "durationScale": 1
+    },
+    "……就一小会儿。礼服会乱的。": {
+      "text": "ほんの少しだけ。ドレスが乱れるから。",
+      "emotion": "reluctant",
+      "durationScale": 1.02
+    },
+    "……这样很痒。": {
+      "text": "……くすぐったい。",
+      "emotion": "embarrassed",
+      "durationScale": 1
+    },
+    "礼服会皱的，适可而止。": {
+      "text": "ドレスがシワになるから、ほどほどに。",
+      "emotion": "stern",
+      "durationScale": 1
+    },
+    "我还在忙。": {
+      "text": "まだ仕事中。",
+      "emotion": "neutral",
+      "durationScale": 0.98
+    },
+    "放我下来，裙子会乱。": {
+      "text": "下ろして。スカートが乱れる。",
+      "emotion": "annoyed",
+      "durationScale": 1
+    },
+    "……别晃。": {
+      "text": "……揺らさないで。",
+      "emotion": "annoyed",
+      "durationScale": 0.98
     }
   }
 }

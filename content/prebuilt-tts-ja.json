@@ -329,6 +329,70 @@
       "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/ai-ack-wait.wav",
       "durationSeconds": 1.04,
       "sha256": "05884316838e6ba515a8b35be09902ace4b92ef668a84851de3898db1c3c95cb"
+    },
+    {
+      "text": "这身礼服……果然还是有点不习惯。",
+      "japanese": "ドレスは……やっぱり少し落ち着かない。",
+      "emotion": "embarrassed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-1.wav",
+      "durationSeconds": 0,
+      "sha256": "10b6ec732cc923ea9aa1b891d4d8639a21c3a1afff9697b7fc4ef54ad5caa4a1"
+    },
+    {
+      "text": "别一直戳啦。",
+      "japanese": "ずっと突かないで。",
+      "emotion": "annoyed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-2.wav",
+      "durationSeconds": 0,
+      "sha256": "120a7838d6e79371125b3a5449dcfb71fc2526941cf4c8f88fc84746136be647"
+    },
+    {
+      "text": "……就一小会儿。礼服会乱的。",
+      "japanese": "ほんの少しだけ。ドレスが乱れるから。",
+      "emotion": "reluctant",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-3.wav",
+      "durationSeconds": 0,
+      "sha256": "4ee99ecc40258d6b38156246434c86d96f5cac27cd01e872b934c7ebdc392646"
+    },
+    {
+      "text": "……这样很痒。",
+      "japanese": "……くすぐったい。",
+      "emotion": "embarrassed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-4.wav",
+      "durationSeconds": 0,
+      "sha256": "61325e79784b37c07aa972f408809d4f685373a1322a5ccfe7538ed36bd9a393"
+    },
+    {
+      "text": "礼服会皱的，适可而止。",
+      "japanese": "ドレスがシワになるから、ほどほどに。",
+      "emotion": "stern",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-5.wav",
+      "durationSeconds": 0,
+      "sha256": "ed0413b1cf0520750f5a76ee5a3945d83d972c7b1f962b26e82920ca0089cff8"
+    },
+    {
+      "text": "我还在忙。",
+      "japanese": "まだ仕事中。",
+      "emotion": "neutral",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-6.wav",
+      "durationSeconds": 0,
+      "sha256": "0e10d00dd1ec9addf06c9c3b0cfd6106e537686a32ebfa3b72d185e8c89df4a0"
+    },
+    {
+      "text": "放我下来，裙子会乱。",
+      "japanese": "下ろして。スカートが乱れる。",
+      "emotion": "annoyed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-7.wav",
+      "durationSeconds": 0,
+      "sha256": "1104c22450b101abe358011c1714b24d6ec323c9051a4ae339ffbc43fa47ae2a"
+    },
+    {
+      "text": "……别晃。",
+      "japanese": "……揺らさないで。",
+      "emotion": "annoyed",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-8.wav",
+      "durationSeconds": 0,
+      "sha256": "52019c387e3fd0191b4f34f1b89b513c5b98c5af14d0ca49760dacf47b11e2d9"
     }
   ]
 }

@@ -3,14 +3,32 @@
   "pools": {
     "head": {
       "entries": [
-        { "id": "head-1", "text": "……在做什么？", "weight": 3 },
-        { "id": "head-2", "text": "别一直戳。", "weight": 2 },
-        { "id": "head-3", "text": "有事就说。", "weight": 2 },
+        {
+          "id": "head-1",
+          "text": "……在做什么？",
+          "weight": 3
+        },
+        {
+          "id": "head-2",
+          "text": "别一直戳。",
+          "weight": 2
+        },
+        {
+          "id": "head-3",
+          "text": "有事就说。",
+          "weight": 2
+        },
         {
           "id": "head-soft",
           "text": "……只碰一下的话，可以。",
           "weight": 2,
-          "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 2 }]
+          "conditions": [
+            {
+              "field": "affectionLevel",
+              "op": ">=",
+              "value": 2
+            }
+          ]
         },
         {
           "id": "head-official-swimsuit",
@@ -21,7 +39,8 @@
             "clip": "Cafe_monolog_1",
             "japanese": "この水着、 変じゃないかな……？",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "head-official-summer",
@@ -32,7 +51,8 @@
             "clip": "Lobby_2",
             "japanese": "別に期待とか、 楽しみにしてたわけじゃ……。 その、ほんの 少しくらいしか……。",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "head-official-camp",
@@ -43,65 +63,186 @@
             "clip": "EventLobby_3",
             "japanese": "夏のトレーニング合宿。 まさか今年は、 先生と一緒だなんて…… ……ちょっと新鮮。",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "head-late-night",
           "text": "这个时间还不睡？……明天会没精神的。",
           "weight": 8,
-          "conditions": [{ "field": "time.period", "op": "==", "value": "late_night" }]
+          "conditions": [
+            {
+              "field": "time.period",
+              "op": "==",
+              "value": "late_night"
+            }
+          ]
         },
         {
           "id": "head-night",
           "text": "已经这么晚了。别把自己逼太紧。",
           "weight": 7,
-          "conditions": [{ "field": "time.period", "op": "==", "value": "night" }]
+          "conditions": [
+            {
+              "field": "time.period",
+              "op": "==",
+              "value": "night"
+            }
+          ]
         },
         {
           "id": "head-focus",
           "text": "先忙完。……我在旁边。",
           "weight": 6,
-          "conditions": [{ "field": "scene.kind", "op": "==", "value": "focus" }]
+          "conditions": [
+            {
+              "field": "scene.kind",
+              "op": "==",
+              "value": "focus"
+            }
+          ]
         },
         {
           "id": "head-development",
           "text": "专心一点。现在不是分心的时候。",
           "weight": 6,
-          "conditions": [{ "field": "scene.kind", "op": "==", "value": "development" }]
+          "conditions": [
+            {
+              "field": "scene.kind",
+              "op": "==",
+              "value": "development"
+            }
+          ]
         },
         {
           "id": "head-communication",
           "text": "先把话说完。我会等你。",
           "weight": 6,
-          "conditions": [{ "field": "scene.kind", "op": "==", "value": "communication" }]
+          "conditions": [
+            {
+              "field": "scene.kind",
+              "op": "==",
+              "value": "communication"
+            }
+          ]
         },
         {
           "id": "head-close-night",
           "text": "这么晚还不睡……我也陪你一会儿。",
           "weight": 9,
           "conditions": [
-            { "field": "affectionLevel", "op": ">=", "value": 6 },
-            { "field": "time.period", "op": "==", "value": "late_night" }
+            {
+              "field": "affectionLevel",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "field": "time.period",
+              "op": "==",
+              "value": "late_night"
+            }
           ]
         },
         {
           "id": "head-summer-promise",
           "text": "今年夏天……还想和老师一起过。",
           "weight": 8,
-          "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 7 }]
+          "conditions": [
+            {
+              "field": "affectionLevel",
+              "op": ">=",
+              "value": 7
+            }
+          ],
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "head-stay-together",
           "text": "就算夏天结束……我也会在这里。",
           "weight": 9,
-          "conditions": [{ "field": "affectionLevel", "op": ">=", "value": 8 }]
+          "conditions": [
+            {
+              "field": "affectionLevel",
+              "op": ">=",
+              "value": 8
+            }
+          ],
+          "outfits": ["hina-swimsuit"]
+        },
+        {
+          "id": "head-dress-1",
+          "text": "这身礼服……果然还是有点不习惯。",
+          "weight": 1,
+          "outfits": ["hina-dress"]
+        },
+        {
+          "id": "head-normal-1",
+          "text": "别一直戳啦。",
+          "weight": 1,
+          "outfits": ["hina-normal"]
+        },
+        {
+          "id": "head-dress-1",
+          "text": "穿礼服……总有点静不下来。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Cafe_monolog_1",
+            "japanese": "ドレスだと、少し落ち着かない……",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head-dress-2",
+          "text": "最近在练钢琴。……久违地做点风纪委员以外的事，有点新鲜。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Lobby_2",
+            "japanese": "最近はピアノの練習をしてるの。久しぶりに風紀委員の業務以外に打ち込んでるから、ちょっと新鮮かも。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head-dress-3",
+          "text": "不管发生什么，风纪委员会要做的事都不会变。……已经习以为常了。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "EventLobby_3",
+            "japanese": "どんな事態だろうと、風紀委員会がやることは変わらないわ。いつものことだから。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head-normal-13",
+          "text": "在这里，我不过是一名普通部员而已。",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Lobby_2",
+            "japanese": "ここではただの一人の部員にすぎないから。",
+            "translation": "project-cn"
+          }
         }
       ]
     },
     "head_annoyed": {
       "entries": [
-        { "id": "head-annoyed-1", "text": "……今天已经够吵了。", "weight": 1 },
-        { "id": "head-annoyed-2", "text": "再这样就别怪我不客气。", "weight": 1 },
+        {
+          "id": "head-annoyed-1",
+          "text": "……今天已经够吵了。",
+          "weight": 1
+        },
+        {
+          "id": "head-annoyed-2",
+          "text": "再这样就别怪我不客气。",
+          "weight": 1
+        },
         {
           "id": "head-annoyed-official-sigh",
           "text": "唉，真是的……！",
@@ -111,7 +252,8 @@
             "clip": "Battle_Damage_2",
             "japanese": "ハァ、まったく…！",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "head-annoyed-official-give-up",
@@ -122,27 +264,92 @@
             "clip": "ExSkill_Level_1",
             "japanese": "そろそろ諦めたら？",
             "translation": "project-cn"
+          },
+          "outfits": ["hina-swimsuit"]
+        },
+        {
+          "id": "head_annoyed-dress-11",
+          "text": "要准备的话，我早就准备好了。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "ExSkill_Level_1",
+            "japanese": "準備なら、できてる。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head_annoyed-normal-20",
+          "text": "这可不妙啊。",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Battle_Damage_2",
+            "japanese": "良くないなぁ。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "head_annoyed-normal-21",
+          "text": "能撑多久呢？倒是让人期待。",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "ExSkill_Level_1",
+            "japanese": "どれくらい耐えられるか見ものね？",
+            "translation": "project-cn"
           }
         }
       ]
     },
     "horn": {
       "entries": [
-        { "id": "horn-1", "text": "角不能乱碰。", "weight": 2 },
-        { "id": "horn-2", "text": "……你是故意的吧。", "weight": 1 }
+        {
+          "id": "horn-1",
+          "text": "角不能乱碰。",
+          "weight": 2
+        },
+        {
+          "id": "horn-2",
+          "text": "……你是故意的吧。",
+          "weight": 1
+        }
       ]
     },
     "halo": {
       "entries": [
-        { "id": "halo-1", "text": "光环不是按钮。", "weight": 2 },
-        { "id": "halo-2", "text": "再碰就真的烦了。", "weight": 1 }
+        {
+          "id": "halo-1",
+          "text": "光环不是按钮。",
+          "weight": 2
+        },
+        {
+          "id": "halo-2",
+          "text": "再碰就真的烦了。",
+          "weight": 1
+        }
       ]
     },
     "body": {
       "entries": [
-        { "id": "body-1", "text": "适可而止。", "weight": 2 },
-        { "id": "body-2", "text": "我还有工作。", "weight": 1 },
-        { "id": "body-3", "text": "这样很痒。", "weight": 1 },
+        {
+          "id": "body-1",
+          "text": "适可而止。",
+          "weight": 2
+        },
+        {
+          "id": "body-2",
+          "text": "我还有工作。",
+          "weight": 1
+        },
+        {
+          "id": "body-3",
+          "text": "这样很痒。",
+          "weight": 1
+        },
         {
           "id": "body-official-tired",
           "text": "也许是训练的缘故……身体有点发沉。",
@@ -152,7 +359,8 @@
             "clip": "Cafe_monolog_2",
             "japanese": "トレーニングの せいか…… 少し体がだるい。",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "body-official-rest",
@@ -163,7 +371,8 @@
             "clip": "Lobby_3",
             "japanese": "トレーニングもいいけど、 休息も大事？ ……確かにそれも正論。 でも、私がサボる わけにはいかないから。",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "body-official-waste",
@@ -174,38 +383,127 @@
             "clip": "StudentProfile.Background",
             "japanese": "勿体ないから",
             "translation": "official-cn"
+          },
+          "outfits": ["hina-swimsuit"]
+        },
+        {
+          "id": "body-dress-1",
+          "text": "礼服会皱的，适可而止。",
+          "weight": 1,
+          "outfits": ["hina-dress"]
+        },
+        {
+          "id": "body-normal-1",
+          "text": "我还在忙。",
+          "weight": 1,
+          "outfits": ["hina-normal"]
+        },
+        {
+          "id": "body-dress-4",
+          "text": "想找个地方坐下练一会儿……不过，现在不行。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Cafe_monolog_2",
+            "japanese": "どこかに座って、練習したいところだけど……",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "body-dress-5",
+          "text": "穿上礼服，背会不自觉地挺直。……所以才会比平时更紧张一点吧。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Lobby_3",
+            "japanese": "ドレスを着ると、ちょっとだけ背筋が伸びるの。だからなのかな、いつもより少しだけ、ドキドキする。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "body-normal-14",
+          "text": "那个……能、能不能别摸那么久？",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Lobby_3",
+            "japanese": "あの…そ、そんなに撫でないでくれる？",
+            "translation": "project-cn"
           }
         }
       ]
     },
     "body_trusted": {
       "entries": [
-        { "id": "body-trusted-1", "text": "别突然碰……不过，也没让你停。", "weight": 2 },
-        { "id": "body-trusted-2", "text": "……只有你才这样。", "weight": 1 }
+        {
+          "id": "body-trusted-1",
+          "text": "别突然碰……不过，也没让你停。",
+          "weight": 2
+        },
+        {
+          "id": "body-trusted-2",
+          "text": "……只有你才这样。",
+          "weight": 1
+        }
       ]
     },
     "head_close": {
       "entries": [
-        { "id": "head-close-1", "text": "只是待在旁边的话……倒也不坏。", "weight": 3 },
-        { "id": "head-close-2", "text": "不用一直说话。这样就好。", "weight": 2 }
+        {
+          "id": "head-close-1",
+          "text": "只是待在旁边的话……倒也不坏。",
+          "weight": 3
+        },
+        {
+          "id": "head-close-2",
+          "text": "不用一直说话。这样就好。",
+          "weight": 2
+        }
       ]
     },
     "headpat_basic": {
       "entries": [
-        { "id": "headpat-basic-1", "text": "……只准一会儿。", "weight": 2 },
-        { "id": "headpat-basic-2", "text": "真拿你没办法。", "weight": 1 }
+        {
+          "id": "headpat-basic-1",
+          "text": "……只准一会儿。",
+          "weight": 2
+        },
+        {
+          "id": "headpat-basic-2",
+          "text": "真拿你没办法。",
+          "weight": 1
+        }
       ]
     },
     "headpat_trusted": {
       "entries": [
-        { "id": "headpat-trusted-1", "text": "……再待一会儿也可以。", "weight": 2 },
-        { "id": "headpat-trusted-2", "text": "别把我当小孩子。……就一会儿。", "weight": 1 }
+        {
+          "id": "headpat-trusted-1",
+          "text": "……再待一会儿也可以。",
+          "weight": 2
+        },
+        {
+          "id": "headpat-trusted-2",
+          "text": "别把我当小孩子。……就一会儿。",
+          "weight": 1
+        }
       ]
     },
     "headpat_friendly": {
       "entries": [
-        { "id": "headpat-friendly-1", "text": "……我没有说可以继续。", "weight": 2 },
-        { "id": "headpat-friendly-2", "text": "就一会儿。别得寸进尺。", "weight": 1 },
+        {
+          "id": "headpat-friendly-1",
+          "text": "……我没有说可以继续。",
+          "weight": 2
+        },
+        {
+          "id": "headpat-friendly-2",
+          "text": "就一会儿。别得寸进尺。",
+          "weight": 1
+        },
         {
           "id": "headpat-friendly-official-help",
           "text": "有什么我能做的……？谢谢你，老师。光是这么说，我就很高兴。",
@@ -215,7 +513,8 @@
             "clip": "Lobby_4",
             "japanese": "何かできること……？ ありがとう、先生。 そう言ってくれるだけで、 私は嬉しい。",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "headpat-friendly-official-stay",
@@ -226,7 +525,8 @@
             "clip": "Lobby_5",
             "japanese": "この夏が終わる、 最後の瞬間まで……。 私がすぐそばで、 先生のことを助けるから。",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
         },
         {
           "id": "headpat-friendly-official-summer",
@@ -237,13 +537,102 @@
             "clip": "Relationship_Up_1",
             "japanese": "今年の夏も、先生と一緒にいられるんだね。",
             "translation": "project-cn"
+          },
+          "outfits": ["hina-swimsuit"]
+        },
+        {
+          "id": "headpat-dress-1",
+          "text": "……就一小会儿。礼服会乱的。",
+          "weight": 1,
+          "outfits": ["hina-dress"]
+        },
+        {
+          "id": "headpat-normal-1",
+          "text": "……这样很痒。",
+          "weight": 1,
+          "outfits": ["hina-normal"]
+        },
+        {
+          "id": "headpat_friendly-dress-8",
+          "text": "就算穿着礼服，我还是我。今天也会在老师身边帮忙。所以……不许逃哦。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Lobby_4",
+            "japanese": "ドレスを着てても、私は私。今日も先生の仕事を、隣でサポートする。だから……逃げちゃダメよ。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "headpat_friendly-dress-9",
+          "text": "「虽然很严格，但日奈果然很可爱」……呜，你、你到底在说什么啊。……虽然有点高兴，但、但是……真是的。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Lobby_5",
+            "japanese": "「厳しいけど、やっぱりヒナは可愛い」って……。うっ、本当にな、な、何を言ってるの。あなたは。……そりゃ、嬉しいけど、で、でも……もう。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "headpat_friendly-dress-10",
+          "text": "告诉我「就算是我也有用」的人，是老师。正因为有老师在……我才……真的，谢谢你。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Relationship_Up_1",
+            "japanese": "私なんかでも役に立つと教えてくれたのは、先生だよ。そんな先生がいたからこそ……私は……本当に、ありがとう。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "headpat_friendly-normal-17",
+          "text": "我好歹也是风纪委员长，而、而且可能会被别人看到……",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Lobby_4",
+            "japanese": "これでも一応風紀委員長だし だ、誰かに見られるかもしれないし…。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "headpat_friendly-normal-18",
+          "text": "被看到也没关系？！你、你在说什么啊？！",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Lobby_5",
+            "japanese": "見られても関係ない？！な、なにを言ってるの？！",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "headpat_friendly-normal-19",
+          "text": "……这样的我，也可以吗？",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Relationship_Up_1",
+            "japanese": "こんな私でもいいの…？",
+            "translation": "project-cn"
           }
         }
       ]
     },
     "double_tap": {
       "entries": [
-        { "id": "double-1", "text": "两次了。你到底想做什么？", "weight": 1 },
+        {
+          "id": "double-1",
+          "text": "两次了。你到底想做什么？",
+          "weight": 1
+        },
         {
           "id": "double-official-again",
           "text": "唉……还在啊？",
@@ -253,14 +642,47 @@
             "clip": "Battle_Move_2",
             "japanese": "はあ……まだいるの？",
             "translation": "project-cn"
+          },
+          "outfits": ["hina-swimsuit"]
+        },
+        {
+          "id": "double_tap-dress-12",
+          "text": "我可不能迟到。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Battle_Move_2",
+            "japanese": "遅れるわけには、いかないから。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "double_tap-normal-22",
+          "text": "真是的，做多少都做不完……",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Battle_Move_2",
+            "japanese": "もう、やってもやっても終わらない……",
+            "translation": "project-cn"
           }
         }
       ]
     },
     "drag": {
       "entries": [
-        { "id": "drag-1", "text": "……放我下来。", "weight": 2 },
-        { "id": "drag-2", "text": "别晃。", "weight": 1 },
+        {
+          "id": "drag-1",
+          "text": "……放我下来。",
+          "weight": 2
+        },
+        {
+          "id": "drag-2",
+          "text": "别晃。",
+          "weight": 1
+        },
         {
           "id": "drag-official-wait",
           "text": "诶，总之先一起跳进海里吧？等、等一下老师！我、我还没做好心理准备……！",
@@ -270,14 +692,35 @@
             "clip": "Season_Birthday_2",
             "japanese": "えっ、取り合えず 一緒に海に飛び込もう？ ちょ、ちょっと待って先生！ こ、心の準備が……！",
             "translation": "project-cn"
-          }
+          },
+          "outfits": ["hina-swimsuit"]
+        },
+        {
+          "id": "drag-dress-1",
+          "text": "放我下来，裙子会乱。",
+          "weight": 1,
+          "outfits": ["hina-dress"]
+        },
+        {
+          "id": "drag-normal-1",
+          "text": "……别晃。",
+          "weight": 1,
+          "outfits": ["hina-normal"]
         }
       ]
     },
     "cooldown": {
       "entries": [
-        { "id": "cooldown-1", "text": "先让我安静一会儿。", "weight": 2 },
-        { "id": "cooldown-2", "text": "刚才已经回应过了。", "weight": 1 },
+        {
+          "id": "cooldown-1",
+          "text": "先让我安静一会儿。",
+          "weight": 2
+        },
+        {
+          "id": "cooldown-2",
+          "text": "刚才已经回应过了。",
+          "weight": 1
+        },
         {
           "id": "cooldown-official-tired",
           "text": "也许是训练的缘故……身体有点发沉。",
@@ -287,13 +730,42 @@
             "clip": "Cafe_monolog_2",
             "japanese": "トレーニングの せいか…… 少し体がだるい。",
             "translation": "project-cn"
+          },
+          "outfits": ["hina-swimsuit"]
+        },
+        {
+          "id": "cooldown-dress-6",
+          "text": "想找个地方坐下练一会儿……不过，现在不行。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Cafe_monolog_2",
+            "japanese": "どこかに座って、練習したいところだけど……",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "cooldown-normal-15",
+          "text": "那个……能、能不能别摸那么久？",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Lobby_3",
+            "japanese": "あの…そ、そんなに撫でないでくれる？",
+            "translation": "project-cn"
           }
         }
       ]
     },
     "paused": {
       "entries": [
-        { "id": "paused-1", "text": "互动暂停中。忙完再说。", "weight": 1 },
+        {
+          "id": "paused-1",
+          "text": "互动暂停中。忙完再说。",
+          "weight": 1
+        },
         {
           "id": "paused-official-rest",
           "text": "训练固然好，但休息也很重要？……确实这也很有道理。可是，我不能偷懒。",
@@ -302,6 +774,31 @@
             "page": "https://bluearchive.wiki/wiki/Hina_(Swimsuit)/audio",
             "clip": "Lobby_3",
             "japanese": "トレーニングもいいけど、 休息も大事？ ……確かにそれも正論。 でも、私がサボる わけにはいかないから。",
+            "translation": "project-cn"
+          },
+          "outfits": ["hina-swimsuit"]
+        },
+        {
+          "id": "paused-dress-7",
+          "text": "穿上礼服，背会不自觉地挺直。……所以才会比平时更紧张一点吧。",
+          "weight": 1,
+          "outfits": ["hina-dress"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(dress)/audio",
+            "clip": "Lobby_3",
+            "japanese": "ドレスを着ると、ちょっとだけ背筋が伸びるの。だからなのかな、いつもより少しだけ、ドキドキする。",
+            "translation": "project-cn"
+          }
+        },
+        {
+          "id": "paused-normal-16",
+          "text": "那个……能、能不能别摸那么久？",
+          "weight": 1,
+          "outfits": ["hina-normal"],
+          "source": {
+            "page": "https://bluearchive.wiki/wiki/Hina_(normal)/audio",
+            "clip": "Lobby_3",
+            "japanese": "あの…そ、そんなに撫でないでくれる？",
             "translation": "project-cn"
           }
         }

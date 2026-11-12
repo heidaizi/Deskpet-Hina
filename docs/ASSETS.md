@@ -2,33 +2,40 @@
 
 ## 仓库内已包含
 
-| 素材              | 路径                                                                             | 许可                               |
-| ----------------- | -------------------------------------------------------------------------------- | ---------------------------------- |
-| 3D 模型（GLB）    | `assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb` | [个人非商业](../LICENSE-ASSETS.md) |
-| 语音模型（AIVMX） | 通过 [GitHub Releases](https://github.com/heidaizi/Deskpet-Hina/releases) 下载   | [个人非商业](../LICENSE-ASSETS.md) |
+| 素材         | 路径                                                                 | 许可       |
+| ------------ | -------------------------------------------------------------------- | ---------- |
+| 泳装 3D 模型 | `private/3d/official/swimsuit.glb`                                   | 个人非商业 |
+| 礼服 3D 模型 | `private/3d/official/dress.glb`                                      | 个人非商业 |
+| 常服 3D 模型 | `private/3d/official/normal.glb`                                     | 个人非商业 |
+| 语音模型     | [GitHub Releases](https://github.com/heidaizi/Deskpet-Hina/releases) | 个人非商业 |
 
-两者都**仅允许个人、非商业使用**。商业用途、转售、付费分发均被禁止。
+以上素材**仅允许个人、非商业使用**，详见 [LICENSE-ASSETS.md](../LICENSE-ASSETS.md)。
+商业用途、转售、付费分发均被禁止。
 
 ## 2D 形象说明
 
-当前 2D 渲染（`2d-placeholder`）只使用**演示模型**，用于功能验证：
+当前 2D 渲染（`2d-placeholder`）只是演示占位：
 
-- 最终 2D 形象尚未确定，仍在设计中；
+- 最终 2D 形象尚未确定；
 - **不建议**用于宣传、展示或二次分发；
-- 后续版本会提供正式的 2D 素材。
+- 后续版本会提供正式素材。
 
-如果你只想看功能效果，可以继续使用；正式发布前请以 3D 模型为准。
+正式展示请使用三套 3D 模型。
 
-## 需要自行准备
+## 需要自行准备（可选）
 
-| 素材         | 路径                                     | 必需 |
-| ------------ | ---------------------------------------- | ---- |
-| 官方语音片段 | `private/audio/official-denoise45/*.wav` | 否   |
-| 预生成语音   | `private/audio/generated-dialogue/*.wav` | 否   |
+| 素材           | 路径                                                   | 说明                     |
+| -------------- | ------------------------------------------------------ | ------------------------ |
+| 各服装官方语音 | `private/audio/outfit/<swimsuit\|dress\|normal>/*.ogg` | 登录、返回与日常互动语音 |
+| 固定台词原声   | `private/audio/official-denoise45/*.wav`               | 泳装固定台词             |
+| 预生成语音     | `private/audio/generated-dialogue/*.wav`               | 无官方片段时的预生成 TTS |
 
-官方语音与训练数据**不包含**在仓库中，且不建议分发。
+官方语音与训练数据**不包含**在仓库中，也不建议分发。
 
-缺少音频时，固定台词会自动改为实时合成，不影响使用。
+缺少音频时的行为：
+
+- 官方语音缺失 → 该场景改用 TTS，不会串用其他服装的声音；
+- 预生成语音缺失 → 首次合成后写入本机缓存。
 
 ## 目录结构
 
@@ -37,15 +44,21 @@ assets/characters/hina-swimsuit/private/
 ├── README.md
 ├── 3d/
 │   └── official/
-│       └── hina-swimsuit-official.glb     # 已包含
+│       ├── swimsuit.glb    # 已包含
+│       ├── dress.glb       # 已包含
+│       └── normal.glb      # 已包含
 └── audio/
-    ├── official-denoise45/               # 可选
-    └── generated-dialogue/               # 可选
+    ├── outfit/             # 可选：各服装官方语音
+    │   ├── swimsuit/
+    │   ├── dress/
+    │   └── normal/
+    ├── official-denoise45/ # 可选
+    └── generated-dialogue/ # 可选
 ```
 
 ## 安装语音模型
 
-1. 打开 Releases 页面，下载 `hina.aivmx`（约 238MB）
+1. 从 Releases 下载 `hina.aivmx`（约 238MB）
 2. 放到：
 
 ```bash
@@ -53,22 +66,17 @@ mkdir -p "$HOME/Library/Application Support/AivisSpeech-Engine/Models"
 cp ~/Downloads/hina.aivmx "$HOME/Library/Application Support/AivisSpeech-Engine/Models/"
 ```
 
-3. 重启应用，确认引擎识别：
+3. 重启应用并确认：
 
 ```bash
 curl -s http://127.0.0.1:10101/speakers | head -c 300
 ```
 
-模型 speaker 名与样式约定见 [SETUP.md](SETUP.md)。
+## 自己训练
+
+想使用自己的声音数据，见 [VOICE_TRAINING.md](VOICE_TRAINING.md)。
 
 ## 版权提醒
 
 _Blue Archive_ 及角色「空崎ヒナ」版权归 **NEXON Games / Yostar** 所有。
-语音模型由公开语音素材训练得到，不授予任何声音表演者权利。
-
-本仓库的「禁止商用」声明只表达项目意图，**不能替代**权利方的授权。
-如果你要用于商业场景，请自行取得授权。
-
-## 自己训练模型
-
-如果想使用自己的声音数据，见 [VOICE_TRAINING.md](VOICE_TRAINING.md)。
+本项目是非官方同人项目，不提供也不鼓励分发官方资源。

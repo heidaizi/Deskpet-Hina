@@ -23,6 +23,8 @@ import type {
 } from '../shared/types'
 import type { TimeSceneContext } from '../shared/time-scene'
 import type { EpisodicMemory } from '../shared/presence'
+import type { PermissionSnapshot } from '../shared/permissions'
+import type { LongTermMemoryView, ProfileCategory, ProfileFactView } from '../shared/memory'
 import type {
   AiContextMode,
   AiContextPreview,
@@ -73,6 +75,8 @@ const api: DeskpetApi = {
         | 'aiProactiveEnabled'
         | 'aiWindowTitleEnabled'
         | 'aiSelectedTextEnabled'
+        | 'screenPerceptionEnabled'
+        | 'screenPerceptionPaused'
         | 'conversationMemoryEnabled'
         | 'intelligenceLevel'
         | 'ttsQuality'
@@ -90,6 +94,11 @@ const api: DeskpetApi = {
   },
   openChat() {
     ipcRenderer.send('chat:open')
+  },
+  getOutfitGreeting(scene = 'login') {
+    return ipcRenderer.invoke('outfit:greeting', scene) as Promise<
+      import('@shared/types').OutfitGreeting | null
+    >
   },
   getChatHistory() {
     return ipcRenderer.invoke('chat:history') as Promise<ChatMessageView[]>
@@ -175,11 +184,50 @@ const api: DeskpetApi = {
   rememberSemanticMemory(text: string) {
     return ipcRenderer.invoke('memory:semantic-add', text) as Promise<SemanticMemoryView[]>
   },
+  updateSemanticMemory(id: string, text: string) {
+    return ipcRenderer.invoke('memory:semantic-update', { id, text }) as Promise<
+      SemanticMemoryView[]
+    >
+  },
   deleteSemanticMemory(id: string) {
     return ipcRenderer.invoke('memory:semantic-delete', id) as Promise<SemanticMemoryView[]>
   },
   clearSemanticMemories() {
     return ipcRenderer.invoke('memory:semantic-clear') as Promise<SemanticMemoryView[]>
+  },
+  listProfileFacts() {
+    return ipcRenderer.invoke('memory:profile-list') as Promise<ProfileFactView[]>
+  },
+  addProfileFact(category: ProfileCategory, text: string) {
+    return ipcRenderer.invoke('memory:profile-add', { category, text }) as Promise<
+      ProfileFactView[]
+    >
+  },
+  updateProfileFact(id: string, text: string) {
+    return ipcRenderer.invoke('memory:profile-update', { id, text }) as Promise<ProfileFactView[]>
+  },
+  deleteProfileFact(id: string) {
+    return ipcRenderer.invoke('memory:profile-delete', id) as Promise<ProfileFactView[]>
+  },
+  setProfileFactPinned(id: string, pinned: boolean) {
+    return ipcRenderer.invoke('memory:profile-pin', { id, pinned }) as Promise<ProfileFactView[]>
+  },
+  clearProfileFacts() {
+    return ipcRenderer.invoke('memory:profile-clear') as Promise<ProfileFactView[]>
+  },
+  listLongTermMemories() {
+    return ipcRenderer.invoke('memory:longterm-list') as Promise<LongTermMemoryView[]>
+  },
+  updateLongTermMemory(id: string, text: string) {
+    return ipcRenderer.invoke('memory:longterm-update', { id, text }) as Promise<
+      LongTermMemoryView[]
+    >
+  },
+  deleteLongTermMemory(id: string) {
+    return ipcRenderer.invoke('memory:longterm-delete', id) as Promise<LongTermMemoryView[]>
+  },
+  clearLongTermMemories() {
+    return ipcRenderer.invoke('memory:longterm-clear') as Promise<LongTermMemoryView[]>
   },
   clearConversationMemory() {
     return ipcRenderer.invoke('memory:conversation-clear') as Promise<{ turns: number }>
@@ -257,6 +305,12 @@ const api: DeskpetApi = {
     return () => {
       ipcRenderer.removeListener('app:system-power-state', listener)
     }
+  },
+  getPermissionStatus(probeAutomation = false) {
+    return ipcRenderer.invoke('permissions:get', probeAutomation) as Promise<PermissionSnapshot>
+  },
+  openPermissionSettings(service) {
+    return ipcRenderer.invoke('permissions:open', service) as Promise<void>
   },
   getAiStatus() {
     return ipcRenderer.invoke('ai:status') as Promise<AiServiceStatus>

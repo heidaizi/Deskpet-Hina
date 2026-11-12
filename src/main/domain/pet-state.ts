@@ -225,6 +225,15 @@ export function normalizeSettings(raw: unknown): PetSettings {
       candidate.rendererMode === '3d' || candidate.rendererMode === '2d'
         ? candidate.rendererMode
         : '2d',
+    rendererId: typeof candidate.rendererId === 'string' ? candidate.rendererId.slice(0, 64) : '',
+    outfitRotationEnabled:
+      typeof candidate.outfitRotationEnabled === 'boolean' ? candidate.outfitRotationEnabled : true,
+    outfitRotationDays:
+      typeof candidate.outfitRotationDays === 'number' &&
+      candidate.outfitRotationDays >= 1 &&
+      candidate.outfitRotationDays <= 30
+        ? Math.round(candidate.outfitRotationDays)
+        : 3,
     modelScale:
       typeof candidate.modelScale === 'number' && Number.isFinite(candidate.modelScale)
         ? Math.min(MODEL_SCALE_MAX, Math.max(MODEL_SCALE_MIN, candidate.modelScale))
@@ -274,6 +283,14 @@ export function normalizeSettings(raw: unknown): PetSettings {
     aiSelectedTextEnabled:
       typeof candidate.aiSelectedTextEnabled === 'boolean'
         ? candidate.aiSelectedTextEnabled
+        : false,
+    screenPerceptionEnabled:
+      typeof candidate.screenPerceptionEnabled === 'boolean'
+        ? candidate.screenPerceptionEnabled
+        : false,
+    screenPerceptionPaused:
+      typeof candidate.screenPerceptionPaused === 'boolean'
+        ? candidate.screenPerceptionPaused
         : false,
   }
 }

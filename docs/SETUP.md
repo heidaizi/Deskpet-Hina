@@ -46,12 +46,16 @@ assets/characters/hina-swimsuit/private/
 ### 2.1 3D 模型（已包含）
 
 ```
-assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb
+assets/characters/hina-swimsuit/private/3d/official/
+├── swimsuit.glb   # 泳装
+├── dress.glb      # 礼服
+└── normal.glb     # 常服
 ```
 
-- 仓库已包含该文件（约 5.5MB），无需额外下载
+- 三套模型均已包含，无需额外下载
 - 格式：`.glb`（glTF Binary），文件名需保持一致
 - 仅允许个人、非商业使用，见 `LICENSE-ASSETS.md`
+- 在「设置 → 形象」中切换；也可开启每 1～14 天自动轮换
 - 没有模型时应用会退回 2D 占位模式
 - **注意**：当前 2D 形象只是演示占位，最终设计未定，不建议展示或分发
 
@@ -63,7 +67,19 @@ assets/characters/hina-swimsuit/private/audio/official-denoise45/*.wav
 
 这些是固定台词的原始语音。**没有也能用**：找不到音频时会实时合成。
 
-### 2.3 预生成语音（可选）
+### 2.3 各服装官方语音（可选）
+
+```
+assets/characters/hina-swimsuit/private/audio/outfit/
+├── swimsuit/*.ogg
+├── dress/*.ogg
+└── normal/*.ogg
+```
+
+每套服装的登录、返回问候与日常互动优先使用对应片段；
+某个片段缺失时该场景自动改用 TTS，不会串用其他服装的声音。
+
+### 2.4 预生成语音（可选）
 
 ```
 assets/characters/hina-swimsuit/private/audio/generated-dialogue/*.wav
@@ -165,7 +181,15 @@ xattr -dr com.apple.quarantine ~/Applications/空崎日奈.app
 打开设置（菜单栏图标 → 设置），在 AI 页填入 DeepSeek API Key。
 Key 使用 macOS `safeStorage` 加密保存在本地。
 
-### 5.4 语音开关
+### 5.4 服装与轮换
+
+设置 → 形象：
+
+- 手动选择泳装 / 礼服 / 常服；
+- 开启「自动轮换服装」，间隔可选 1～14 天（默认 3 天）；
+- 手动切换会重置轮换计时。
+
+### 5.5 语音开关
 
 - 设置 → 语音：引擎选择 **AivisSpeech**
 - 质量选择 `quality`（更自然，稍慢）或默认

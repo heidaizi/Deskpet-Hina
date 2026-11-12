@@ -1,8 +1,10 @@
 # Deskpet — Hina Desktop Companion
 
 An Electron desktop pet of **Hina (空崎ヒナ)** from _Blue Archive_: 3D/2D
-renderer, streaming dialogue, local voice synthesis, long-term memory and
-opt-in screen awareness.
+renderer, streaming dialogue, local voice synthesis, long-term memory,
+opt-in screen awareness and three switchable outfits.
+
+**Current release: 1.2.0**
 
 > **Unofficial fan project.** Not affiliated with NEXON Games / Yostar.
 > The 3D model and the voice model are provided for **personal, non-commercial
@@ -19,24 +21,27 @@ opt-in screen awareness.
 ## Features
 
 - Electron + Three.js / VRM + PixiJS, transparent always-on-top pet window.
+- **Three outfits** (swimsuit / dress / normal) with manual switching and an
+  optional automatic rotation every few days.
 - Chat with DeepSeek (JSON replies, glossary, translation quality checks).
-- Local voice: AivisSpeech + your own Style-Bert-VITS2 voice model, with
-  macOS `say` fallback.
+- Local voice: AivisSpeech + a Style-Bert-VITS2 voice model, with macOS `say`
+  fallback. Each outfit can use its own official voice clips when supplied.
 - Long-term memory: semantic recall, user profile, relationship stages.
 - Optional perception: browser page context, screenshots analysed by
   `deepseek-flash`, now-playing music, calendar and reminders.
 - Proactive behaviour with "manners": quiet hours, focus detection,
   ignored-streak backoff, hourly greeting.
+- **Demo mode** for recording (`DESKPET_DEMO=1`) plus storyboard and title card.
 
 ## Requirements
 
-| Item    | Requirement                                                 |
-| ------- | ----------------------------------------------------------- |
-| macOS   | 13+ (Apple Silicon recommended)                             |
-| Node.js | 22+ (developed on 24)                                       |
-| Disk    | ~2 GB for dependencies and caches                           |
-| API key | DeepSeek API key (entered in Settings)                      |
-| Assets  | 3D model / voice clips / voice model — **you supply these** |
+| Item    | Requirement                                                     |
+| ------- | --------------------------------------------------------------- |
+| macOS   | 13+ (Apple Silicon recommended)                                 |
+| Node.js | 22+ (developed on 24)                                           |
+| Disk    | ~2 GB for dependencies and caches                               |
+| API key | DeepSeek API key (entered in Settings)                          |
+| Assets  | 3D models included; voice model / official voice clips optional |
 
 ## Quick start
 
@@ -52,18 +57,19 @@ AivisSpeech engine, voice models, permissions, packaging and autostart.
 
 ### What you need
 
-1. **3D model** — included at
-   `assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
+1. **3D models** — included under `assets/characters/hina-swimsuit/private/3d/official/`
+   (`swimsuit.glb`, `dress.glb`, `normal.glb`)
 2. **Voice model** — download from
    [Releases](https://github.com/heidaizi/Deskpet-Hina/releases) and place the
    `.aivmx` in `~/Library/Application Support/AivisSpeech-Engine/Models/`
 3. **AivisSpeech Engine** — extract to `~/Library/Deskpet/engine/` so that
    `~/Library/Deskpet/engine/run` exists
-4. **DeepSeek API key** — Settings → AI
+4. **Official voice clips** (optional) — see [docs/ASSETS.md](docs/ASSETS.md)
+5. **DeepSeek API key** — Settings → AI
 
-The 3D and voice models are licensed for **personal, non-commercial use only**.
-Without them the app still starts: the renderer falls back to 2D and voice
-falls back to macOS `say`.
+The 3D models and voice model are licensed for **personal, non-commercial use
+only**. Without them the app still starts: the renderer falls back to 2D and
+voice falls back to macOS `say`.
 
 ## Build & package
 
@@ -85,6 +91,7 @@ src/preload     IPC bridge
 src/renderer    Pet window / chat / settings UI
 src/shared      Types shared by main and renderer
 content         Dialogue, affection, glossary, prebuilt TTS manifests
+demo            Demo-mode script, storyboard and title card
 scripts         Build, packaging and voice-training helpers
 docs            Setup, architecture, perception, voice and dev guides
 ```
@@ -92,7 +99,7 @@ docs            Setup, architecture, perception, voice and dev guides
 ## Testing
 
 - Unit tests run without private assets: `npm test`.
-- E2E tests need the 3D model and voice clips; they are skipped locally if
+- E2E tests use the bundled 3D model; official voice clips are optional.
   the assets are missing.
 - `npm run test:e2e` uses Playwright and launches a separate app instance.
 
@@ -127,12 +134,14 @@ artwork and third-party components: see [NOTICE.md](NOTICE.md).
 
 - Electron + Three.js / VRM + PixiJS，透明置顶的桌宠窗口；
 - DeepSeek 对话：JSON 回复、术语表、翻译质量校验；
-- 本地语音：AivisSpeech + 自己训练的 Style-Bert-VITS2 模型，
-  没有模型时退回 macOS `say`；
+- **三套服装**（泳装 / 礼服 / 常服）：可手动切换，也可每几天自动轮换；
+- 本地语音：AivisSpeech + Style-Bert-VITS2 模型；提供官方语音时，
+  每套服装可使用自己的语音片段；
 - 长期记忆：语义召回、用户画像、关系阶段；
 - 可选感知：浏览器页面、屏幕截图（`deepseek-flash` 视觉）、
   正在播放的音乐、日历与提醒；
-- 有分寸的主动性：深夜静默、专注检测、连续被忽略后退让、每小时问候。
+- 有分寸的主动性：深夜静默、专注检测、连续被忽略后退让、每小时问候；
+- **演示模式**（`DESKPET_DEMO=1`）与分镜、标题卡，方便录制介绍视频。
 
 ## 环境要求
 
@@ -158,8 +167,8 @@ npm run dev
 
 ### 需要准备的东西
 
-1. **3D 模型** — 已包含在
-   `assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
+1. **3D 模型** — 已包含：`assets/characters/hina-swimsuit/private/3d/official/`
+   下的 `swimsuit.glb`、`dress.glb`、`normal.glb`
 2. **语音模型** — 从 [Releases](https://github.com/heidaizi/Deskpet-Hina/releases)
    下载 `.aivmx`，放到 `~/Library/Application Support/AivisSpeech-Engine/Models/`
 3. **AivisSpeech 引擎** — 解压到 `~/Library/Deskpet/engine/`，确保存在 `run`
@@ -186,6 +195,7 @@ src/preload     IPC 桥接
 src/renderer    桌宠 / 聊天 / 设置界面
 src/shared      主进程与渲染进程共享类型
 content         对话、好感度、术语表、预生成语音清单
+demo            演示脚本、分镜与标题卡
 scripts         构建、打包、语音训练脚本
 docs            部署、架构、感知、语音与开发文档
 ```

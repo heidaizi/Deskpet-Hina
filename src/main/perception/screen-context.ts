@@ -112,6 +112,11 @@ export async function collectScreenContext(
   return base
 }
 
+/** 供本地风险预检复用最近一次页面身份；不触发新的抓取。 */
+export function getCachedScreenContext(): ScreenContext | null {
+  return cached
+}
+
 export function buildPerceptionPrompt(context: ScreenContext | null): string {
   if (!context) {
     return ''

@@ -34,7 +34,8 @@ toolchain; check its license before redistributing a trained model.
 
 ## Assets in this repository
 
-- **3D model**：`assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb`
+- **3D models**：`assets/characters/hina-swimsuit/private/3d/official/`
+  （`swimsuit.glb`、`dress.glb`、`normal.glb`）
 - **Voice model**：通过 GitHub Release 分发（`.aivmx`）
 
 以上素材与模型仅允许**个人、非商业**使用，详见

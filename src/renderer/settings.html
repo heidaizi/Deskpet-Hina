@@ -44,6 +44,17 @@
           class="settings-tab"
           type="button"
           role="tab"
+          id="tab-button-memory"
+          data-tab="memory"
+          aria-selected="false"
+          aria-controls="tab-memory"
+        >
+          记忆
+        </button>
+        <button
+          class="settings-tab"
+          type="button"
+          role="tab"
           id="tab-button-behavior"
           data-tab="behavior"
           aria-selected="false"
@@ -86,6 +97,34 @@
           <h2 id="renderer-title">形象渲染</h2>
           <p class="panel-copy">2D 占位与官方日奈 Q 版 3D 均可切换，状态和互动保持同步。</p>
           <div class="renderer-options" id="renderer-options"></div>
+        </section>
+
+        <section class="panel" aria-labelledby="outfit-rotation-title">
+          <span class="section-kicker">OUTFIT ROTATION</span>
+          <h2 id="outfit-rotation-title">服装轮换</h2>
+
+          <label class="setting-row" for="outfit-rotation-enabled">
+            <span>
+              <strong>自动轮换服装</strong>
+              <small>每隔几天自动换一套 3D 服装；手动切换后会重新计时。</small>
+            </span>
+            <input id="outfit-rotation-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="outfit-rotation-days">
+            <span>
+              <strong>轮换间隔</strong>
+              <small>默认每 3 天换一次。</small>
+            </span>
+            <select id="outfit-rotation-days">
+              <option value="1">1 天</option>
+              <option value="2">2 天</option>
+              <option value="3">3 天</option>
+              <option value="5">5 天</option>
+              <option value="7">7 天</option>
+              <option value="14">14 天</option>
+            </select>
+          </label>
         </section>
 
         <section class="panel model-panel" aria-labelledby="model-panel-title">
@@ -176,6 +215,86 @@
             </article>
           </div>
         </section>
+      </div>
+
+      <div class="tab-panel" id="tab-memory" role="tabpanel" aria-labelledby="tab-button-memory">
+        <section class="panel memory-panel" aria-labelledby="profile-memory-title">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">PROFILE</span>
+              <h2 id="profile-memory-title">她记得的你</h2>
+            </div>
+            <div class="level-chip" id="profile-count">0</div>
+          </div>
+          <p class="panel-copy">
+            从对话里自动提取，或由你手动补充。置顶的事实会优先进入对话提示词；不准确的内容可以随时修改或删除。
+          </p>
+          <form class="memory-form" id="profile-form">
+            <select id="profile-category" aria-label="事实类别">
+              <option value="project">项目</option>
+              <option value="preference">偏好</option>
+              <option value="schedule">作息</option>
+              <option value="other">其它</option>
+            </select>
+            <input
+              id="profile-text"
+              maxlength="60"
+              placeholder="例如：我在开发一个桌面宠物"
+              aria-label="新的画像事实"
+            />
+            <button id="profile-add" class="button primary" type="submit">添加</button>
+          </form>
+          <div class="memory-list" id="profile-list"></div>
+          <p class="resource-note" id="profile-status">正在读取画像…</p>
+          <div class="button-row compact">
+            <button id="profile-clear" class="button danger" type="button">清空画像</button>
+          </div>
+        </section>
+
+        <section class="panel memory-panel" aria-labelledby="semantic-memory-title">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">EXPLICIT MEMORY</span>
+              <h2 id="semantic-memory-title">她明确记住的事</h2>
+            </div>
+            <div class="level-chip" id="semantic-count">0</div>
+          </div>
+          <p class="panel-copy">
+            只来自你说过“记住这段”或下方手动添加的内容。这里不会自动抽取，也不会把整段对话塞进提示词。
+          </p>
+          <form class="memory-form single" id="semantic-form">
+            <input
+              id="semantic-text"
+              maxlength="400"
+              placeholder="写下一件希望日奈长期记住的事"
+              aria-label="新的明确记忆"
+            />
+            <button id="semantic-add" class="button primary" type="submit">记住</button>
+          </form>
+          <div class="memory-list" id="semantic-list"></div>
+          <p class="resource-note" id="semantic-status">正在读取明确记忆…</p>
+          <div class="button-row compact">
+            <button id="semantic-clear" class="button danger" type="button">清空明确记忆</button>
+          </div>
+        </section>
+
+        <section class="panel memory-panel" aria-labelledby="longterm-memory-title">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">LONG-TERM</span>
+              <h2 id="longterm-memory-title">对话沉淀</h2>
+            </div>
+            <div class="level-chip" id="longterm-count">0</div>
+          </div>
+          <p class="panel-copy">
+            每轮聊天会压缩成一句要点，用于之后的语义召回。这里显示最近 50 条；删除后不会再被检索到。
+          </p>
+          <div class="memory-list" id="longterm-list"></div>
+          <p class="resource-note" id="longterm-status">正在读取长期记忆…</p>
+          <div class="button-row compact">
+            <button id="longterm-clear" class="button danger" type="button">清空对话沉淀</button>
+          </div>
+        </section>
 
         <section class="panel memory-panel" id="memory-panel" aria-labelledby="memory-title">
           <div class="section-title-row">
@@ -187,6 +306,7 @@
           </div>
           <p class="panel-copy">
             只记录专注、深夜、返回和关系升级等结构化经历，不保存窗口标题、选中文字或代码正文。
+            为避免改写行为证据，情节记忆只支持删除或清空，不支持编辑。
           </p>
           <div class="memory-list" id="memory-list"></div>
           <p class="resource-note" id="memory-status">正在读取记忆…</p>
@@ -351,8 +471,8 @@
           </div>
           <p class="panel-copy">
             默认只有你主动触发时才会请求
-            DeepSeek。开启主动规划后，仅高价值本地事件会发送筛选后的场景、情绪与记忆摘要；
-            窗口标题和选中文字仍必须单独开启，并在发送前预览。
+            DeepSeek。主动规划与屏幕感知是两个独立开关：主动规划只发送筛选后的场景、情绪与记忆摘要；
+            屏幕感知会先在本机做敏感内容预检。窗口标题和选中文字仍必须单独开启，并在发送前预览。
           </p>
 
           <label class="setting-row" for="ai-enabled">
@@ -492,6 +612,90 @@
           </div>
         </section>
 
+        <section class="panel" aria-labelledby="screen-perception-title">
+          <span class="section-kicker">SCREEN AWARENESS</span>
+          <h2 id="screen-perception-title">屏幕感知</h2>
+          <p class="panel-copy">
+            开启后约每 8 分钟截取一次当前屏幕；当你在对话里明确问到时，也会即时分析一次。
+            截图会先在本机做敏感内容预检，通过后才发送给 DeepSeek 做场景理解；检测到密码、网银、
+            验证码、银行卡号、助记词等内容时会跳过本次上传。私人聊天不会按应用整体拦截，
+            只有出现明确的凭据或支付内容时才跳过。
+          </p>
+          <label class="setting-row" for="screen-perception-enabled">
+            <span>
+              <strong>允许屏幕感知</strong>
+              <small>
+                需要同时启用 DeepSeek；菜单栏会显示「日奈 · 感知中」，可随时一键暂停。
+              </small>
+            </span>
+            <input id="screen-perception-enabled" type="checkbox" />
+          </label>
+          <div class="button-row compact">
+            <button id="screen-perception-pause" class="button secondary" type="button">
+              暂停感知
+            </button>
+          </div>
+          <p class="resource-note" id="screen-perception-status">正在读取屏幕感知状态…</p>
+        </section>
+
+        <section class="panel" aria-labelledby="permission-title">
+          <span class="section-kicker">SYSTEM PERMISSIONS</span>
+          <h2 id="permission-title">权限与恢复</h2>
+          <p class="panel-copy">
+            重新打包或系统更新后，macOS 可能把日奈当成新应用。这里显示三项权限的实际状态；
+            缺权限时打开系统设置重新允许，然后回到这里点「重新检测」。
+          </p>
+          <div class="permission-list">
+            <div class="permission-item">
+              <div class="permission-copy">
+                <strong>屏幕录制</strong>
+                <small>屏幕感知与截图分析</small>
+              </div>
+              <span class="permission-state" id="permission-screen-state" data-state="unknown">
+                读取中
+              </span>
+              <button id="permission-screen-open" class="button secondary" type="button">
+                打开设置
+              </button>
+            </div>
+            <div class="permission-item">
+              <div class="permission-copy">
+                <strong>辅助功能</strong>
+                <small>窗口标题、选中文字与部分鼠标行为</small>
+              </div>
+              <span
+                class="permission-state"
+                id="permission-accessibility-state"
+                data-state="unknown"
+              >
+                读取中
+              </span>
+              <button id="permission-accessibility-open" class="button secondary" type="button">
+                授权
+              </button>
+            </div>
+            <div class="permission-item">
+              <div class="permission-copy">
+                <strong>自动化</strong>
+                <small id="permission-automation-detail">页面、媒体与日历读取</small>
+              </div>
+              <span class="permission-state" id="permission-automation-state" data-state="unknown">
+                未检测
+              </span>
+              <button id="permission-automation-open" class="button secondary" type="button">
+                打开设置
+              </button>
+            </div>
+          </div>
+          <div class="button-row compact">
+            <button id="permission-recheck" class="button primary" type="button">重新检测</button>
+          </div>
+          <p class="resource-note" id="permission-note">
+            自动化检查会触发一次 System Events
+            探针；浏览器页面还需要在「自动化」里单独允许对应浏览器。
+          </p>
+        </section>
+
         <section class="panel resource-panel" aria-labelledby="resource-title">
           <span class="section-kicker">AI RUNTIME</span>
           <h2 id="resource-title">AI 与运行资源</h2>
@@ -582,6 +786,23 @@
         </footer>
       </div>
     </main>
+
+    <div class="memory-editor" id="memory-editor" hidden>
+      <div
+        class="memory-editor-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="memory-editor-title"
+      >
+        <strong id="memory-editor-title">编辑记忆</strong>
+        <textarea id="memory-editor-text" rows="4" maxlength="400"></textarea>
+        <p class="resource-note" id="memory-editor-status"></p>
+        <div class="button-row compact">
+          <button id="memory-editor-save" class="button primary" type="button">保存</button>
+          <button id="memory-editor-cancel" class="button secondary" type="button">取消</button>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="./src/settings.ts"></script>
   </body>

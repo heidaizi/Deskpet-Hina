@@ -58,6 +58,18 @@ describe('semantic memory', () => {
     expect(hits[0].statement).toContain('TypeScript')
   })
 
+  it('edits a statement and merges a duplicate edit', () => {
+    const { store } = makeStore()
+    const first = store.remember('旧的表述')!
+    store.remember('另一条记忆')
+    store.update(first.id, '新的表述')
+    expect(store.list().some((memory) => memory.statement === '新的表述')).toBe(true)
+
+    store.update(first.id, '另一条记忆')
+    expect(store.list()).toHaveLength(1)
+    expect(store.list()[0].statement).toBe('另一条记忆')
+  })
+
   it('deletes and clears entries', () => {
     const { store } = makeStore()
     const first = store.remember('第一条')

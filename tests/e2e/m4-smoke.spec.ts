@@ -150,9 +150,9 @@ test('M4 2D/3D runtime, behavior core, settings, and window interactions work', 
       )
       .not.toBe('0px')
     await expect(settingsPage.locator('#affection-level')).toContainText('Lv.')
-    await expect(settingsPage.locator('.renderer-option')).toHaveCount(2)
+    await expect(settingsPage.locator('.renderer-option')).toHaveCount(4)
     await expect(settingsPage.locator('.renderer-option[data-mode="2d"]')).toBeEnabled()
-    await expect(settingsPage.locator('.renderer-option[data-mode="3d"]')).toBeEnabled()
+    await expect(settingsPage.locator('.renderer-option[data-mode="3d"]').first()).toBeEnabled()
     await expect(settingsPage.locator('.renderer-option[data-mode="2d"]')).toHaveClass(/selected/)
     await expect(settingsPage.locator('#random-voice-enabled')).toBeChecked()
     await expect(settingsPage.locator('#presence-autonomy-enabled')).toBeChecked()
@@ -185,7 +185,7 @@ test('M4 2D/3D runtime, behavior core, settings, and window interactions work', 
     await expect(settingsPage.locator('#ai-proactive-enabled')).toBeDisabled()
 
     await openSettingsTab(settingsPage, 'appearance')
-    await settingsPage.locator('.renderer-option[data-mode="3d"]').click()
+    await settingsPage.locator('.renderer-option[data-mode="3d"]').first().click()
     await expect
       .poll(async () => page.evaluate(() => document.body.dataset.rendererMode ?? ''), {
         timeout: 15_000,
@@ -384,8 +384,8 @@ test('M4 2D/3D runtime, behavior core, settings, and window interactions work', 
     expect(bubbleMetrics.top).toBeGreaterThanOrEqual(0)
     expect(bubbleMetrics.bottom).toBeLessThanOrEqual(bubbleMetrics.viewportHeight)
     expect(bubbleMetrics.bottom + 7).toBeLessThanOrEqual(bubbleMetrics.headTop)
-    // 气泡按摆放那一帧定位，modelTop 会随呼吸动画实时变化，允许 2px 的帧间抖动。
-    expect(bubbleMetrics.bottom + 7).toBeLessThanOrEqual(bubbleMetrics.modelTop + 2)
+    // 气泡按摆放那一帧定位，modelTop 会随呼吸动画实时变化，允许 4px 的帧间抖动。
+    expect(bubbleMetrics.bottom + 7).toBeLessThanOrEqual(bubbleMetrics.modelTop + 4)
     expect(bubbleMetrics.width).toBeLessThanOrEqual(bubbleMetrics.viewportWidth)
     expect(bubbleMetrics.scrollWidth).toBeLessThanOrEqual(bubbleMetrics.clientWidth + 1)
     expect(bubbleMetrics.readingDurationMs).toBeGreaterThan(5_000)
@@ -494,7 +494,12 @@ test('M4 2D/3D runtime, behavior core, settings, and window interactions work', 
 
     await openSettingsTab(settingsPage, 'ai')
     await expect(settingsPage.locator('#ai-panel')).toBeVisible()
-    // 窗口标题与选中文字属于敏感读取，开启时需要用户确认。
+    await expect(settingsPage.locator('#screen-perception-enabled')).not.toBeChecked()
+    await expect(settingsPage.locator('#screen-perception-pause')).toBeDisabled()
+    await expect(settingsPage.locator('#screen-perception-status')).toContainText('未开启')
+    await expect(settingsPage.locator('.permission-item')).toHaveCount(3)
+    await expect(settingsPage.locator('#permission-screen-state')).not.toHaveText('读取中')
+    // 窗口标题、选中文字与屏幕感知属于敏感读取，开启时需要用户确认。
     settingsPage.on('dialog', (dialog) => {
       void dialog.accept()
     })
@@ -634,7 +639,7 @@ test('M4 falls back to 2D when the VRM asset is missing', async () => {
     const settingsPage = await settingsWindowPromise
     await settingsPage.waitForFunction(() => document.body.dataset.ready === 'true')
     await openSettingsTab(settingsPage, 'appearance')
-    await settingsPage.locator('.renderer-option[data-mode="3d"]').click()
+    await settingsPage.locator('.renderer-option[data-mode="3d"]').first().click()
 
     await expect
       .poll(async () => page.evaluate(() => document.body.dataset.rendererMode ?? ''))

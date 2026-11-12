@@ -1,6 +1,7 @@
 import type {
   ResourceSnapshot,
   RuntimeInfo,
+  SemanticMemoryView,
   SettingsSnapshot,
   TtsResourceStatus,
 } from '@shared/types'
@@ -14,6 +15,14 @@ import {
   MODEL_SCALE_MIN,
 } from '@shared/model-animations'
 import { resolveRelationshipStage } from '@shared/relationship'
+import { describeScreenPerception } from '@shared/screen-perception'
+import { PERMISSION_STATE_LABELS, type PermissionSnapshot } from '@shared/permissions'
+import {
+  PROFILE_CATEGORY_LABELS,
+  type LongTermMemoryView,
+  type ProfileCategory,
+  type ProfileFactView,
+} from '@shared/memory'
 import { activateSettingsTab, setupSettingsTabs } from './settings-tabs'
 import './settings.css'
 
@@ -41,6 +50,31 @@ const memoryCount = requireElement<HTMLElement>('#memory-count')
 const memoryList = requireElement<HTMLElement>('#memory-list')
 const memoryStatus = requireElement<HTMLElement>('#memory-status')
 const clearMemory = requireElement<HTMLButtonElement>('#clear-memory')
+const profileCount = requireElement<HTMLElement>('#profile-count')
+const profileList = requireElement<HTMLElement>('#profile-list')
+const profileStatus = requireElement<HTMLElement>('#profile-status')
+const profileForm = requireElement<HTMLFormElement>('#profile-form')
+const profileCategory = requireElement<HTMLSelectElement>('#profile-category')
+const profileText = requireElement<HTMLInputElement>('#profile-text')
+const profileAdd = requireElement<HTMLButtonElement>('#profile-add')
+const profileClear = requireElement<HTMLButtonElement>('#profile-clear')
+const semanticCount = requireElement<HTMLElement>('#semantic-count')
+const semanticList = requireElement<HTMLElement>('#semantic-list')
+const semanticStatus = requireElement<HTMLElement>('#semantic-status')
+const semanticForm = requireElement<HTMLFormElement>('#semantic-form')
+const semanticText = requireElement<HTMLInputElement>('#semantic-text')
+const semanticAdd = requireElement<HTMLButtonElement>('#semantic-add')
+const clearSemanticMemoriesButton = requireElement<HTMLButtonElement>('#semantic-clear')
+const longtermCount = requireElement<HTMLElement>('#longterm-count')
+const longtermList = requireElement<HTMLElement>('#longterm-list')
+const longtermStatus = requireElement<HTMLElement>('#longterm-status')
+const clearLongtermMemories = requireElement<HTMLButtonElement>('#longterm-clear')
+const memoryEditor = requireElement<HTMLDivElement>('#memory-editor')
+const memoryEditorTitle = requireElement<HTMLElement>('#memory-editor-title')
+const memoryEditorText = requireElement<HTMLTextAreaElement>('#memory-editor-text')
+const memoryEditorStatus = requireElement<HTMLElement>('#memory-editor-status')
+const memoryEditorSave = requireElement<HTMLButtonElement>('#memory-editor-save')
+const memoryEditorCancel = requireElement<HTMLButtonElement>('#memory-editor-cancel')
 const pauseInteractions = requireElement<HTMLInputElement>('#pause-interactions')
 const randomVoiceEnabled = requireElement<HTMLInputElement>('#random-voice-enabled')
 const localTtsEnabled = requireElement<HTMLInputElement>('#local-tts-enabled')
@@ -54,6 +88,20 @@ const aiProactiveEnabled = requireElement<HTMLInputElement>('#ai-proactive-enabl
 const aiWindowTitleEnabled = requireElement<HTMLInputElement>('#ai-window-title-enabled')
 const aiSelectedTextEnabled = requireElement<HTMLInputElement>('#ai-selected-text-enabled')
 const conversationMemoryEnabled = requireElement<HTMLInputElement>('#conversation-memory-enabled')
+const screenPerceptionEnabled = requireElement<HTMLInputElement>('#screen-perception-enabled')
+const screenPerceptionPause = requireElement<HTMLButtonElement>('#screen-perception-pause')
+const screenPerceptionStatus = requireElement<HTMLElement>('#screen-perception-status')
+const permissionScreenState = requireElement<HTMLElement>('#permission-screen-state')
+const permissionAccessibilityState = requireElement<HTMLElement>('#permission-accessibility-state')
+const permissionAutomationState = requireElement<HTMLElement>('#permission-automation-state')
+const permissionAutomationDetail = requireElement<HTMLElement>('#permission-automation-detail')
+const permissionNote = requireElement<HTMLElement>('#permission-note')
+const permissionRecheck = requireElement<HTMLButtonElement>('#permission-recheck')
+const permissionScreenOpen = requireElement<HTMLButtonElement>('#permission-screen-open')
+const permissionAccessibilityOpen = requireElement<HTMLButtonElement>(
+  '#permission-accessibility-open',
+)
+const permissionAutomationOpen = requireElement<HTMLButtonElement>('#permission-automation-open')
 const clearConversationMemoryButton = requireElement<HTMLButtonElement>(
   '#clear-conversation-memory',
 )
@@ -80,6 +128,8 @@ const aiPreviewNote = requireElement<HTMLElement>('#ai-preview-note')
 const sendAiContext = requireElement<HTMLButtonElement>('#send-ai-context')
 const cancelAiContext = requireElement<HTMLButtonElement>('#cancel-ai-context')
 const modelScale = requireElement<HTMLInputElement>('#model-scale')
+const outfitRotationEnabled = requireElement<HTMLInputElement>('#outfit-rotation-enabled')
+const outfitRotationDays = requireElement<HTMLSelectElement>('#outfit-rotation-days')
 const modelScaleValue = requireElement<HTMLOutputElement>('#model-scale-value')
 const modelAction = requireElement<HTMLSelectElement>('#model-action')
 const previewModelAction = requireElement<HTMLButtonElement>('#preview-model-action')
@@ -116,8 +166,12 @@ let saving = false
 let resourceRefreshTimer = 0
 let resourceRefreshInFlight = false
 let latestAiStatus: AiServiceStatus | null = null
+let latestRuntime: RuntimeInfo | null = null
+let latestPermissionStatus: PermissionSnapshot | null = null
 let pendingAiPreview: AiContextPreview | null = null
 let memoryRefreshInFlight = false
+let memoryDataRefreshInFlight = false
+let memoryEditorSaveHandler: ((text: string) => Promise<void>) | null = null
 const RESOURCE_REFRESH_MS = 2_500
 
 setupSettingsTabs()
@@ -131,8 +185,10 @@ window.deskpet.onStateChanged(render)
 window.deskpet.onTimeSceneChanged(renderTimeSceneContext)
 renderTimeSceneContext(await window.deskpet.getTimeSceneContext())
 await refreshAiState()
+void refreshPermissionStatus(false)
 void refreshSemanticSummary()
 await refreshMemoryPanel()
+void refreshMemoryTab()
 const pendingPreview = await window.deskpet.getPendingAiContext()
 if (pendingPreview) {
   showAiPreview(pendingPreview)
@@ -156,6 +212,10 @@ document.addEventListener('visibilitychange', () => {
 })
 window.addEventListener('beforeunload', () => {
   stopResourceRefresh()
+})
+window.addEventListener('focus', () => {
+  // 从系统设置授权回来时，自动更新屏幕录制/辅助功能；自动化探针只在显式检测时运行。
+  void refreshPermissionStatus(false)
 })
 
 document.body.dataset.ready = 'true'
@@ -208,6 +268,96 @@ clearMemory.addEventListener('click', () => {
     })
 })
 
+profileForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  void addProfileFactFromForm()
+})
+
+semanticForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  void addSemanticMemoryFromForm()
+})
+
+profileClear.addEventListener('click', () => {
+  if (!window.confirm('确定清空全部画像事实吗？此操作无法撤销。')) {
+    return
+  }
+  profileClear.disabled = true
+  void window.deskpet
+    .clearProfileFacts()
+    .then((facts) => renderProfileFacts(facts))
+    .catch((error: unknown) => {
+      profileStatus.textContent = `清空画像失败：${String(error)}`
+    })
+    .finally(() => {
+      profileClear.disabled = false
+    })
+})
+
+clearSemanticMemoriesButton.addEventListener('click', () => {
+  if (!window.confirm('确定清空全部明确记忆吗？此操作无法撤销。')) {
+    return
+  }
+  clearSemanticMemoriesButton.disabled = true
+  void window.deskpet
+    .clearSemanticMemories()
+    .then((memories) => renderSemanticMemories(memories))
+    .catch((error: unknown) => {
+      semanticStatus.textContent = `清空明确记忆失败：${String(error)}`
+    })
+    .finally(() => {
+      clearSemanticMemoriesButton.disabled = false
+    })
+})
+
+clearLongtermMemories.addEventListener('click', () => {
+  if (!window.confirm('确定清空全部对话沉淀吗？此操作无法撤销。')) {
+    return
+  }
+  clearLongtermMemories.disabled = true
+  void window.deskpet
+    .clearLongTermMemories()
+    .then((memories) => renderLongTermMemories(memories))
+    .catch((error: unknown) => {
+      longtermStatus.textContent = `清空对话沉淀失败：${String(error)}`
+    })
+    .finally(() => {
+      clearLongtermMemories.disabled = false
+    })
+})
+
+memoryEditorCancel.addEventListener('click', closeMemoryEditor)
+memoryEditor.addEventListener('click', (event) => {
+  if (event.target === memoryEditor) {
+    closeMemoryEditor()
+  }
+})
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !memoryEditor.hidden) {
+    closeMemoryEditor()
+  }
+})
+memoryEditorSave.addEventListener('click', async () => {
+  const handler = memoryEditorSaveHandler
+  if (!handler) {
+    return
+  }
+  const text = memoryEditorText.value.trim()
+  if (!text) {
+    memoryEditorStatus.textContent = '内容不能为空。'
+    return
+  }
+  memoryEditorSave.disabled = true
+  try {
+    await handler(text)
+    closeMemoryEditor()
+  } catch (error) {
+    memoryEditorStatus.textContent = '保存失败：' + String(error)
+  } finally {
+    memoryEditorSave.disabled = false
+  }
+})
+
 alwaysOnTop.addEventListener('change', () => {
   void updateSettings({ alwaysOnTop: alwaysOnTop.checked })
 })
@@ -258,7 +408,7 @@ rememberAiContext.addEventListener('click', async () => {
   }
   try {
     const memories = await window.deskpet.rememberSemanticMemory(text)
-    semanticSummary.textContent = `语义记忆：${memories.length} 条（仅记录你明确要求记住的内容）。`
+    renderSemanticMemories(memories)
     showMessage('已记住这段内容。')
   } catch (error) {
     showMessage(`记忆失败：${String(error)}`, 'error')
@@ -280,6 +430,50 @@ aiSelectedTextEnabled.addEventListener('change', () => {
     return
   }
   void updateSettings({ aiSelectedTextEnabled: aiSelectedTextEnabled.checked })
+})
+
+screenPerceptionEnabled.addEventListener('change', () => {
+  if (screenPerceptionEnabled.checked && !confirmSensitiveRead('screen-perception')) {
+    screenPerceptionEnabled.checked = false
+    return
+  }
+  void updateSettings({
+    screenPerceptionEnabled: screenPerceptionEnabled.checked,
+    screenPerceptionPaused: false,
+  }).then(refreshAiState)
+})
+
+screenPerceptionPause.addEventListener('click', () => {
+  const paused = latestSnapshot?.settings.screenPerceptionPaused ?? false
+  void updateSettings({ screenPerceptionPaused: !paused })
+})
+
+permissionScreenOpen.addEventListener('click', () => {
+  void window.deskpet.openPermissionSettings('screen')
+})
+
+permissionAutomationOpen.addEventListener('click', () => {
+  void window.deskpet.openPermissionSettings('automation')
+})
+
+permissionAccessibilityOpen.addEventListener('click', async () => {
+  permissionAccessibilityOpen.disabled = true
+  try {
+    latestAiStatus = await window.deskpet.requestAccessibilityPermission()
+    renderAiStatus()
+    if (!latestAiStatus.accessibilityTrusted) {
+      await window.deskpet.openPermissionSettings('accessibility')
+    }
+    await refreshPermissionStatus(false)
+  } catch (error) {
+    permissionNote.textContent = `辅助功能请求失败：${String(error)}`
+  } finally {
+    permissionAccessibilityOpen.disabled = false
+  }
+})
+
+permissionRecheck.addEventListener('click', () => {
+  void refreshPermissionStatus(true)
 })
 
 saveDeepSeekKey.addEventListener('click', async () => {
@@ -398,6 +592,14 @@ cancelAiContext.addEventListener('click', async () => {
 
 modelScale.addEventListener('input', () => {
   updateModelScaleLabel(Number(modelScale.value))
+})
+
+outfitRotationEnabled.addEventListener('change', () => {
+  void updateSettings({ outfitRotationEnabled: outfitRotationEnabled.checked })
+})
+
+outfitRotationDays.addEventListener('change', () => {
+  void updateSettings({ outfitRotationDays: Number(outfitRotationDays.value) })
 })
 
 modelScale.addEventListener('change', () => {
@@ -528,10 +730,19 @@ function render(snapshot: SettingsSnapshot): void {
   aiProactiveEnabled.disabled = saving || !snapshot.settings.aiEnabled
   aiWindowTitleEnabled.checked = snapshot.settings.aiWindowTitleEnabled
   aiSelectedTextEnabled.checked = snapshot.settings.aiSelectedTextEnabled
+  screenPerceptionEnabled.checked = snapshot.settings.screenPerceptionEnabled
+  screenPerceptionPause.disabled =
+    saving || !snapshot.settings.screenPerceptionEnabled || !snapshot.settings.aiEnabled
+  screenPerceptionPause.textContent = snapshot.settings.screenPerceptionPaused
+    ? '继续感知'
+    : '暂停感知'
   conversationMemoryEnabled.checked = snapshot.settings.conversationMemoryEnabled
   intelligenceLevel.value = snapshot.settings.intelligenceLevel
   ttsQuality.value = snapshot.settings.ttsQuality
   ttsEngine.value = snapshot.settings.ttsEngine
+  outfitRotationEnabled.checked = snapshot.settings.outfitRotationEnabled
+  outfitRotationDays.value = String(snapshot.settings.outfitRotationDays)
+  outfitRotationDays.disabled = !snapshot.settings.outfitRotationEnabled
   modelScale.value = String(snapshot.settings.modelScale)
   updateModelScaleLabel(snapshot.settings.modelScale)
   const is3d = snapshot.settings.rendererMode === '3d'
@@ -548,6 +759,7 @@ function render(snapshot: SettingsSnapshot): void {
   if (latestAiStatus) {
     renderAiStatus()
   }
+  renderScreenPerceptionStatus()
 }
 
 function renderRendererOptions(snapshot: SettingsSnapshot): void {
@@ -559,22 +771,28 @@ function renderRendererOptions(snapshot: SettingsSnapshot): void {
       button.disabled = renderer.status !== 'available'
       button.dataset.status = renderer.status
       button.dataset.mode = renderer.mode
-      button.classList.toggle('selected', snapshot.settings.rendererMode === renderer.mode)
+      const default3dId = snapshot.character.renderers.find(
+        (option) => option.mode === '3d' && option.status === 'available',
+      )?.id
+      const effective3dId = snapshot.settings.rendererId || default3dId
+      const selected =
+        snapshot.settings.rendererMode === renderer.mode &&
+        (renderer.mode !== '3d' || effective3dId === renderer.id)
+      button.classList.toggle('selected', selected)
 
       const name = document.createElement('strong')
       name.textContent = renderer.label
       const status = document.createElement('span')
-      status.textContent =
-        renderer.status === 'available'
-          ? snapshot.settings.rendererMode === renderer.mode
-            ? '当前'
-            : '切换'
-          : '计划中'
+      status.textContent = renderer.status === 'available' ? (selected ? '当前' : '切换') : '计划中'
       button.append(name, status)
       button.addEventListener('click', () => {
-        if (snapshot.settings.rendererMode !== renderer.mode) {
-          void updateSettings({ rendererMode: renderer.mode })
+        if (selected) {
+          return
         }
+        void updateSettings({
+          rendererMode: renderer.mode,
+          rendererId: renderer.mode === '3d' ? renderer.id : '',
+        })
       })
       return button
     }),
@@ -588,6 +806,9 @@ async function updateSettings(
       | 'alwaysOnTop'
       | 'interactionsPaused'
       | 'rendererMode'
+      | 'rendererId'
+      | 'outfitRotationEnabled'
+      | 'outfitRotationDays'
       | 'modelScale'
       | 'randomVoiceEnabled'
       | 'localTtsEnabled'
@@ -599,6 +820,8 @@ async function updateSettings(
       | 'aiProactiveEnabled'
       | 'aiWindowTitleEnabled'
       | 'aiSelectedTextEnabled'
+      | 'screenPerceptionEnabled'
+      | 'screenPerceptionPaused'
       | 'conversationMemoryEnabled'
       | 'intelligenceLevel'
       | 'ttsQuality'
@@ -641,6 +864,13 @@ function setBusy(value: boolean): void {
   aiProactiveEnabled.disabled = value || !aiEnabled.checked
   aiWindowTitleEnabled.disabled = value
   aiSelectedTextEnabled.disabled = value
+  screenPerceptionEnabled.disabled = value
+  screenPerceptionPause.disabled = value || !screenPerceptionEnabled.checked || !aiEnabled.checked
+  profileCategory.disabled = value
+  profileText.disabled = value
+  profileAdd.disabled = value
+  semanticText.disabled = value
+  semanticAdd.disabled = value
   deepSeekKey.disabled = value || latestAiStatus?.encryptionAvailable === false
   saveDeepSeekKey.disabled = value || latestAiStatus?.encryptionAvailable === false
   deleteDeepSeekKey.disabled = value || !latestAiStatus?.keyConfigured
@@ -695,10 +925,12 @@ async function refreshResources(): Promise<void> {
       window.deskpet.getResourceSnapshot(),
       window.deskpet.getRuntimeInfo(),
     ])
+    latestRuntime = runtime
     renderResourceSnapshot(snapshot)
     renderEmotionState(runtime)
     renderPresenceTelemetry(runtime)
     renderLastError(runtime)
+    renderScreenPerceptionStatus()
   } catch (error) {
     resourceNote.textContent = `资源状态读取失败：${String(error)}`
   } finally {
@@ -743,6 +975,276 @@ function renderEmotionState(runtime: RuntimeInfo): void {
   emotionSocialBattery.textContent = String(social)
   emotionPatienceProgress.style.width = `${clamp(patience, 0, 100)}%`
   emotionSocialProgress.style.width = `${clamp(social, 0, 100)}%`
+}
+
+async function refreshMemoryTab(): Promise<void> {
+  if (memoryDataRefreshInFlight) {
+    return
+  }
+  memoryDataRefreshInFlight = true
+  try {
+    const [profile, semantic, longterm] = await Promise.all([
+      window.deskpet.listProfileFacts(),
+      window.deskpet.listSemanticMemories(),
+      window.deskpet.listLongTermMemories(),
+    ])
+    renderProfileFacts(profile)
+    renderSemanticMemories(semantic)
+    renderLongTermMemories(longterm)
+  } catch (error) {
+    profileStatus.textContent = '画像读取失败：' + String(error)
+    semanticStatus.textContent = '明确记忆读取失败：' + String(error)
+    longtermStatus.textContent = '对话沉淀读取失败：' + String(error)
+  } finally {
+    memoryDataRefreshInFlight = false
+  }
+}
+
+function openMemoryEditor(
+  title: string,
+  value: string,
+  maxLength: number,
+  onSave: (text: string) => Promise<void>,
+): void {
+  memoryEditorTitle.textContent = title
+  memoryEditorText.value = value
+  memoryEditorText.maxLength = maxLength
+  memoryEditorStatus.textContent = ''
+  memoryEditorSave.disabled = false
+  memoryEditorSaveHandler = onSave
+  memoryEditor.hidden = false
+  memoryEditorText.focus()
+  memoryEditorText.setSelectionRange(memoryEditorText.value.length, memoryEditorText.value.length)
+}
+
+function closeMemoryEditor(): void {
+  memoryEditor.hidden = true
+  memoryEditorSaveHandler = null
+  memoryEditorStatus.textContent = ''
+}
+
+function createMemoryAction(label: string, handler: () => void, active = false): HTMLButtonElement {
+  const button = document.createElement('button')
+  button.type = 'button'
+  button.className = 'memory-action'
+  button.textContent = label
+  if (active) {
+    button.dataset.active = 'true'
+  }
+  button.addEventListener('click', handler)
+  return button
+}
+
+function renderProfileFacts(facts: ProfileFactView[]): void {
+  profileCount.textContent = String(facts.length)
+  profileClear.disabled = facts.length === 0
+  profileList.replaceChildren(
+    ...facts.map((fact) => {
+      const item = document.createElement('article')
+      item.className = 'memory-item'
+      if (fact.pinned) {
+        item.classList.add('pinned')
+      }
+      const body = document.createElement('div')
+      const summary = document.createElement('strong')
+      const category = document.createElement('span')
+      category.className = 'memory-category'
+      category.textContent = PROFILE_CATEGORY_LABELS[fact.category]
+      summary.append(category, document.createTextNode(fact.text))
+      const detail = document.createElement('small')
+      detail.textContent =
+        (fact.source === 'manual' ? '手动添加' : '从对话提取') +
+        ' · ' +
+        formatMemoryTime(fact.updatedAt)
+      body.append(summary, detail)
+      const actions = document.createElement('div')
+      actions.className = 'memory-actions'
+      actions.append(
+        createMemoryAction(
+          fact.pinned ? '取消置顶' : '置顶',
+          () => {
+            void window.deskpet
+              .setProfileFactPinned(fact.id, !fact.pinned)
+              .then((next) => renderProfileFacts(next))
+              .catch((error: unknown) => {
+                profileStatus.textContent = '置顶失败：' + String(error)
+              })
+          },
+          fact.pinned,
+        ),
+        createMemoryAction('编辑', () => {
+          void editProfileFact(fact)
+        }),
+        createMemoryAction('删除', () => {
+          void window.deskpet
+            .deleteProfileFact(fact.id)
+            .then((next) => renderProfileFacts(next))
+            .catch((error: unknown) => {
+              profileStatus.textContent = '删除失败：' + String(error)
+            })
+        }),
+      )
+      item.append(body, actions)
+      return item
+    }),
+  )
+  profileStatus.textContent =
+    facts.length === 0
+      ? '还没有画像事实。聊天里自然提到项目、偏好或作息，或直接在上方添加一条。'
+      : '共 ' + facts.length + ' 条；置顶事实会优先进入对话提示词。'
+}
+
+function editProfileFact(fact: ProfileFactView): void {
+  openMemoryEditor('修改这条画像记忆', fact.text, 60, async (text) => {
+    try {
+      renderProfileFacts(await window.deskpet.updateProfileFact(fact.id, text))
+    } catch (error) {
+      profileStatus.textContent = '修改失败：' + String(error)
+      throw error
+    }
+  })
+}
+
+async function addProfileFactFromForm(): Promise<void> {
+  const text = profileText.value.trim()
+  if (!text) {
+    profileStatus.textContent = '请先写一条内容。'
+    return
+  }
+  profileAdd.disabled = true
+  try {
+    const facts = await window.deskpet.addProfileFact(
+      profileCategory.value as ProfileCategory,
+      text,
+    )
+    profileText.value = ''
+    renderProfileFacts(facts)
+    showMessage('已添加一条画像事实。')
+  } catch (error) {
+    profileStatus.textContent = '添加失败：' + String(error)
+  } finally {
+    profileAdd.disabled = false
+  }
+}
+
+function renderSemanticMemories(memories: SemanticMemoryView[]): void {
+  semanticCount.textContent = String(memories.length)
+  semanticSummary.textContent =
+    '语义记忆：' + memories.length + ' 条（仅记录你明确要求记住的内容）。'
+  clearSemanticMemoriesButton.disabled = memories.length === 0
+  semanticList.replaceChildren(
+    ...memories.map((memory) => {
+      const item = document.createElement('article')
+      item.className = 'memory-item'
+      const body = document.createElement('div')
+      const summary = document.createElement('strong')
+      summary.textContent = memory.statement
+      const detail = document.createElement('small')
+      detail.textContent = '明确记忆 · ' + formatMemoryTime(memory.at)
+      body.append(summary, detail)
+      const actions = document.createElement('div')
+      actions.className = 'memory-actions'
+      actions.append(
+        createMemoryAction('编辑', () => {
+          void editSemanticMemory(memory)
+        }),
+        createMemoryAction('删除', () => {
+          void window.deskpet
+            .deleteSemanticMemory(memory.id)
+            .then((next) => renderSemanticMemories(next))
+            .catch((error: unknown) => {
+              semanticStatus.textContent = '删除失败：' + String(error)
+            })
+        }),
+      )
+      item.append(body, actions)
+      return item
+    }),
+  )
+  semanticStatus.textContent =
+    memories.length === 0
+      ? '还没有明确记忆。可以在 AI 预览里点“记住这段”，或在上方手动写一条。'
+      : '共 ' + memories.length + ' 条；这些内容会直接进入长期提示词。'
+}
+
+function editSemanticMemory(memory: SemanticMemoryView): void {
+  openMemoryEditor('修改这条明确记忆', memory.statement, 400, async (text) => {
+    try {
+      renderSemanticMemories(await window.deskpet.updateSemanticMemory(memory.id, text))
+    } catch (error) {
+      semanticStatus.textContent = '修改失败：' + String(error)
+      throw error
+    }
+  })
+}
+
+async function addSemanticMemoryFromForm(): Promise<void> {
+  const text = semanticText.value.trim()
+  if (!text) {
+    semanticStatus.textContent = '请先写一条内容。'
+    return
+  }
+  semanticAdd.disabled = true
+  try {
+    const memories = await window.deskpet.rememberSemanticMemory(text)
+    semanticText.value = ''
+    renderSemanticMemories(memories)
+    showMessage('已记住这段内容。')
+  } catch (error) {
+    semanticStatus.textContent = '添加失败：' + String(error)
+  } finally {
+    semanticAdd.disabled = false
+  }
+}
+
+function renderLongTermMemories(memories: LongTermMemoryView[]): void {
+  longtermCount.textContent = String(memories.length)
+  clearLongtermMemories.disabled = memories.length === 0
+  longtermList.replaceChildren(
+    ...memories.map((memory) => {
+      const item = document.createElement('article')
+      item.className = 'memory-item'
+      const body = document.createElement('div')
+      const summary = document.createElement('strong')
+      summary.textContent = memory.text
+      const detail = document.createElement('small')
+      detail.textContent =
+        '对话沉淀 · ' + formatMemoryTime(memory.createdAt) + ' · 命中 ' + memory.hits + ' 次'
+      body.append(summary, detail)
+      const actions = document.createElement('div')
+      actions.className = 'memory-actions'
+      actions.append(
+        createMemoryAction('编辑', () => {
+          void editLongTermMemory(memory)
+        }),
+        createMemoryAction('删除', () => {
+          void window.deskpet
+            .deleteLongTermMemory(memory.id)
+            .then((next) => renderLongTermMemories(next))
+            .catch((error: unknown) => {
+              longtermStatus.textContent = '删除失败：' + String(error)
+            })
+        }),
+      )
+      item.append(body, actions)
+      return item
+    }),
+  )
+  longtermStatus.textContent =
+    memories.length === 0
+      ? '还没有对话沉淀。完成几轮聊天后会在这里出现。'
+      : '显示最近 ' + memories.length + ' 条；删除后不会再被语义召回。'
+}
+
+function editLongTermMemory(memory: LongTermMemoryView): void {
+  openMemoryEditor('修改这条对话沉淀', memory.text, 160, async (text) => {
+    try {
+      renderLongTermMemories(await window.deskpet.updateLongTermMemory(memory.id, text))
+    } catch (error) {
+      longtermStatus.textContent = '修改失败：' + String(error)
+      throw error
+    }
+  })
 }
 
 async function refreshMemoryPanel(): Promise<void> {
@@ -934,6 +1436,105 @@ function renderAiStatus(): void {
   requestAccessibility.disabled = saving || latestAiStatus.accessibilityTrusted
   aiAnalyzeTask.disabled = saving || !latestAiStatus.enabled
   aiAnalyzeSelection.disabled = saving || !latestAiStatus.enabled || !aiSelectedTextEnabled.checked
+  renderScreenPerceptionStatus()
+  renderPermissionStatus()
+}
+
+function renderScreenPerceptionStatus(): void {
+  const snapshot = latestSnapshot
+  if (!snapshot) {
+    return
+  }
+  const enabled = snapshot.settings.screenPerceptionEnabled
+  const paused = snapshot.settings.screenPerceptionPaused
+  const aiEnabled = latestAiStatus?.enabled ?? snapshot.settings.aiEnabled
+  const status = latestRuntime?.screenPerception
+  const parts: string[] = []
+
+  if (!enabled) {
+    parts.push('未开启')
+  } else if (paused) {
+    parts.push('已暂停')
+  } else if (!aiEnabled) {
+    parts.push('等待启用 DeepSeek')
+  } else if (!status) {
+    parts.push('正在读取状态')
+  } else {
+    // 运行时状态可能还没追上刚保存的开关，以设置快照为准展示。
+    parts.push(describeScreenPerception({ ...status, configured: true, paused: false }))
+    if (status.lastUploadAt) {
+      parts.push(`上次分析 ${formatClock(status.lastUploadAt)}`)
+    }
+    if (status.lastSkipAt) {
+      parts.push(`上次跳过 ${formatClock(status.lastSkipAt)}`)
+    }
+    if (status.lastError) {
+      parts.push(status.lastError)
+    }
+  }
+
+  screenPerceptionStatus.textContent = parts.join(' · ')
+  screenPerceptionStatus.dataset.kind =
+    status?.lastError || (enabled && status && status.permission !== 'granted') ? 'error' : 'ready'
+  screenPerceptionPause.disabled = saving || !enabled || !aiEnabled
+  screenPerceptionPause.textContent = paused ? '继续感知' : '暂停感知'
+}
+
+async function refreshPermissionStatus(probeAutomation = false): Promise<void> {
+  permissionRecheck.disabled = true
+  try {
+    const previous = latestPermissionStatus
+    const next = await window.deskpet.getPermissionStatus(probeAutomation)
+    if (!probeAutomation && previous && previous.automation !== 'unknown') {
+      next.automation = previous.automation
+      next.automationDetail = previous.automationDetail
+    }
+    latestPermissionStatus = next
+    renderPermissionStatus()
+  } catch (error) {
+    permissionNote.textContent = `权限检测失败：${String(error)}`
+  } finally {
+    permissionRecheck.disabled = saving
+  }
+}
+
+function renderPermissionStatus(): void {
+  const status = latestPermissionStatus
+  if (!status) {
+    return
+  }
+  setPermissionState(permissionScreenState, status.screen)
+  setPermissionState(permissionAccessibilityState, status.accessibility)
+  setPermissionState(permissionAutomationState, status.automation)
+  permissionAutomationDetail.textContent =
+    status.automationDetail ??
+    (status.automation === 'unknown' ? '点击「重新检测」检查自动化授权' : '页面、媒体与日历读取')
+
+  const allGranted =
+    status.screen === 'granted' &&
+    status.accessibility === 'granted' &&
+    status.automation === 'granted'
+  const needsAutomationCheck =
+    status.screen === 'granted' &&
+    status.accessibility === 'granted' &&
+    status.automation === 'unknown'
+  permissionNote.textContent = allGranted
+    ? `三项权限已就绪 · 上次检测 ${formatClock(status.checkedAt)}`
+    : needsAutomationCheck
+      ? `屏幕与辅助功能已就绪 · 自动化未检测，点「重新检测」确认`
+      : `上次检测 ${formatClock(status.checkedAt)} · 缺权限时点对应按钮，授权后回到这里重新检测`
+}
+
+function setPermissionState(element: HTMLElement, state: PermissionSnapshot['screen']): void {
+  element.textContent = PERMISSION_STATE_LABELS[state]
+  element.dataset.state = state
+}
+
+function formatClock(at: number): string {
+  return new Date(at).toLocaleTimeString('zh-CN', {
+    hour: '2-digit',
+    minute: '2-digit',
+  })
 }
 
 function formatProactiveOutcome(status: AiServiceStatus): string {
@@ -1129,11 +1730,13 @@ function formatIdleTime(seconds: number): string {
 /**
  * 这两项会把本机内容发到云端，开启前必须让用户明确确认一次。
  */
-function confirmSensitiveRead(kind: 'window-title' | 'selection'): boolean {
+function confirmSensitiveRead(kind: 'window-title' | 'selection' | 'screen-perception'): boolean {
   const message =
     kind === 'window-title'
       ? '开启后，只有你主动触发 AI 时才会读取前台窗口标题，并随请求发送到 DeepSeek 云端。窗口标题可能包含文档名或网页主题。\n\n确定开启吗？'
-      : '开启后，按下“解释选中文字”时会把当前选中的文字发送到 DeepSeek 云端，文本会离开本机。\n\n确定开启吗？'
+      : kind === 'selection'
+        ? '开启后，按下“解释选中文字”时会把当前选中的文字发送到 DeepSeek 云端，文本会离开本机。\n\n确定开启吗？'
+        : '开启后，日奈会约每 8 分钟截取一次当前屏幕；当你在对话里明确问到时，也会即时分析一次。截图会先在本机做敏感内容预检，只有通过预检的截图才会发送给 DeepSeek 做场景理解。\n\n检测到密码、网银、验证码、银行卡号、助记词或支付页面时会跳过本次上传；私人聊天不会按应用整体拦截，但明确包含凭据内容时仍会跳过。\n\n你可以随时在菜单栏点击“暂停屏幕感知”，或在设置页关闭。确定开启吗？'
   return window.confirm(message)
 }
 

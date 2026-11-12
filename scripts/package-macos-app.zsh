@@ -76,6 +76,7 @@ mkdir -p \
   "$APP_RESOURCES/scripts"
 ditto "$PROJECT_ROOT/out" "$APP_RESOURCES/out"
 ditto "$PROJECT_ROOT/content" "$APP_RESOURCES/content"
+ditto "$PROJECT_ROOT/demo" "$APP_RESOURCES/demo"
 ditto \
   "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/3d/official" \
   "$APP_RESOURCES/assets/characters/hina-swimsuit/private/3d/official"
@@ -83,6 +84,11 @@ if [[ -d "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/official-d
   ditto \
     "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/official-denoise45" \
     "$APP_RESOURCES/assets/characters/hina-swimsuit/private/audio/official-denoise45"
+fi
+if [[ -d "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/outfit" ]]; then
+  ditto \
+    "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/outfit" \
+    "$APP_RESOURCES/assets/characters/hina-swimsuit/private/audio/outfit"
 fi
 if [[ -d "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/generated-dialogue" ]]; then
   ditto \
@@ -124,18 +130,49 @@ plutil -replace NSAppleEventsUsageDescription \
 SIGN_IDENTITY="${DESKPET_SIGN_IDENTITY:-Deskpet Local Signing}"
 ENTITLEMENTS="$PROJECT_ROOT/scripts/deskpet.entitlements"
 if security find-identity -v -p codesigning 2>/dev/null | grep -Fq "\"$SIGN_IDENTITY\""; then
+  CERT_PEM="$(security find-certificate -c "$SIGN_IDENTITY" -p 2>/dev/null || true)"
+  if [[ -z "$CERT_PEM" ]]; then
+    echo "ERROR: cannot read certificate '$SIGN_IDENTITY' from the keychain." >&2
+    exit 1
+  fi
+  if ! print -r -- "$CERT_PEM" | openssl x509 -checkend 31536000 -noout 2>/dev/null; then
+    echo "WARNING: '$SIGN_IDENTITY' expires within one year." >&2
+    echo "         Renewing the certificate changes the TCC requirement; back it up or plan a one-time re-auth." >&2
+  fi
+  CERT_SHA1="$(print -r -- "$CERT_PEM" | openssl x509 -noout -fingerprint -sha1 2>/dev/null | sed -E 's/^.*=//; s/://g' | tr '[:upper:]' '[:lower:]')"
   codesign --force --deep --entitlements "$ENTITLEMENTS" --sign "$SIGN_IDENTITY" "$DIST_APP" >/dev/null
   echo "Signed with identity: $SIGN_IDENTITY"
+  DR="$(codesign -d -r- "$DIST_APP" 2>&1 || true)"
+  if ! print -r -- "$DR" | grep -Fq 'identifier "local.deskpet.hina"'; then
+    echo "ERROR: designated requirement is missing the stable bundle identifier." >&2
+    echo "$DR" >&2
+    exit 1
+  fi
+  if [[ -n "$CERT_SHA1" ]] && ! print -r -- "$DR" | grep -Fiq "certificate leaf = H\"$CERT_SHA1\""; then
+    echo "ERROR: designated requirement is not pinned to '$SIGN_IDENTITY'." >&2
+    echo "$DR" >&2
+    exit 1
+  fi
+  echo "Designated requirement: $DR"
 else
-  echo "WARNING: signing identity '$SIGN_IDENTITY' not found; falling back to ad-hoc." >&2
-  echo "         macOS will ask for Accessibility/Automation permission again after each rebuild." >&2
-  codesign --force --deep --entitlements "$ENTITLEMENTS" --sign - "$DIST_APP" >/dev/null
+  if [[ "${DESKPET_ALLOW_ADHOC:-0}" == "1" ]]; then
+    echo "WARNING: DESKPET_ALLOW_ADHOC=1; ad-hoc signing will reset Screen Recording/Automation." >&2
+    codesign --force --deep --entitlements "$ENTITLEMENTS" --sign - "$DIST_APP" >/dev/null
+  else
+    echo "ERROR: signing identity '$SIGN_IDENTITY' not found." >&2
+    echo "Refusing to fall back to ad-hoc: its cdhash changes every build and TCC will reset." >&2
+    echo "Run scripts/check-signing-identity.zsh, or set DESKPET_ALLOW_ADHOC=1 only for a throwaway build." >&2
+    exit 1
+  fi
 fi
 codesign --verify --deep --strict "$DIST_APP"
 
 mkdir -p "$INSTALL_DIR"
 rm -rf "$INSTALL_APP"
 ditto "$DIST_APP" "$INSTALL_APP"
+codesign --verify --deep --strict "$INSTALL_APP"
+echo "Installed designated requirement: $(codesign -d -r- "$INSTALL_APP" 2>&1 | tail -1)"
+echo "Screen Recording / Accessibility / Automation should survive this update while the signing identity is unchanged."
 
 echo "Packaged app: $DIST_APP"
 echo "Installed app: $INSTALL_APP"

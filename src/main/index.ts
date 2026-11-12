@@ -5,17 +5,25 @@ import { state } from './app-state'
 import { ensureAivisEngine, stopAivisEngine } from './domain/aivis-engine'
 import { startAivisHealthMonitor } from './domain/aivis-health'
 import { startScreenVisionLoop } from './perception/screen-vision'
+import { startDemoRunner } from './demo/demo-runner'
+import { startOutfitRotation } from './domain/outfit-rotation'
 import { cancelAutonomousWalk, startAutonomousBehavior } from './behavior/autonomous'
 import { IS_E2E } from './config'
 import { configureProxyFromSystem } from './net/proxy'
 import { registerIpcHandlers } from './ipc/handlers'
 import { initializePresenceController } from './presence/bridge'
-import { initializePetController, showSettingsWindow } from './settings/bridge'
+import { initializePetController, showSettingsWindow, updateAppSettings } from './settings/bridge'
 import { registerDisplayHandlers } from './system/displays'
 import { recordError } from './system/error-log'
 import { registerPowerHandlers } from './system/power'
+import { schedulePermissionNotice } from './system/permission-notice'
 import { startTimeSceneMonitor } from './time-scene/observer'
-import { createTray, registerClickThroughShortcut, setClickThroughMode } from './tray/tray'
+import {
+  createTray,
+  refreshTrayMenu,
+  registerClickThroughShortcut,
+  setClickThroughMode,
+} from './tray/tray'
 import { startMousePolling, stopMousePolling } from './window/mouse'
 import { persistWindowState } from './window/persistence'
 import { createPetWindow, showPetWindow } from './window/pet-window'
@@ -174,22 +182,40 @@ async function startApplication(): Promise<void> {
   if (!IS_E2E) {
     startScreenVisionLoop({
       getApiKey: async () => (await state.deepSeekKeyStore?.loadKey()) ?? null,
+      isConfigured: () => Boolean(state.petController?.getSettings().screenPerceptionEnabled),
+      isPaused: () => Boolean(state.petController?.getSettings().screenPerceptionPaused),
       isEnabled: () => {
         const settings = state.petController?.getSettings()
-        return Boolean(settings?.aiEnabled) && process.env.DESKPET_PERCEPTION !== '0'
+        return Boolean(
+          settings?.aiEnabled &&
+          settings.screenPerceptionEnabled &&
+          !state.systemPowerState.screenLocked &&
+          !state.systemPowerState.suspended &&
+          process.env.DESKPET_PERCEPTION !== '0',
+        )
       },
+      onStatusChange: () => refreshTrayMenu(),
     })
   }
   initializePresenceController()
   registerClickThroughShortcut()
   registerAiContextShortcuts()
   createTray()
+  schedulePermissionNotice()
   startMousePolling()
   registerDisplayHandlers()
   startAutonomousBehavior()
   registerPowerHandlers()
   startTimeSceneMonitor()
+  startOutfitRotation({
+    getSettings: () => state.petController!.getSettings(),
+    getRenderers: () => state.petController!.getSettingsSnapshot().character.renderers,
+    apply: (rendererId) => {
+      updateAppSettings({ rendererMode: '3d', rendererId })
+    },
+  })
   scheduleAiTtsWarmup()
+  void startDemoRunner()
 
   if (process.env.DESKPET_OPEN_SETTINGS === '1') {
     setTimeout(() => {

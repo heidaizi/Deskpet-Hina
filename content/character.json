@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "hina-swimsuit",
-  "displayName": "空崎日奈（泳装）",
+  "displayName": "空崎日奈",
   "renderers": [
     {
       "id": "2d-placeholder",
@@ -10,11 +10,25 @@
       "status": "available"
     },
     {
-      "id": "3d-glb",
-      "label": "3D 官方Q版",
+      "id": "hina-swimsuit",
+      "label": "泳装",
       "mode": "3d",
       "status": "available",
-      "assetPath": "assets/characters/hina-swimsuit/private/3d/official/hina-swimsuit-official.glb"
+      "assetPath": "assets/characters/hina-swimsuit/private/3d/official/swimsuit.glb"
+    },
+    {
+      "id": "hina-dress",
+      "label": "礼服",
+      "mode": "3d",
+      "status": "available",
+      "assetPath": "assets/characters/hina-swimsuit/private/3d/official/dress.glb"
+    },
+    {
+      "id": "hina-normal",
+      "label": "常服",
+      "mode": "3d",
+      "status": "available",
+      "assetPath": "assets/characters/hina-swimsuit/private/3d/official/normal.glb"
     }
   ]
 }

@@ -724,6 +724,17 @@ export class GLBPetRenderer implements PetRenderer {
       }
       const materials = Array.isArray(object.material) ? object.material : [object.material]
       const refinedMaterials = materials.map((material) => {
+        // 先对原材质着色，兼容 Standard / Basic / Physical 等类型。
+        const colorMaterial = material as THREE.Material & { color?: THREE.Color }
+        if (colorMaterial.color instanceof THREE.Color) {
+          if (/Face/i.test(material.name)) {
+            colorMaterial.color.multiply(new THREE.Color(0xffd8c4))
+          } else if (/Body/i.test(material.name)) {
+            colorMaterial.color.multiply(new THREE.Color(0xffdfcf))
+          } else if (/Hair/i.test(material.name)) {
+            colorMaterial.color.multiply(new THREE.Color(0xfff9ff))
+          }
+        }
         if (!(material instanceof THREE.MeshStandardMaterial)) {
           return material
         }
@@ -750,13 +761,6 @@ export class GLBPetRenderer implements PetRenderer {
                 side: THREE.DoubleSide,
               })
         refined.color.copy(material.color)
-        if (material.name === 'CH0063_Face') {
-          refined.color.multiply(new THREE.Color(0xffd9d2))
-        } else if (material.name === 'CH0063_Body') {
-          refined.color.multiply(new THREE.Color(0xffe9e2))
-        } else if (material.name === 'CH0063_Hair') {
-          refined.color.multiply(new THREE.Color(0xfff9ff))
-        }
         refined.userData.outlineParameters = {
           visible: !isPlanarFaceLayer,
           thickness: isHalo ? 0.0025 : 0.002,

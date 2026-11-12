@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>Deskpet Hina — Title Card</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+      body {
+        font-family:
+          'Hiragino Sans',
+          'PingFang SC',
+          -apple-system,
+          sans-serif;
+        color: #f7f4ff;
+        background:
+          radial-gradient(1200px 700px at 78% 18%, rgba(139, 92, 246, 0.35), transparent 60%),
+          radial-gradient(900px 600px at 18% 82%, rgba(56, 189, 248, 0.28), transparent 60%),
+          linear-gradient(135deg, #0b1020 0%, #141a33 48%, #1d1636 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 120px 140px;
+        overflow: hidden;
+      }
+      .kicker {
+        letter-spacing: 0.42em;
+        font-size: 22px;
+        color: #a5b4fc;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: 132px;
+        line-height: 1.05;
+        margin: 28px 0 10px;
+        font-weight: 700;
+      }
+      .sub {
+        font-size: 34px;
+        color: #c7d2fe;
+        margin-bottom: 56px;
+      }
+      .badges {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 72px;
+      }
+      .badge {
+        padding: 14px 26px;
+        border-radius: 999px;
+        font-size: 24px;
+        border: 1px solid rgba(165, 180, 252, 0.35);
+        background: rgba(99, 102, 241, 0.12);
+      }
+      .url {
+        font-size: 34px;
+        color: #93c5fd;
+        letter-spacing: 0.03em;
+      }
+      .note {
+        margin-top: 26px;
+        font-size: 22px;
+        color: #94a3b8;
+      }
+      .halo {
+        position: absolute;
+        right: 150px;
+        top: 50%;
+        width: 520px;
+        height: 520px;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        border: 10px solid rgba(196, 181, 253, 0.5);
+        box-shadow:
+          0 0 120px rgba(139, 92, 246, 0.45),
+          inset 0 0 80px rgba(56, 189, 248, 0.25);
+      }
+      .halo::after {
+        content: '';
+        position: absolute;
+        inset: 42px;
+        border-radius: 50%;
+        border: 2px dashed rgba(196, 181, 253, 0.35);
+      }
+      .content {
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="halo"></div>
+    <div class="content">
+      <div class="kicker">Unofficial Fan Project</div>
+      <h1>空崎ヒナ</h1>
+      <div class="sub">Hina · Desktop Companion for macOS</div>
+      <div class="badges">
+        <span class="badge">Electron</span>
+        <span class="badge">3D / VRM</span>
+        <span class="badge">Local TTS</span>
+        <span class="badge">Long-term Memory</span>
+        <span class="badge">Screen Awareness</span>
+      </div>
+      <div class="url">github.com/heidaizi/Deskpet-Hina</div>
+      <div class="note">非官方同人作品 · 仅限个人非商业使用 · 2D 形象为演示占位</div>
+    </div>
+  </body>
+</html>

@@ -80,7 +80,7 @@ test('M5.4 creates, lists, deletes and clears structured episodic memories', asy
     await expect(settingsPage.locator('#memory-list')).toContainText('持续专注')
     await expect(settingsPage.locator('#memory-list')).toContainText('好感等级 4')
 
-    await openSettingsTab(settingsPage, 'relationship')
+    await openSettingsTab(settingsPage, 'memory')
     await settingsPage.locator('.memory-delete').first().click()
     await expect(settingsPage.locator('#memory-count')).toHaveText('1')
 

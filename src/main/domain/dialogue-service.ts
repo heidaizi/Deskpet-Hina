@@ -3,6 +3,10 @@ import { getOfficialVoiceLine } from '../../shared/official-voices'
 import type { TimeSceneContext } from '../../shared/time-scene'
 import type { BehaviorBundle, DialogueEntry, PetState } from './types'
 
+export function isEntryAllowedForOutfit(entry: DialogueEntry, outfitId: string): boolean {
+  return !entry.outfits || entry.outfits.includes(outfitId)
+}
+
 export interface DialogueSelection {
   state: PetState
   dialogue: string
@@ -33,12 +37,16 @@ export class DialogueService {
   constructor(
     private readonly bundle: BehaviorBundle,
     private readonly random: () => number = Math.random,
+    private readonly getOutfitId: () => string = () => '',
   ) {}
 
   select(poolId: string, state: PetState, timeScene?: TimeSceneContext): DialogueSelection {
     const pool = this.bundle.dialogues.pools[poolId]
-    const eligible = (pool?.entries ?? []).filter((entry) =>
-      matchesConditions(state, entry.conditions, { timeScene }),
+    const outfitId = this.getOutfitId() || 'hina-swimsuit'
+    const eligible = (pool?.entries ?? []).filter(
+      (entry) =>
+        isEntryAllowedForOutfit(entry, outfitId) &&
+        matchesConditions(state, entry.conditions, { timeScene }),
     )
     if (eligible.length === 0) {
       return {
@@ -66,7 +74,7 @@ export class DialogueService {
       state: nextState,
       dialogue: selected.text,
       dialogueId: selected.id,
-      voice: getOfficialVoiceLine(selected.source?.clip)?.path,
+      voice: getOfficialVoiceLine(selected.source?.clip, this.getOutfitId())?.path,
     }
   }
 }

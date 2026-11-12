@@ -34,6 +34,7 @@ describe('official voice catalog', () => {
         {
           entries: Array<{
             text: string
+            outfits?: string[]
             source?: { clip: string; japanese: string }
           }>
         }
@@ -51,7 +52,12 @@ describe('official voice catalog', () => {
     const transcripts = new Map(training.entries.map((entry) => [entry.clip, entry.text]))
     const sourced = Object.values(dialogues.pools)
       .flatMap((pool) => pool.entries)
-      .filter((entry) => entry.source && transcripts.has(entry.source.clip))
+      .filter(
+        (entry) =>
+          entry.source &&
+          transcripts.has(entry.source.clip) &&
+          (!entry.outfits || entry.outfits.includes('hina-swimsuit')),
+      )
 
     expect(sourced.length).toBeGreaterThanOrEqual(13)
     for (const entry of sourced) {

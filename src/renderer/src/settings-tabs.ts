@@ -1,7 +1,14 @@
-export type SettingsTabName = 'appearance' | 'relationship' | 'behavior' | 'ai' | 'data'
+export type SettingsTabName = 'appearance' | 'relationship' | 'memory' | 'behavior' | 'ai' | 'data'
 
 const STORAGE_KEY = 'deskpet.settings.tab'
-const TAB_NAMES: SettingsTabName[] = ['appearance', 'relationship', 'behavior', 'ai', 'data']
+const TAB_NAMES: SettingsTabName[] = [
+  'appearance',
+  'relationship',
+  'memory',
+  'behavior',
+  'ai',
+  'data',
+]
 
 let activeTab: SettingsTabName = 'appearance'
 
