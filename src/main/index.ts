@@ -5,7 +5,6 @@ import { state } from './app-state'
 import { ensureAivisEngine, stopAivisEngine } from './domain/aivis-engine'
 import { startAivisHealthMonitor } from './domain/aivis-health'
 import { startScreenVisionLoop } from './perception/screen-vision'
-import { startDemoRunner } from './demo/demo-runner'
 import { startOutfitRotation } from './domain/outfit-rotation'
 import { cancelAutonomousWalk, startAutonomousBehavior } from './behavior/autonomous'
 import { IS_E2E } from './config'
@@ -215,7 +214,6 @@ async function startApplication(): Promise<void> {
     },
   })
   scheduleAiTtsWarmup()
-  void startDemoRunner()
 
   if (process.env.DESKPET_OPEN_SETTINGS === '1') {
     setTimeout(() => {

@@ -31,7 +31,6 @@ opt-in screen awareness and three switchable outfits.
   `deepseek-flash`, now-playing music, calendar and reminders.
 - Proactive behaviour with "manners": quiet hours, focus detection,
   ignored-streak backoff, hourly greeting.
-- **Demo mode** for recording (`DESKPET_DEMO=1`) plus storyboard and title card.
 
 ## Requirements
 
@@ -91,7 +90,6 @@ src/preload     IPC bridge
 src/renderer    Pet window / chat / settings UI
 src/shared      Types shared by main and renderer
 content         Dialogue, affection, glossary, prebuilt TTS manifests
-demo            Demo-mode script, storyboard and title card
 scripts         Build, packaging and voice-training helpers
 docs            Setup, architecture, perception, voice and dev guides
 ```
@@ -141,7 +139,6 @@ artwork and third-party components: see [NOTICE.md](NOTICE.md).
 - 可选感知：浏览器页面、屏幕截图（`deepseek-flash` 视觉）、
   正在播放的音乐、日历与提醒；
 - 有分寸的主动性：深夜静默、专注检测、连续被忽略后退让、每小时问候；
-- **演示模式**（`DESKPET_DEMO=1`）与分镜、标题卡，方便录制介绍视频。
 
 ## 环境要求
 
@@ -195,7 +192,6 @@ src/preload     IPC 桥接
 src/renderer    桌宠 / 聊天 / 设置界面
 src/shared      主进程与渲染进程共享类型
 content         对话、好感度、术语表、预生成语音清单
-demo            演示脚本、分镜与标题卡
 scripts         构建、打包、语音训练脚本
 docs            部署、架构、感知、语音与开发文档
 ```

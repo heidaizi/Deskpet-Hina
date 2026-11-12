@@ -76,7 +76,6 @@ mkdir -p \
   "$APP_RESOURCES/scripts"
 ditto "$PROJECT_ROOT/out" "$APP_RESOURCES/out"
 ditto "$PROJECT_ROOT/content" "$APP_RESOURCES/content"
-ditto "$PROJECT_ROOT/demo" "$APP_RESOURCES/demo"
 ditto \
   "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/3d/official" \
   "$APP_RESOURCES/assets/characters/hina-swimsuit/private/3d/official"

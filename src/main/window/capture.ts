@@ -11,10 +11,6 @@ export function excludeFromScreenCapture(window: BrowserWindow): void {
   if (process.platform !== 'darwin') {
     return
   }
-  // 演示模式：允许录屏看到对话窗/设置窗。
-  if (process.env.DESKPET_DEMO === '1' || process.env.DESKPET_DEMO_CAPTURE === '1') {
-    return
-  }
   const apply = (): void => {
     if (window.isDestroyed()) {
       return
