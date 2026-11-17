@@ -84,6 +84,11 @@ if [[ -d "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/official-d
     "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/official-denoise45" \
     "$APP_RESOURCES/assets/characters/hina-swimsuit/private/audio/official-denoise45"
 fi
+if [[ -d "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/stickers" ]]; then
+  ditto \
+    "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/stickers" \
+    "$APP_RESOURCES/assets/characters/hina-swimsuit/private/stickers"
+fi
 if [[ -d "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/outfit" ]]; then
   ditto \
     "$PROJECT_ROOT/assets/characters/hina-swimsuit/private/audio/outfit" \

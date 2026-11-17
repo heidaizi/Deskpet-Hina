@@ -393,6 +393,62 @@
       "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/outfit-line-8.wav",
       "durationSeconds": 0,
       "sha256": "52019c387e3fd0191b4f34f1b89b513c5b98c5af14d0ca49760dacf47b11e2d9"
+    },
+    {
+      "text": "……喝点水吧。别又忘了。",
+      "japanese": "……水、飲んで。また忘れてるでしょ。",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/routine-water.wav",
+      "durationSeconds": 0,
+      "sha256": "4fd8bc4635c99d01be11cb83323fc3106d3d6462dd43ee995f9271208b8e6320"
+    },
+    {
+      "text": "好，开始吧。二十五分钟，我帮你看着。",
+      "japanese": "わかった。始めましょう。25分、見てるから。",
+      "emotion": "neutral",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/routine-pomodoroStart.wav",
+      "durationSeconds": 0,
+      "sha256": "0d23636693f33c8de2bb3df065d0a4d8eacb9cbd63cb1067941487eba917edc6"
+    },
+    {
+      "text": "时间到了。起来走一走，休息五分钟。",
+      "japanese": "時間よ。少し歩いて、5分休んで。",
+      "emotion": "stern",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/routine-pomodoroEnd.wav",
+      "durationSeconds": 0,
+      "sha256": "22269918ed0ab0e1feff5d8fe17796e39bd2dba72e40383d10d2a12140698613"
+    },
+    {
+      "text": "休息结束。……要继续吗？",
+      "japanese": "休憩おわり。……続ける？",
+      "emotion": "neutral",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/routine-breakEnd.wav",
+      "durationSeconds": 0,
+      "sha256": "add33081f4566fdae6ac04b540ace41a0be974fc272c8f01cd0b80d690e66465"
+    },
+    {
+      "text": "差不多该睡了，老师。明天还有事吧？",
+      "japanese": "そろそろ寝て、先生。明日もあるでしょ？",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/routine-sleep.wav",
+      "durationSeconds": 0,
+      "sha256": "5fffaae6bd5eb597bd7347b9472db1bbfa5ad08ece5a967339976297c4b06595"
+    },
+    {
+      "text": "老师，日程快开始了。",
+      "japanese": "先生、予定の時間が近いよ。",
+      "emotion": "stern",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/routine-eventSoon.wav",
+      "durationSeconds": 0,
+      "sha256": "76f6bd16da3bbaf1454e407ce761c8e248d974a4821921b1c214f07a9e9cf280"
+    },
+    {
+      "text": "老师，往年的今天……我们说过一些话。还记得吗？",
+      "japanese": "先生、一年前の今日のこと、覚えてる？",
+      "emotion": "soft",
+      "path": "assets/characters/hina-swimsuit/private/audio/generated-dialogue/routine-onThisDay.wav",
+      "durationSeconds": 0,
+      "sha256": "d3245c0acd279b44cf702e581b76f5a1ef2b7d3c2ecbeb2354f8fd7c228a81a3"
     }
   ]
 }

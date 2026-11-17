@@ -136,6 +136,16 @@ export function isSettingsPatch(
     if (key === 'modelScale') {
       return typeof field === 'number' && field >= MODEL_SCALE_MIN && field <= MODEL_SCALE_MAX
     }
+    if (
+      key === 'waterReminderEnabled' ||
+      key === 'sleepReminderEnabled' ||
+      key === 'calendarReminderEnabled'
+    ) {
+      return typeof field === 'boolean'
+    }
+    if (key === 'sleepTime') {
+      return typeof field === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(field)
+    }
     if (key === 'presenceIntensity') {
       return field === 'quiet' || field === 'balanced' || field === 'lively'
     }

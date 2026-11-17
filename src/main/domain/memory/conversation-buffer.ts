@@ -18,6 +18,7 @@ export interface ConversationTurn {
   role: ConversationRole
   text: string
   emotion?: string
+  stickerId?: string
   /** chat 用于对话窗口；context 用于“分析/解释选中文字”。 */
   channel?: 'chat' | 'context'
 }
@@ -99,7 +100,7 @@ export class ConversationBuffer {
   append(
     role: ConversationRole,
     text: string,
-    options: { emotion?: string; channel?: 'chat' | 'context' } = {},
+    options: { emotion?: string; stickerId?: string; channel?: 'chat' | 'context' } = {},
   ): void {
     const content = truncate(text, MAX_STORED_CHARS)
     if (!content) {
@@ -111,6 +112,7 @@ export class ConversationBuffer {
       role,
       text: content,
       ...(options.emotion ? { emotion: options.emotion } : {}),
+      ...(options.stickerId ? { stickerId: options.stickerId } : {}),
       channel: options.channel ?? 'context',
     })
     if (this.turns.length > MAX_STORED_TURNS) {

@@ -6,6 +6,16 @@ import { ensureAivisEngine, stopAivisEngine } from './domain/aivis-engine'
 import { startAivisHealthMonitor } from './domain/aivis-health'
 import { startScreenVisionLoop } from './perception/screen-vision'
 import { startOutfitRotation } from './domain/outfit-rotation'
+import { startWorldStateService, stopWorldStateService } from './domain/world-state-service'
+import { RoutineService } from './domain/routine-service'
+import { findOnThisDay } from './domain/memory/on-this-day'
+import { getSchedule } from './perception/life-context'
+import { sendRendererCommand } from './renderer/commands'
+import {
+  configureExpressionQueue,
+  enqueueExpression,
+  EXPRESSION_PRIORITY,
+} from './expression/expression-queue'
 import { cancelAutonomousWalk, startAutonomousBehavior } from './behavior/autonomous'
 import { IS_E2E } from './config'
 import { configureProxyFromSystem } from './net/proxy'
@@ -37,6 +47,7 @@ process.on('unhandledRejection', (reason) => {
   console.error('Unhandled rejection in main process:', reason)
 })
 
+configureExpressionQueue(sendRendererCommand)
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
 app.setName('Deskpet')
 if (IS_E2E) {
@@ -141,6 +152,8 @@ if (!hasSingleInstanceLock) {
     state.localTtsService?.stop()
     stopAivisEngine()
     stopAivisHealth?.()
+    state.routineService?.stop()
+    stopWorldStateService()
     stopAivisHealth = null
   })
 
@@ -206,6 +219,7 @@ async function startApplication(): Promise<void> {
   startAutonomousBehavior()
   registerPowerHandlers()
   startTimeSceneMonitor()
+  startWorldStateService()
   startOutfitRotation({
     getSettings: () => state.petController!.getSettings(),
     getRenderers: () => state.petController!.getSettingsSnapshot().character.renderers,
@@ -213,6 +227,66 @@ async function startApplication(): Promise<void> {
       updateAppSettings({ rendererMode: '3d', rendererId })
     },
   })
+  state.routineService = new RoutineService({
+    contentDir: join(app.getAppPath(), 'content'),
+    userDataDir: app.getPath('userData'),
+    getSettings: () => {
+      const settings = state.petController!.getSettings()
+      return {
+        waterReminderEnabled: settings.waterReminderEnabled,
+        calendarReminderEnabled: settings.calendarReminderEnabled,
+        sleepReminderEnabled: settings.sleepReminderEnabled,
+        sleepTime: settings.sleepTime,
+      }
+    },
+    getSchedule: () => getSchedule(),
+    onEvent: (event) => {
+      state.memoryEvents?.record({
+        kind: 'routine',
+        summary: event.summary,
+        importance: event.importance,
+      })
+    },
+    getOnThisDay: async () => {
+      const memories = [
+        ...(state.longTermMemory?.list() ?? []).map((entry) => ({
+          text: entry.text,
+          at: entry.createdAt,
+        })),
+        ...(state.presenceMemoryStore?.load().memories ?? []).map((memory) => ({
+          text: memory.summary,
+          at: memory.updatedAt,
+        })),
+        ...(state.memoryEvents?.list(500) ?? []).map((event) => ({
+          text: event.summary,
+          at: event.at,
+        })),
+      ]
+      return findOnThisDay(memories)?.text ?? null
+    },
+    isAvailable: () =>
+      !state.systemPowerState.suspended && !state.systemPowerState.screenLocked && state.petVisible,
+    deliver: (line) => {
+      enqueueExpression({
+        source: 'routine',
+        priority: EXPRESSION_PRIORITY.routine,
+        ttlMs: 120_000,
+        segments: [
+          {
+            command: {
+              action: 'idle',
+              expression: line.expression,
+              dialogue: line.zh,
+              spokenText: line.ja,
+              ttsEmotion: line.emotion,
+              speakDialogue: true,
+            },
+          },
+        ],
+      })
+    },
+  })
+  state.routineService.start()
   scheduleAiTtsWarmup()
 
   if (process.env.DESKPET_OPEN_SETTINGS === '1') {

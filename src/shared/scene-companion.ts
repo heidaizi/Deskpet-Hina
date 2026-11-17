@@ -16,6 +16,8 @@ export interface SceneCompanionContext {
   suspended: boolean
   systemIdleSeconds: number
   randomVoiceEnabled: boolean
+  outfitId?: string
+  focusActive?: boolean
 }
 
 export interface SceneCompanionSelection {
@@ -44,6 +46,7 @@ interface PerformanceOptions {
   restRecovery?: boolean
   voicePath?: string
   voiceClip?: string
+  outfits?: readonly string[]
   modelClip?: string
 }
 
@@ -194,6 +197,7 @@ const IDLE_PERFORMANCES: readonly IdlePerformance[] = [
   officialPerformance('official-swimsuit', 'Cafe_monolog_1', {
     scenes: ['browser', 'media', 'desktop', 'other'],
     minAffection: 2,
+    outfits: ['hina-swimsuit'],
   }),
   officialPerformance('official-tired', 'Cafe_monolog_2', {
     maxEnergy: 55,
@@ -221,6 +225,7 @@ const IDLE_PERFORMANCES: readonly IdlePerformance[] = [
   officialPerformance('official-summer-camp', 'EventLobby_3', {
     scenes: ['browser', 'desktop', 'other'],
     minAffection: 3,
+    outfits: ['hina-swimsuit'],
   }),
   officialPerformance('official-together', 'Relationship_Up_1', {
     minAffection: 6,
@@ -342,6 +347,7 @@ function matchesContext(entry: IdlePerformance, context: SceneCompanionContext):
     (entry.minMood === undefined || context.mood >= entry.minMood) &&
     (entry.maxMood === undefined || context.mood <= entry.maxMood) &&
     (entry.minAffection === undefined || context.affectionLevel >= entry.minAffection) &&
+    (!entry.outfits || !context.outfitId || entry.outfits.includes(context.outfitId)) &&
     (entry.minSystemIdleSeconds === undefined ||
       context.systemIdleSeconds >= entry.minSystemIdleSeconds) &&
     (entry.maxSystemIdleSeconds === undefined ||
@@ -387,6 +393,7 @@ function isEligible(context: SceneCompanionContext): boolean {
     !context.suspended &&
     context.randomVoiceEnabled &&
     context.scene !== 'system' &&
-    context.scene !== 'unknown'
+    context.scene !== 'unknown' &&
+    !context.focusActive
   )
 }

@@ -50,6 +50,12 @@ export interface AiContextInput {
   isWeekend: boolean
   windowTitle?: string
   selectedText?: string
+  world?: {
+    outfit?: string
+    emotion?: string
+    relationship?: string
+    pomodoroMinutesLeft?: number | null
+  }
 }
 
 export interface AiContextPreview {
@@ -64,12 +70,19 @@ export interface AiContextPreview {
   windowTitleCharacters: number
 }
 
+export interface AiReplyPart {
+  reply_zh: string
+  reply_ja: string
+}
+
 export interface AiPetReply {
   reply_zh: string
   reply_ja: string
   emotion: AiEmotion
   action: AiAction
   confidence: number
+  /** 需要继续说下去时的后续消息（讲故事、被追问细节等）。 */
+  followups?: AiReplyPart[]
 }
 
 export interface AiProactiveMemory {
@@ -99,6 +112,12 @@ export interface AiProactiveContext {
     tags: string[]
   }
   memories: AiProactiveMemory[]
+  world?: {
+    outfit?: string
+    focusMinutesLeft?: number | null
+    emotion?: string
+    nextEvent?: string
+  }
 }
 
 export interface AiProactivePlan {

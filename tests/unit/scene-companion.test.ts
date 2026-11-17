@@ -28,6 +28,12 @@ function context(overrides: Partial<SceneCompanionContext> = {}): SceneCompanion
 }
 
 describe('scene companion', () => {
+  it('stays silent while the pomodoro focus timer is running', () => {
+    const companion = new SceneCompanion(() => 0, { stableMs: 0, cooldownMs: 0 })
+    expect(companion.observe(context({ focusActive: true, now: 1_000 }))).toBeNull()
+    expect(companion.observe(context({ focusActive: true, now: 30_000 }))).toBeNull()
+  })
+
   it('requires a stable scene and then observes cooldown', () => {
     const companion = new SceneCompanion(() => 0, {
       stableMs: 20_000,

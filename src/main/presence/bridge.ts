@@ -40,6 +40,8 @@ import { DeepSeekApiError, DeepSeekClient } from '../domain/deepseek-client'
 import { createScenePerformanceCandidate } from './presence-rules'
 import { deriveEmotionSeed } from '../domain/local-tts-service'
 import { sendRendererCommand } from '../renderer/commands'
+import { getWorldState } from '../domain/world-state-service'
+import { enqueueExpression, EXPRESSION_PRIORITY } from '../expression/expression-queue'
 export function initializePresenceController(): void {
   if (!IS_E2E) {
     startScreenContextPolling()
@@ -103,6 +105,7 @@ export function initializePresenceController(): void {
     lateNightStableMs: readPositiveNumberEnv('DESKPET_PRESENCE_LATE_NIGHT_STABLE_MS'),
     idleMicroMs: readPositiveNumberEnv('DESKPET_PRESENCE_IDLE_MICRO_MS'),
     restEnergy: readPositiveNumberEnv('DESKPET_PRESENCE_REST_ENERGY'),
+    getWorld: () => currentPresenceWorld(),
     getRuntime: () => {
       const snapshot = state.petController?.getSettingsSnapshot()
       return {
@@ -140,6 +143,10 @@ export function initializePresenceController(): void {
         focusPressure,
       })
       if (manners.suppress) {
+        return { score: -1, threshold: 1 }
+      }
+      // 番茄钟专注期间不主动开口；只保留纯动作演出。
+      if (context.world?.focusActive && candidate.speech !== 'none') {
         return { score: -1, threshold: 1 }
       }
       if (state.petController?.getSettings().intelligenceLevel !== 'adaptive') {
@@ -252,10 +259,21 @@ export async function planProactivePresenceWithDeepSeek(
   }
   try {
     // 把当前页面作为背景带进主动规划，让她能就内容提问或发表看法。
+    const world = getWorldState()
+    const nextEvent = world.schedule.find(
+      (item) => item.kind === 'event' && item.minutesUntil !== undefined,
+    )
+    const worldContext = {
+      ...(world.outfit.label ? { outfit: world.outfit.label } : {}),
+      ...(world.emotion ? { emotion: world.emotion.label } : {}),
+      ...(nextEvent ? { nextEvent: nextEvent.title } : {}),
+      focusMinutesLeft: world.routine.pomodoroMinutesLeft,
+    }
     const screen = await collectScreenContextFast()
     const context = screen
       ? {
           ...request.context,
+          world: worldContext,
           localTrigger: {
             ...request.context.localTrigger,
             reason: `${request.context.localTrigger.reason}；老师正在看「${screen.title ?? screen.app}」`,
@@ -270,7 +288,7 @@ export async function planProactivePresenceWithDeepSeek(
             ...request.context.memories,
           ].slice(0, 8),
         }
-      : request.context
+      : { ...request.context, world: worldContext }
     const plan = await new DeepSeekClient({ apiKey: key }).planProactiveReply(context, {
       signal: request.signal,
       timeoutMs: 8_000,
@@ -350,6 +368,44 @@ export async function planE2EProactivePresence(
   return null
 }
 
+function currentPresenceWorld(): {
+  outfitId: string
+  outfitLabel: string
+  focusActive: boolean
+  focusMinutesLeft: number | null
+  emotionLabel?: string
+  fatigue?: number
+  patience?: number
+  nextEventTitle?: string
+  nextEventMinutes?: number
+  mediaTitle?: string
+} {
+  const world = getWorldState()
+  const nextEvent = world.schedule.find(
+    (item) => item.kind === 'event' && item.minutesUntil !== undefined,
+  )
+  return {
+    outfitId: world.outfit.id,
+    outfitLabel: world.outfit.label,
+    focusActive: world.routine.pomodoroPhase === 'work',
+    focusMinutesLeft: world.routine.pomodoroMinutesLeft,
+    ...(world.emotion
+      ? {
+          emotionLabel: world.emotion.label,
+          fatigue: world.emotion.fatigue,
+          patience: world.emotion.patience,
+        }
+      : {}),
+    ...(nextEvent
+      ? {
+          nextEventTitle: nextEvent.title,
+          nextEventMinutes: nextEvent.minutesUntil,
+        }
+      : {}),
+    ...(world.media ? { mediaTitle: `${world.media.title} — ${world.media.artist}` } : {}),
+  }
+}
+
 export function getPresenceScenePerformance(context: PresenceContextV1): PresenceCandidate | null {
   if (!context.runtime.randomVoiceEnabled || !state.sceneCompanion) {
     return null
@@ -368,6 +424,8 @@ export function getPresenceScenePerformance(context: PresenceContextV1): Presenc
     suspended: context.scene.suspended,
     systemIdleSeconds: context.scene.systemIdleSeconds,
     randomVoiceEnabled: context.runtime.randomVoiceEnabled,
+    outfitId: context.world?.outfitId,
+    focusActive: context.world?.focusActive ?? false,
   })
   return selection ? createScenePerformanceCandidate(selection) : null
 }
@@ -403,6 +461,13 @@ export function handlePresenceDelivery(delivery: PresenceDelivery): void {
         delivery.relationship ?? undefined,
       )
     : null
+  const worldForVoice = getWorldState()
+  const voiceScale =
+    worldForVoice.routine.pomodoroPhase === 'work'
+      ? 0.98
+      : (worldForVoice.emotion?.fatigue ?? 0) >= 75
+        ? 1.04
+        : 1
   const ttsSeed =
     candidate.ttsSeed ??
     (voiceStyle && (candidate.dialogue || candidate.spokenText)
@@ -413,8 +478,8 @@ export function handlePresenceDelivery(delivery: PresenceDelivery): void {
           voiceStyle.activationBucket,
         )
       : undefined)
-  sendRendererCommand({
-    action: candidate.action ?? 'idle',
+  const command = {
+    action: candidate.action ?? ('idle' as const),
     deliveryId: delivery.deliveryId ?? undefined,
     performanceToken: delivery.performanceToken,
     modelClip: candidate.modelClip,
@@ -425,13 +490,34 @@ export function handlePresenceDelivery(delivery: PresenceDelivery): void {
     spokenText: candidate.spokenText,
     ttsEmotion,
     ttsSeed,
-    ttsDurationScale: voiceStyle?.durationScale,
+    ttsDurationScale: voiceStyle ? voiceStyle.durationScale * voiceScale : undefined,
     speakDialogue: candidate.speech !== 'none',
-    bodyPolicy: candidate.bodyPolicy === 'replace' ? 'replace' : 'overlay',
+    bodyPolicy: candidate.bodyPolicy === 'replace' ? ('replace' as const) : ('overlay' as const),
     microMotion: candidate.microMotion,
     idlePerformance: candidate.speech === 'none' && candidate.tags.includes('scene_comment'),
-    activityClass: 'ambient',
-  })
+    activityClass: 'ambient' as const,
+  }
+  const hasSpeech =
+    command.speakDialogue &&
+    Boolean(command.voice || command.dialogue?.trim() || command.spokenText?.trim())
+  if (hasSpeech) {
+    const summary = command.dialogue ?? command.spokenText
+    if (summary) {
+      state.memoryEvents?.record({
+        kind: 'presence',
+        summary,
+        importance: 2,
+      })
+    }
+    enqueueExpression({
+      source: 'presence',
+      priority: EXPRESSION_PRIORITY.presence,
+      ttlMs: 120_000,
+      segments: [{ command }],
+    })
+  } else {
+    sendRendererCommand(command)
+  }
   // 只登记占用，不拦截投递；Presence 的准入仍由自身仲裁器负责。
   observeDecision({
     source: 'presence',

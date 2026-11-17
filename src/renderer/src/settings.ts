@@ -18,8 +18,10 @@ import { resolveRelationshipStage } from '@shared/relationship'
 import { describeScreenPerception } from '@shared/screen-perception'
 import { PERMISSION_STATE_LABELS, type PermissionSnapshot } from '@shared/permissions'
 import {
+  MEMORY_EVENT_KIND_LABELS,
   PROFILE_CATEGORY_LABELS,
   type LongTermMemoryView,
+  type MemoryEventView,
   type ProfileCategory,
   type ProfileFactView,
 } from '@shared/memory'
@@ -49,6 +51,13 @@ const emotionSocialProgress = requireElement<HTMLElement>('#emotion-social-progr
 const memoryCount = requireElement<HTMLElement>('#memory-count')
 const memoryList = requireElement<HTMLElement>('#memory-list')
 const memoryStatus = requireElement<HTMLElement>('#memory-status')
+const albumDays = requireElement<HTMLElement>('#album-days')
+const albumStats = requireElement<HTMLElement>('#album-stats')
+const albumWeek = requireElement<HTMLElement>('#album-week')
+const albumOnThisDay = requireElement<HTMLElement>('#album-onthisday')
+const albumOnThisDayBlock = requireElement<HTMLElement>('#album-onthisday-block')
+const albumTimeline = requireElement<HTMLElement>('#album-timeline')
+const albumStatus = requireElement<HTMLElement>('#album-status')
 const clearMemory = requireElement<HTMLButtonElement>('#clear-memory')
 const profileCount = requireElement<HTMLElement>('#profile-count')
 const profileList = requireElement<HTMLElement>('#profile-list')
@@ -77,6 +86,7 @@ const memoryEditorSave = requireElement<HTMLButtonElement>('#memory-editor-save'
 const memoryEditorCancel = requireElement<HTMLButtonElement>('#memory-editor-cancel')
 const pauseInteractions = requireElement<HTMLInputElement>('#pause-interactions')
 const randomVoiceEnabled = requireElement<HTMLInputElement>('#random-voice-enabled')
+const autoStickerEnabled = requireElement<HTMLInputElement>('#auto-sticker-enabled')
 const localTtsEnabled = requireElement<HTMLInputElement>('#local-tts-enabled')
 const presenceEmotionEnabled = requireElement<HTMLInputElement>('#presence-emotion-enabled')
 const presenceMemoryEnabled = requireElement<HTMLInputElement>('#presence-memory-enabled')
@@ -130,6 +140,10 @@ const cancelAiContext = requireElement<HTMLButtonElement>('#cancel-ai-context')
 const modelScale = requireElement<HTMLInputElement>('#model-scale')
 const outfitRotationEnabled = requireElement<HTMLInputElement>('#outfit-rotation-enabled')
 const outfitRotationDays = requireElement<HTMLSelectElement>('#outfit-rotation-days')
+const waterReminderEnabled = requireElement<HTMLInputElement>('#water-reminder-enabled')
+const calendarReminderEnabled = requireElement<HTMLInputElement>('#calendar-reminder-enabled')
+const sleepReminderEnabled = requireElement<HTMLInputElement>('#sleep-reminder-enabled')
+const sleepTime = requireElement<HTMLInputElement>('#sleep-time')
 const modelScaleValue = requireElement<HTMLOutputElement>('#model-scale-value')
 const modelAction = requireElement<HTMLSelectElement>('#model-action')
 const previewModelAction = requireElement<HTMLButtonElement>('#preview-model-action')
@@ -222,6 +236,10 @@ document.body.dataset.ready = 'true'
 
 pauseInteractions.addEventListener('change', () => {
   void updateSettings({ interactionsPaused: pauseInteractions.checked })
+})
+
+autoStickerEnabled.addEventListener('change', () => {
+  void updateSettings({ autoStickerEnabled: autoStickerEnabled.checked })
 })
 
 randomVoiceEnabled.addEventListener('change', () => {
@@ -598,6 +616,22 @@ outfitRotationEnabled.addEventListener('change', () => {
   void updateSettings({ outfitRotationEnabled: outfitRotationEnabled.checked })
 })
 
+waterReminderEnabled.addEventListener('change', () => {
+  void updateSettings({ waterReminderEnabled: waterReminderEnabled.checked })
+})
+
+calendarReminderEnabled.addEventListener('change', () => {
+  void updateSettings({ calendarReminderEnabled: calendarReminderEnabled.checked })
+})
+
+sleepReminderEnabled.addEventListener('change', () => {
+  void updateSettings({ sleepReminderEnabled: sleepReminderEnabled.checked })
+})
+
+sleepTime.addEventListener('change', () => {
+  void updateSettings({ sleepTime: sleepTime.value })
+})
+
 outfitRotationDays.addEventListener('change', () => {
   void updateSettings({ outfitRotationDays: Number(outfitRotationDays.value) })
 })
@@ -716,6 +750,7 @@ function render(snapshot: SettingsSnapshot): void {
 
   pauseInteractions.checked = snapshot.settings.interactionsPaused
   randomVoiceEnabled.checked = snapshot.settings.randomVoiceEnabled
+  autoStickerEnabled.checked = snapshot.settings.autoStickerEnabled
   localTtsEnabled.checked = snapshot.settings.localTtsEnabled
   presenceEmotionEnabled.checked = snapshot.settings.presenceEmotionEnabled
   presenceMemoryEnabled.checked = snapshot.settings.presenceMemoryEnabled
@@ -740,6 +775,10 @@ function render(snapshot: SettingsSnapshot): void {
   intelligenceLevel.value = snapshot.settings.intelligenceLevel
   ttsQuality.value = snapshot.settings.ttsQuality
   ttsEngine.value = snapshot.settings.ttsEngine
+  waterReminderEnabled.checked = snapshot.settings.waterReminderEnabled
+  calendarReminderEnabled.checked = snapshot.settings.calendarReminderEnabled
+  sleepReminderEnabled.checked = snapshot.settings.sleepReminderEnabled
+  sleepTime.value = snapshot.settings.sleepTime
   outfitRotationEnabled.checked = snapshot.settings.outfitRotationEnabled
   outfitRotationDays.value = String(snapshot.settings.outfitRotationDays)
   outfitRotationDays.disabled = !snapshot.settings.outfitRotationEnabled
@@ -823,6 +862,11 @@ async function updateSettings(
       | 'screenPerceptionEnabled'
       | 'screenPerceptionPaused'
       | 'conversationMemoryEnabled'
+      | 'autoStickerEnabled'
+      | 'waterReminderEnabled'
+      | 'sleepReminderEnabled'
+      | 'sleepTime'
+      | 'calendarReminderEnabled'
       | 'intelligenceLevel'
       | 'ttsQuality'
       | 'ttsEngine'
@@ -983,14 +1027,17 @@ async function refreshMemoryTab(): Promise<void> {
   }
   memoryDataRefreshInFlight = true
   try {
-    const [profile, semantic, longterm] = await Promise.all([
+    const [profile, semantic, longterm, episodic, events] = await Promise.all([
       window.deskpet.listProfileFacts(),
       window.deskpet.listSemanticMemories(),
       window.deskpet.listLongTermMemories(),
+      window.deskpet.listEpisodicMemories(),
+      window.deskpet.listMemoryEvents(),
     ])
     renderProfileFacts(profile)
     renderSemanticMemories(semantic)
     renderLongTermMemories(longterm)
+    renderMemoryAlbum(episodic, longterm, events)
   } catch (error) {
     profileStatus.textContent = '画像读取失败：' + String(error)
     semanticStatus.textContent = '明确记忆读取失败：' + String(error)
@@ -1195,6 +1242,151 @@ async function addSemanticMemoryFromForm(): Promise<void> {
   } finally {
     semanticAdd.disabled = false
   }
+}
+
+interface AlbumItem {
+  id: string
+  text: string
+  at: number
+  kind: string
+  weight: number
+}
+
+function albumDateLabel(at: number): string {
+  const date = new Date(at)
+  const now = new Date()
+  const sameDay =
+    date.getFullYear() === now.getFullYear() &&
+    date.getMonth() === now.getMonth() &&
+    date.getDate() === now.getDate()
+  if (sameDay) {
+    return '今天'
+  }
+  return `${date.getMonth() + 1}月${date.getDate()}日`
+}
+
+function renderMemoryAlbum(
+  episodic: readonly EpisodicMemory[],
+  longterm: readonly LongTermMemoryView[],
+  events: readonly MemoryEventView[],
+): void {
+  const items: AlbumItem[] = [
+    ...episodic.map((memory) => ({
+      id: `episodic-${memory.id}`,
+      text: memory.summary,
+      at: memory.updatedAt,
+      kind: memoryKindLabel(memory.kind),
+      weight: memory.importance,
+    })),
+    ...longterm.map((memory) => ({
+      id: `longterm-${memory.id}`,
+      text: memory.text,
+      at: memory.createdAt,
+      kind: '对话沉淀',
+      weight: Math.min(5, memory.hits + 1),
+    })),
+    ...events.map((event) => ({
+      id: `event-${event.id}`,
+      text: event.summary,
+      at: event.at,
+      kind: MEMORY_EVENT_KIND_LABELS[event.kind],
+      weight: event.importance,
+    })),
+  ].sort((a, b) => b.at - a.at)
+
+  // 事件流与旧的长期/情节记忆会有重叠，按文本去重，保留权重更高的一条。
+  const deduped = new Map<string, AlbumItem>()
+  for (const item of items) {
+    const key = item.text.replace(/\s+/gu, '').slice(0, 80)
+    const existing = deduped.get(key)
+    if (!existing || item.weight > existing.weight || item.at > existing.at) {
+      deduped.set(key, item)
+    }
+  }
+  const uniqueItems = [...deduped.values()].sort((a, b) => b.at - a.at)
+
+  const now = Date.now()
+  const weekAgo = now - 7 * 24 * 60 * 60 * 1000
+  const week = uniqueItems.filter((item) => item.at >= weekAgo)
+
+  if (uniqueItems.length === 0) {
+    albumDays.textContent = '0 天'
+    albumStats.replaceChildren()
+    albumWeek.replaceChildren()
+    albumOnThisDayBlock.hidden = true
+    albumTimeline.replaceChildren()
+    albumStatus.textContent = '还没有回忆。多聊几次，或在专注、深夜陪伴之后再来看看。'
+    return
+  }
+
+  const firstAt = Math.min(...uniqueItems.map((item) => item.at))
+  const days = Math.max(1, Math.floor((now - firstAt) / (24 * 60 * 60 * 1000)) + 1)
+  albumDays.textContent = `${days} 天`
+  albumStats.replaceChildren(
+    ...[
+      '记住 ' + uniqueItems.length + ' 条',
+      '本周 ' + week.length + ' 条',
+      '重要时刻 ' + (episodic.length + events.length) + ' 条',
+    ].map((text) => {
+      const chip = document.createElement('span')
+      chip.className = 'album-stat'
+      chip.textContent = text
+      return chip
+    }),
+  )
+
+  const renderCards = (target: HTMLElement, list: readonly AlbumItem[]): void => {
+    target.replaceChildren(
+      ...list.slice(0, 3).map((item) => {
+        const card = document.createElement('article')
+        card.className = 'album-card'
+        const text = document.createElement('strong')
+        text.textContent = item.text
+        const detail = document.createElement('small')
+        detail.textContent = `${item.kind} · ${albumDateLabel(item.at)}`
+        card.append(text, detail)
+        return card
+      }),
+    )
+  }
+
+  renderCards(
+    albumWeek,
+    [...week].sort((a, b) => b.weight - a.weight || b.at - a.at),
+  )
+  if (week.length === 0) {
+    const empty = document.createElement('p')
+    empty.className = 'resource-note'
+    empty.textContent = '这周还没有新的回忆。'
+    albumWeek.replaceChildren(empty)
+  }
+
+  const today = new Date()
+  const onThisDay = uniqueItems.filter((item) => {
+    const date = new Date(item.at)
+    return (
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate() &&
+      date.getFullYear() !== today.getFullYear()
+    )
+  })
+  albumOnThisDayBlock.hidden = onThisDay.length === 0
+  renderCards(albumOnThisDay, onThisDay)
+
+  albumTimeline.replaceChildren(
+    ...uniqueItems.slice(0, 40).map((item) => {
+      const entry = document.createElement('div')
+      entry.className = 'album-entry'
+      const time = document.createElement('time')
+      time.dateTime = new Date(item.at).toISOString()
+      time.textContent = albumDateLabel(item.at)
+      const text = document.createElement('span')
+      text.textContent = item.text
+      entry.append(time, text)
+      return entry
+    }),
+  )
+  albumStatus.textContent = `已按时间整理 ${uniqueItems.length} 条回忆。`
 }
 
 function renderLongTermMemories(memories: LongTermMemoryView[]): void {

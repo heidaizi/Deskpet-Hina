@@ -274,6 +274,41 @@
       "text": "……揺らさないで。",
       "emotion": "annoyed",
       "durationScale": 0.98
+    },
+    "……喝点水吧。别又忘了。": {
+      "text": "……水、飲んで。また忘れてるでしょ。",
+      "emotion": "soft",
+      "durationScale": 1
+    },
+    "好，开始吧。二十五分钟，我帮你看着。": {
+      "text": "わかった。始めましょう。25分、見てるから。",
+      "emotion": "neutral",
+      "durationScale": 1
+    },
+    "时间到了。起来走一走，休息五分钟。": {
+      "text": "時間よ。少し歩いて、5分休んで。",
+      "emotion": "stern",
+      "durationScale": 1
+    },
+    "休息结束。……要继续吗？": {
+      "text": "休憩おわり。……続ける？",
+      "emotion": "neutral",
+      "durationScale": 1
+    },
+    "差不多该睡了，老师。明天还有事吧？": {
+      "text": "そろそろ寝て、先生。明日もあるでしょ？",
+      "emotion": "soft",
+      "durationScale": 1
+    },
+    "老师，日程快开始了。": {
+      "text": "先生、予定の時間が近いよ。",
+      "emotion": "stern",
+      "durationScale": 1
+    },
+    "老师，往年的今天……我们说过一些话。还记得吗？": {
+      "text": "先生、一年前の今日のこと、覚えてる？",
+      "emotion": "soft",
+      "durationScale": 1
     }
   }
 }

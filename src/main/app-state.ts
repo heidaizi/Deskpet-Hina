@@ -18,6 +18,9 @@ import type { GlossaryEntry } from './domain/glossary'
 import type { LongTermMemory } from './domain/memory/long-term-memory'
 import type { UserProfile } from './domain/memory/user-profile'
 import type { RelationshipState } from './domain/relationship-state'
+import type { RoutineService } from './domain/routine-service'
+import type { StickerService } from './domain/sticker-service'
+import type { MemoryEventStore } from './domain/memory/memory-events'
 import type { ConversationBuffer } from './domain/memory/conversation-buffer'
 import type { FeedbackStore } from './domain/memory/feedback-store'
 import type { SemanticMemoryStore } from './domain/memory/semantic-memory'
@@ -87,6 +90,9 @@ export interface AppState {
   longTermMemory: LongTermMemory | null
   userProfile: UserProfile | null
   relationshipState: RelationshipState | null
+  routineService: RoutineService | null
+  stickerService: StickerService | null
+  memoryEvents: MemoryEventStore | null
   semanticMemory: SemanticMemoryStore | null
   feedbackStore: FeedbackStore | null
   deepSeekKeyStore: DeepSeekKeyStore | null
@@ -147,6 +153,9 @@ export function createAppState(): AppState {
     longTermMemory: null,
     userProfile: null,
     relationshipState: null,
+    routineService: null,
+    stickerService: null,
+    memoryEvents: null,
     semanticMemory: null,
     feedbackStore: null,
     deepSeekKeyStore: null,

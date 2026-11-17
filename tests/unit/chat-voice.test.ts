@@ -37,3 +37,24 @@ describe('relationship-aware voice', () => {
     expect(resolveChatTtsEmotion('annoyed', 4)).toBe('annoyed')
   })
 })
+
+describe('chat voice world state', () => {
+  it('keeps the voice calm during pomodoro focus', async () => {
+    const { resolveChatTtsEmotion } = await import('../../src/shared/chat-voice')
+    expect(resolveChatTtsEmotion('happy', 5, { pomodoroActive: true })).toBe('neutral')
+    expect(resolveChatTtsEmotion('annoyed', 5, { pomodoroActive: true })).toBe('annoyed')
+  })
+
+  it('softens the voice when Hina is very tired', async () => {
+    const { resolveChatTtsEmotion } = await import('../../src/shared/chat-voice')
+    expect(resolveChatTtsEmotion('neutral', 4, { fatigue: 80 })).toBe('soft')
+    expect(resolveChatTtsEmotion('neutral', 1, { fatigue: 80 })).toBe('neutral')
+  })
+
+  it('adjusts speech rate from focus and fatigue', async () => {
+    const { resolveChatTtsDurationScale } = await import('../../src/shared/chat-voice')
+    expect(resolveChatTtsDurationScale('neutral', { fatigue: 80 })).toBe(1.04)
+    expect(resolveChatTtsDurationScale('neutral', { pomodoroActive: true })).toBe(0.98)
+    expect(resolveChatTtsDurationScale('annoyed', { fatigue: 80 })).toBeUndefined()
+  })
+})

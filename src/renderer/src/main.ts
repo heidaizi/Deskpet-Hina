@@ -124,6 +124,10 @@ await switchRenderer({
   ),
 })
 
+window.deskpet.onSticker((sticker) => {
+  showFloatingSticker(sticker.dataUrl, sticker.label)
+})
+
 window.deskpet.onStateChanged((snapshot) => {
   applyModelScale(snapshot.settings.modelScale)
   const wasLocalTtsEnabled = localTtsEnabled
@@ -190,8 +194,12 @@ window.setTimeout(() => {
 }, 500)
 
 /** 播放当前服装的固定场景语音（官方片段 + 专属台词）。 */
-async function playOutfitGreeting(scene: 'login' | 'return'): Promise<void> {
+async function playOutfitGreeting(scene: 'login' | 'return', viaQueue = false): Promise<void> {
   try {
+    if (viaQueue) {
+      await window.deskpet.speakOutfitGreeting(scene)
+      return
+    }
     const greeting = await window.deskpet.getOutfitGreeting(scene)
     if (!greeting) {
       return
@@ -266,7 +274,7 @@ async function switchRenderer(command: RendererModeCommand): Promise<void> {
   if (initialRendererApplied) {
     // 2D 回退时不播放服装问候，避免覆盖失败提示。
     if (resolvedMode === '3d') {
-      void playOutfitGreeting('login')
+      void playOutfitGreeting('login', true)
     }
   } else {
     initialRendererApplied = true
@@ -582,6 +590,7 @@ function applyRendererCommand(command: RendererCommand): void {
   if (!renderer) {
     return
   }
+  trackExpressionDelivery(command.deliveryId)
   const performanceToken = command.performanceToken ?? createPerformanceToken()
   const resolvedCommand: RendererCommand = { ...command, performanceToken }
   if (resolvedCommand.bodyPolicy === 'overlay' && resolvedCommand.microMotion) {
@@ -890,6 +899,10 @@ function interruptActivePerformance(
   const performanceToken = activePerformanceToken
   const microToken = activeMicroToken
   const wasLoopingDrag = activeActionLoop
+  if (reason === 'user') {
+    // 即使动作已经结束、只剩语音，也要记录这次用户打断。
+    document.body.dataset.lastUserPerformanceInterruptedReason = 'user'
+  }
   if (!performanceToken && !microToken) {
     if (!options.keepVoice) {
       stopVoicePlayback(voiceInterruptReason(reason))
@@ -1477,8 +1490,38 @@ function beginVoiceDelivery(deliveryId: string | undefined): void {
   })
 }
 
+const notifiedChatSegments = new Set<string>()
+const interruptedChatSegments = new Set<string>()
+let activeExpressionDeliveryId: string | null = null
+
+function notifyExpressionInterrupted(deliveryId: string): void {
+  if (notifiedChatSegments.has(deliveryId) || interruptedChatSegments.has(deliveryId)) {
+    return
+  }
+  interruptedChatSegments.add(deliveryId)
+  window.deskpet.notifyExpressionInterrupted(deliveryId)
+}
+
+function trackExpressionDelivery(deliveryId: string | undefined): void {
+  const next = deliveryId?.startsWith('expr:') ? deliveryId : null
+  if (activeExpressionDeliveryId && activeExpressionDeliveryId !== next) {
+    notifyExpressionInterrupted(activeExpressionDeliveryId)
+  }
+  activeExpressionDeliveryId = next
+}
+
 function completeVoiceDelivery(deliveryId: string | undefined): void {
   flushVoiceDelivery(deliveryId, 'speech_completed')
+  if (
+    (deliveryId?.startsWith('expr:') || deliveryId?.startsWith('chat:')) &&
+    !notifiedChatSegments.has(deliveryId)
+  ) {
+    notifiedChatSegments.add(deliveryId)
+    if (activeExpressionDeliveryId === deliveryId) {
+      activeExpressionDeliveryId = null
+    }
+    window.deskpet.notifyChatSegmentEnded(deliveryId)
+  }
   if (activePerformanceToken && activeActionLoop && !dragLoopLocked) {
     beginPerformanceRecovery(activePerformanceToken, performanceGeneration)
   }
@@ -1489,6 +1532,10 @@ function interruptVoiceDelivery(
   reason: NonNullable<DeliveryLifecycleEvent['reason']>,
 ): void {
   flushVoiceDelivery(deliveryId, 'speech_interrupted', reason)
+  if (deliveryId?.startsWith('expr:') && activeExpressionDeliveryId === deliveryId) {
+    activeExpressionDeliveryId = null
+    notifyExpressionInterrupted(deliveryId)
+  }
 }
 
 function flushVoiceDelivery(
@@ -1509,6 +1556,50 @@ function flushVoiceDelivery(
 
 function reportDelivery(event: DeliveryLifecycleEvent): void {
   window.deskpet.reportDeliveryEvent(event)
+}
+
+let stickerHideTimer: ReturnType<typeof setTimeout> | null = null
+let bubbleBottomBeforeSticker: string | null = null
+
+function showFloatingSticker(dataUrl: string, label: string): void {
+  const image = document.querySelector<HTMLImageElement>('#sticker-float')
+  if (!image) {
+    return
+  }
+  image.src = dataUrl
+  image.alt = label
+  image.hidden = false
+  image.classList.remove('is-visible')
+
+  // 贴在模型头顶：以气泡的基准位置为参照；贴纸出现时暂时让气泡淡出。
+  const bubble = document.querySelector<HTMLElement>('#bubble')
+  const baseBottom = bubble
+    ? Number.parseFloat(getComputedStyle(bubble).getPropertyValue('--bubble-bottom')) || 120
+    : 120
+  image.style.setProperty('--sticker-bottom', `${baseBottom + 6}px`)
+  if (bubble?.dataset.visible === 'true' && bubbleBottomBeforeSticker === null) {
+    bubbleBottomBeforeSticker = bubble.style.getPropertyValue('--bubble-bottom')
+    // 贴纸占 88px，再把气泡整体上移，两者同时可见。
+    bubble.style.setProperty('--bubble-bottom', `${baseBottom + 96}px`)
+  }
+
+  // 重新触发入场动画
+  void image.offsetWidth
+  image.classList.add('is-visible')
+  if (stickerHideTimer) {
+    clearTimeout(stickerHideTimer)
+  }
+  stickerHideTimer = setTimeout(() => {
+    image.classList.remove('is-visible')
+    if (bubble && bubbleBottomBeforeSticker !== null) {
+      bubble.style.setProperty('--bubble-bottom', bubbleBottomBeforeSticker)
+      bubbleBottomBeforeSticker = null
+    }
+    setTimeout(() => {
+      image.hidden = true
+      image.removeAttribute('src')
+    }, 220)
+  }, 3200)
 }
 
 function showBubble(text: string, duration = calculateBubbleDisplayDurationMs(text)): void {

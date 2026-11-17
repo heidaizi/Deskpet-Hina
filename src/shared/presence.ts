@@ -139,6 +139,19 @@ export interface PresenceRuntimeState {
   lastInteractionAt: number
 }
 
+export interface PresenceWorldState {
+  outfitId: string
+  outfitLabel: string
+  focusActive: boolean
+  focusMinutesLeft: number | null
+  emotionLabel?: string
+  fatigue?: number
+  patience?: number
+  nextEventTitle?: string
+  nextEventMinutes?: number
+  mediaTitle?: string
+}
+
 export interface PresenceContextV1 {
   now: number
   scene: TimeSceneContext
@@ -161,6 +174,7 @@ export interface PresenceContextV1 {
   }
   emotion?: EmotionState
   relationship?: RelationshipProfile
+  world?: PresenceWorldState
 }
 
 export interface PresenceCandidate {

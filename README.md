@@ -4,7 +4,7 @@ An Electron desktop pet of **Hina (空崎ヒナ)** from _Blue Archive_: 3D/2D
 renderer, streaming dialogue, local voice synthesis, long-term memory,
 opt-in screen awareness and three switchable outfits.
 
-**Current release: 1.2.0**
+**Current release: 1.3.0**
 
 > **Unofficial fan project.** Not affiliated with NEXON Games / Yostar.
 > The 3D model and the voice model are provided for **personal, non-commercial
@@ -31,6 +31,15 @@ opt-in screen awareness and three switchable outfits.
   `deepseek-flash`, now-playing music, calendar and reminders.
 - Proactive behaviour with "manners": quiet hours, focus detection,
   ignored-streak backoff, hourly greeting.
+- **Unified expression queue**: chat, reminders, presence and outfit
+  greetings never talk over each other.
+- **Shared world state**: outfit, mood, focus timer, schedule and music are
+  visible to chat, presence and speech styling.
+- **Routine companion**: pomodoro, water, sleep and calendar reminders.
+- **Sticker packs per outfit** with emotion labels, plus an automatic
+  emotion sticker option.
+- **Memory album**: weekly recap, on-this-day and a unified event stream for
+  outfit changes, focus sessions, reminders and stickers.
 
 ## Requirements
 
@@ -118,7 +127,9 @@ artwork and third-party components: see [NOTICE.md](NOTICE.md).
 # 中文说明
 
 一个 _蔚蓝档案_ **空崎日奈** 的 Electron 桌面宠物：3D/2D 渲染、流式对话、
-本地语音合成、长期记忆，以及可选的屏幕感知。
+本地语音合成、长期记忆、可选屏幕感知，以及三套可切换的服装。
+
+**当前版本：1.3.0**
 
 > **非官方同人项目**，与 NEXON Games / Yostar 无关。
 > 仓库内的 3D 模型与语音模型**仅允许个人、非商业使用**；
@@ -139,16 +150,21 @@ artwork and third-party components: see [NOTICE.md](NOTICE.md).
 - 可选感知：浏览器页面、屏幕截图（`deepseek-flash` 视觉）、
   正在播放的音乐、日历与提醒；
 - 有分寸的主动性：深夜静默、专注检测、连续被忽略后退让、每小时问候；
+- **统一表达队列**：聊天、提醒、陪伴和换装问候不会互相抢话；
+- **共享世界状态**：服装、情绪、专注计时、日程和音乐对聊天与语音生效；
+- **作息陪伴**：番茄钟、喝水、睡前和日程提醒；
+- **按服装分组的贴纸**，带情绪标签，支持自动情绪贴纸；
+- **回忆册**：本周回顾、往年今日，以及换装/专注/提醒/贴纸的统一事件流；
 
 ## 环境要求
 
-| 项目    | 要求                                      |
-| ------- | ----------------------------------------- |
-| macOS   | 13 及以上（推荐 Apple Silicon）           |
-| Node.js | 22 及以上（开发环境为 24）                |
-| 磁盘    | 依赖与缓存约 2GB                          |
-| API Key | DeepSeek API Key（在设置里填写）          |
-| 素材    | 3D 模型 / 语音片段 / 语音模型，**需自备** |
+| 项目    | 要求                                       |
+| ------- | ------------------------------------------ |
+| macOS   | 13 及以上（推荐 Apple Silicon）            |
+| Node.js | 22 及以上（开发环境为 24）                 |
+| 磁盘    | 依赖与缓存约 2GB                           |
+| API Key | DeepSeek API Key（在设置里填写）           |
+| 素材    | 3D 模型已包含；语音模型与官方语音/贴纸可选 |
 
 ## 快速开始
 

@@ -218,6 +218,31 @@
       </div>
 
       <div class="tab-panel" id="tab-memory" role="tabpanel" aria-labelledby="tab-button-memory">
+        <section class="panel memory-panel album-panel" aria-labelledby="album-title">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">MEMORY ALBUM</span>
+              <h2 id="album-title">回忆册</h2>
+            </div>
+            <div class="level-chip" id="album-days">0 天</div>
+          </div>
+          <p class="panel-copy">
+            把一起经历过的事按时间收好：重要时刻、对话沉淀，以及往年今天的片段。
+          </p>
+          <div class="album-stats" id="album-stats"></div>
+          <div class="album-block" id="album-week-block">
+            <h3>本周回顾</h3>
+            <div class="album-cards" id="album-week"></div>
+          </div>
+          <div class="album-block" id="album-onthisday-block" hidden>
+            <h3>往年今日</h3>
+            <div class="album-cards" id="album-onthisday"></div>
+          </div>
+          <h3 class="album-timeline-title">时间轴</h3>
+          <div class="album-timeline" id="album-timeline"></div>
+          <p class="resource-note" id="album-status">正在整理回忆…</p>
+        </section>
+
         <section class="panel memory-panel" aria-labelledby="profile-memory-title">
           <div class="section-title-row">
             <div>
@@ -322,6 +347,43 @@
         role="tabpanel"
         aria-labelledby="tab-button-behavior"
       >
+        <section class="panel" aria-labelledby="routine-title">
+          <span class="section-kicker">ROUTINE</span>
+          <h2 id="routine-title">作息与提醒</h2>
+
+          <label class="setting-row" for="water-reminder-enabled">
+            <span>
+              <strong>喝水提醒</strong>
+              <small>白天每 90 分钟提醒一次，夜间不打扰。</small>
+            </span>
+            <input id="water-reminder-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="calendar-reminder-enabled">
+            <span>
+              <strong>日程提醒</strong>
+              <small>日历里一小时内的日程会提前提醒；需要 Calendar 正在运行。</small>
+            </span>
+            <input id="calendar-reminder-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="sleep-reminder-enabled">
+            <span>
+              <strong>睡前提醒</strong>
+              <small>到点提醒你休息，每天只提醒一次。</small>
+            </span>
+            <input id="sleep-reminder-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="sleep-time">
+            <span>
+              <strong>睡觉时间</strong>
+              <small>睡前提醒的触发时间。</small>
+            </span>
+            <input id="sleep-time" type="time" value="23:30" />
+          </label>
+        </section>
+
         <section class="panel" aria-labelledby="behavior-title">
           <span class="section-kicker">CONTROLS</span>
           <h2 id="behavior-title">行为控制</h2>
@@ -360,6 +422,14 @@
               <small>空闲时偶尔播放官方日语语音，并配合对应的官方动作。</small>
             </span>
             <input id="random-voice-enabled" type="checkbox" />
+          </label>
+
+          <label class="setting-row" for="auto-sticker-enabled">
+            <span>
+              <strong>情绪贴纸</strong>
+              <small>回复带明显情绪时，自动附上一张当前服装的表情；中性回复不贴。</small>
+            </span>
+            <input id="auto-sticker-enabled" type="checkbox" />
           </label>
 
           <label class="setting-row" for="tts-engine">

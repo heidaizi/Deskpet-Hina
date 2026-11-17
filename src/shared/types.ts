@@ -207,6 +207,11 @@ export interface AppSettings {
   screenPerceptionEnabled: boolean
   screenPerceptionPaused: boolean
   conversationMemoryEnabled: boolean
+  autoStickerEnabled: boolean
+  waterReminderEnabled: boolean
+  sleepReminderEnabled: boolean
+  sleepTime: string
+  calendarReminderEnabled: boolean
   intelligenceLevel: 'off' | 'basic' | 'adaptive'
   ttsQuality: 'quality' | 'balanced' | 'speed'
   ttsEngine: 'irodori' | 'aivis'
@@ -218,12 +223,16 @@ export interface ChatMessageView {
   text: string
   at: number
   emotion?: string
+  /** 贴纸消息：对应素材 id；文本仍保留用于记录。 */
+  stickerId?: string
 }
 
 export interface ChatSendResult {
   ok: boolean
   message?: ChatMessageView
   error?: string
+  /** 还有几条后续消息会稍后到达。 */
+  followupCount?: number
 }
 
 export interface SemanticMemoryView {
@@ -410,6 +419,11 @@ export interface DeskpetApi {
         | 'screenPerceptionEnabled'
         | 'screenPerceptionPaused'
         | 'conversationMemoryEnabled'
+        | 'autoStickerEnabled'
+        | 'waterReminderEnabled'
+        | 'sleepReminderEnabled'
+        | 'sleepTime'
+        | 'calendarReminderEnabled'
         | 'intelligenceLevel'
         | 'ttsQuality'
         | 'ttsEngine'
@@ -431,10 +445,19 @@ export interface DeskpetApi {
   deleteEpisodicMemory: (id: string) => Promise<EpisodicMemory[]>
   clearEpisodicMemories: () => Promise<void>
   getConversationStats: () => Promise<{ turns: number }>
+  listMemoryEvents: () => Promise<import('./memory').MemoryEventView[]>
   clearConversationMemory: () => Promise<{ turns: number }>
   openChat: () => void
   getOutfitGreeting: (scene?: 'login' | 'return') => Promise<OutfitGreeting | null>
   getChatHistory: () => Promise<ChatMessageView[]>
+  getStickers: () => Promise<import('./stickers').StickerPackView>
+  sendSticker: (id: string) => Promise<ChatSendResult>
+  onChatSticker: (listener: (message: import('./types').ChatMessageView) => void) => () => void
+  onChatMessage: (listener: (message: import('./types').ChatMessageView) => void) => () => void
+  speakOutfitGreeting: (scene?: 'login' | 'return') => Promise<boolean>
+  notifyChatSegmentEnded: (segmentId: string) => void
+  notifyExpressionInterrupted: (segmentId: string) => void
+  onSticker: (listener: (sticker: import('./stickers').StickerView) => void) => () => void
   sendChatMessage: (text: string) => Promise<ChatSendResult>
   clearChatHistory: () => Promise<void>
   rememberSemanticMemory: (text: string) => Promise<SemanticMemoryView[]>

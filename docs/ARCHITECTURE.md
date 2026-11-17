@@ -66,6 +66,31 @@ macOS `say`。服装相关的官方语音由 `shared/official-voices-outfit-data
 - `domain/outfit-rotation.ts` 负责每 N 天自动轮换；
 - `domain/outfit-voice.ts` 提供各服装的登录/返回固定台词。
 
+### 统一表达队列
+
+`domain/expression/expression-queue.ts` 是主进程唯一的「说话出口」：
+
+- 聊天、提醒、presence、换装问候统一排队；
+- 按优先级抢占（聊天 > 提醒 > 问候 > 陪伴）；
+- 等渲染进程真实播放完成事件，再间隔 700ms 播下一段；
+- 外部打断会清空当前与待播内容，避免积压台词。
+
+### 共享世界状态
+
+`domain/world-state.ts` + `domain/world-state-service.ts`：
+
+- 汇总服装、情绪、关系、番茄钟、日程、音乐；
+- 聊天按需刷新，presence/场景陪伴读取同一份最新快照；
+- TTS 语速、自动贴纸也会参考这份状态。
+
+### 记忆事件流
+
+`domain/memory/memory-events.ts`：
+
+- 换装、专注、提醒、贴纸、聊天、陪伴写入同一事件文件；
+- 回忆册合并情节记忆/长期记忆后按文本去重展示；
+- 「往年今日」也读取事件流。
+
 ### 感知
 
 `perception/*` 读取浏览器页面、屏幕截图、音乐、日程，注入对话与主动规划。

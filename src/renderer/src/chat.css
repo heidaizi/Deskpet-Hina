@@ -177,3 +177,73 @@ button {
   opacity: 0.5;
   cursor: default;
 }
+
+.sticker-toggle {
+  align-self: flex-end;
+  margin-bottom: 6px;
+}
+
+.sticker-panel[hidden] {
+  display: none;
+}
+
+.sticker-panel {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px;
+  margin: 0 12px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sticker-panel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.sticker-option {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 68px;
+  padding: 4px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.sticker-option:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.sticker-option span {
+  font-size: 11px;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.sticker-option img,
+.sticker-image {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}
+
+.sticker-bubble {
+  padding: 4px;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+
+.sticker-image {
+  width: 96px;
+  height: 96px;
+  border-radius: 8px;
+}

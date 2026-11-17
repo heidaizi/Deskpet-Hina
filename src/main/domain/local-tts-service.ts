@@ -242,7 +242,9 @@ export class LocalTtsService {
 
     const voice = chooseLocalTtsVoice(line.text)
     const cacheKey = createHash('sha256')
-      .update(`${voice}\0${SPEECH_RATE}\0${line.text}`)
+      .update(
+        `${voice}\0${SPEECH_RATE}\0${line.caption}\0${line.seed}\0${line.durationScale}\0${line.text}`,
+      )
       .digest('hex')
     const existing = this.pending.get(cacheKey)
     if (existing) {

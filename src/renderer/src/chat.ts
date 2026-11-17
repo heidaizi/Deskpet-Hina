@@ -1,3 +1,4 @@
+import type { StickerView } from '@shared/stickers'
 import type { ChatMessageView } from '@shared/types'
 import './chat.css'
 
@@ -7,8 +8,13 @@ const form = requireElement<HTMLFormElement>('#chat-form')
 const input = requireElement<HTMLTextAreaElement>('#chat-input')
 const sendButton = requireElement<HTMLButtonElement>('#chat-send')
 const clearButton = requireElement<HTMLButtonElement>('#chat-clear')
+const stickerButton = requireElement<HTMLButtonElement>('#chat-sticker')
+const stickerPanel = requireElement<HTMLElement>('#sticker-panel')
 
 let busy = false
+let pendingFollowups = 0
+const pendingStickers: ChatMessageView[] = []
+const stickers = new Map<string, StickerView>()
 
 function requireElement<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector)
@@ -36,9 +42,18 @@ function appendMessage(message: ChatMessageView): void {
   row.className = `chat-row ${message.role === 'user' ? 'is-user' : 'is-pet'}`
   row.dataset.messageId = message.id
 
+  const sticker = message.stickerId ? stickers.get(message.stickerId) : undefined
   const bubble = document.createElement('div')
-  bubble.className = 'bubble'
-  bubble.textContent = message.text
+  bubble.className = sticker ? 'bubble sticker-bubble' : 'bubble'
+  if (sticker) {
+    const image = document.createElement('img')
+    image.src = sticker.dataUrl
+    image.alt = sticker.label
+    image.className = 'sticker-image'
+    bubble.append(image)
+  } else {
+    bubble.textContent = message.text
+  }
 
   const meta = document.createElement('div')
   meta.className = 'meta'
@@ -59,6 +74,56 @@ function renderEmpty(): void {
 
 function removeEmpty(): void {
   messages.querySelector('#chat-empty')?.remove()
+}
+
+async function refreshStickers(): Promise<void> {
+  try {
+    const pack = await window.deskpet.getStickers()
+    stickerPanel.replaceChildren()
+    stickers.clear()
+    if (pack.stickers.length === 0) {
+      stickerButton.hidden = true
+      stickerPanel.hidden = true
+      return
+    }
+    stickerButton.hidden = false
+    for (const sticker of pack.stickers) {
+      stickers.set(sticker.id, sticker)
+      const button = document.createElement('button')
+      button.type = 'button'
+      button.className = 'sticker-option'
+      button.title = sticker.adjective ? `${sticker.label} · ${sticker.adjective}` : sticker.label
+      const image = document.createElement('img')
+      image.src = sticker.dataUrl
+      image.alt = sticker.label
+      const caption = document.createElement('span')
+      caption.textContent = sticker.label
+      button.append(image, caption)
+      button.addEventListener('click', () => {
+        stickerPanel.hidden = true
+        stickerButton.setAttribute('aria-expanded', 'false')
+        void sendSticker(sticker.id)
+      })
+      stickerPanel.append(button)
+    }
+  } catch {
+    stickerButton.hidden = true
+  }
+}
+
+async function sendSticker(id: string): Promise<void> {
+  removeEmpty()
+  try {
+    const result = await window.deskpet.sendSticker(id)
+    if (result.ok && result.message) {
+      appendMessage(result.message)
+      setStatus('')
+    } else {
+      setStatus(result.error ?? '贴纸发送失败。', 'error')
+    }
+  } catch (error) {
+    setStatus(`贴纸发送失败：${String(error)}`, 'error')
+  }
 }
 
 function setBusy(next: boolean): void {
@@ -102,7 +167,8 @@ async function submit(): Promise<void> {
     const result = await window.deskpet.sendChatMessage(text)
     if (result.ok && result.message) {
       appendMessage(result.message)
-      setStatus('')
+      pendingFollowups = result.followupCount ?? 0
+      setStatus(pendingFollowups > 0 ? '日奈还在说…' : '')
     } else {
       setStatus(result.error ?? '没有得到回复。', 'error')
     }
@@ -110,8 +176,46 @@ async function submit(): Promise<void> {
     setStatus(`发送失败：${String(error)}`, 'error')
   } finally {
     setBusy(false)
+    while (pendingStickers.length > 0) {
+      const sticker = pendingStickers.shift()
+      if (sticker) {
+        appendMessage(sticker)
+      }
+    }
   }
 }
+
+window.deskpet.onChatMessage((message) => {
+  appendMessage(message)
+  pendingFollowups = Math.max(0, pendingFollowups - 1)
+  if (pendingFollowups === 0) {
+    setStatus('')
+  }
+})
+
+window.deskpet.onChatSticker((message) => {
+  if (busy) {
+    pendingStickers.push(message)
+    return
+  }
+  appendMessage(message)
+})
+
+stickerButton.addEventListener('click', () => {
+  const willOpen = stickerPanel.hidden
+  stickerPanel.hidden = !willOpen
+  stickerButton.setAttribute('aria-expanded', String(willOpen))
+  if (willOpen) {
+    void refreshStickers()
+  }
+})
+
+stickerPanel.addEventListener('click', (event) => {
+  if (event.target === stickerPanel) {
+    stickerPanel.hidden = true
+    stickerButton.setAttribute('aria-expanded', 'false')
+  }
+})
 
 form.addEventListener('submit', (event) => {
   event.preventDefault()
@@ -136,5 +240,6 @@ clearButton.addEventListener('click', async () => {
   }
 })
 
+void refreshStickers()
 void loadHistory()
 input.focus()

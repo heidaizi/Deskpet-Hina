@@ -6,6 +6,7 @@ import {
   type AiProactivePlan,
   type AiContextInput,
   type AiPetReply,
+  type AiReplyPart,
 } from '../../shared/ai-context'
 import type { ChatHistoryTurn } from './memory/conversation-buffer'
 import type { GlossaryEntry } from './glossary'
@@ -341,7 +342,13 @@ function withGlossary(systemPrompt: string, glossaryPrompt: string): string {
 }
 
 const CHAT_SYSTEM_PROMPT = `你是《蔚蓝档案》的空崎日奈，正在和老师聊天。
-- 用第一人称、简短自然的口语回答，1～2 句，不超过 60 字。
+- 默认只回 1 条消息：第一人称、简短自然的口语，1～2 句，不超过 60 字。
+- 只有当老师明确要求「讲讲 / 说说 / 详细说说 / 继续」或追问故事、经历、想法时，
+  才可以拆成 2～4 条连续消息：
+  - 第一条先回应，后面的 followups 逐条补充细节，不要重复；
+  - 每条 1～2 句、不超过 60 字，合起来像一次自然的讲述；
+  - 第一条不要停在「我就说说吧」这种开场白上，除非 followups 真的继续；
+  - 普通寒暄、问答、吐槽不要使用 followups。
 - 可以接住上文提到的话题；不知道就说不知道，不要编造共同经历。
 - 不要输出 Markdown、括号舞台说明或表情符号。
 - 不要声称执行过任何系统操作。
@@ -352,6 +359,12 @@ const CHAT_SYSTEM_PROMPT = `你是《蔚蓝档案》的空崎日奈，正在和�
 {
   "reply_zh": "中文气泡，最多60字",
   "reply_ja": "自然、适合语音朗读的日文台词，最多60字",
+  "followups": [
+    {
+      "reply_zh": "需要继续讲时才填的中文，最多60字",
+      "reply_ja": "对应的日文，最多60字"
+    }
+  ],
   "emotion": "neutral|tired|annoyed|stern|suspicious|soft|embarrassed|reluctant|warning|deadpan|calm",
   "action": "idle|look_at_cursor|happy|annoyed|embarrassed|surprised|wave|stretch|sleep",
   "confidence": 0.0
@@ -415,6 +428,24 @@ function normalizeContext(context: AiContextInput): AiContextInput {
     isWeekend: Boolean(context.isWeekend),
     ...(windowTitle ? { windowTitle } : {}),
     ...(selectedText ? { selectedText } : {}),
+    ...(context.world
+      ? {
+          world: {
+            ...(context.world.outfit ? { outfit: String(context.world.outfit).slice(0, 40) } : {}),
+            ...(context.world.emotion
+              ? { emotion: String(context.world.emotion).slice(0, 40) }
+              : {}),
+            ...(context.world.relationship
+              ? { relationship: String(context.world.relationship).slice(0, 40) }
+              : {}),
+            pomodoroMinutesLeft:
+              typeof context.world.pomodoroMinutesLeft === 'number' &&
+              Number.isFinite(context.world.pomodoroMinutesLeft)
+                ? Math.max(0, Math.round(context.world.pomodoroMinutesLeft))
+                : null,
+          },
+        }
+      : {}),
   }
 }
 
@@ -504,13 +535,42 @@ function parseReply(content: string): AiPetReply {
     typeof reply.confidence === 'number' && Number.isFinite(reply.confidence)
       ? Math.max(0, Math.min(1, reply.confidence))
       : 0.6
+  const followups = parseFollowups(reply.followups, replyZh, replyJa)
   return {
     reply_zh: replyZh,
     reply_ja: replyJa,
     emotion: reply.emotion,
     action: reply.action,
     confidence,
+    ...(followups.length > 0 ? { followups } : {}),
   }
+}
+
+/** 解析「继续讲」的后续消息；最多 3 条，去重并做基本清洗。 */
+export function parseFollowups(value: unknown, firstZh: string, firstJa: string): AiReplyPart[] {
+  if (!Array.isArray(value)) {
+    return []
+  }
+  const seen = new Set<string>([firstZh, firstJa])
+  const followups: AiReplyPart[] = []
+  for (const raw of value.slice(0, 8)) {
+    if (followups.length >= 3) {
+      break
+    }
+    if (!raw || typeof raw !== 'object') {
+      continue
+    }
+    const item = raw as Record<string, unknown>
+    const zh = normalizeReply(item.reply_zh, MAX_CHINESE_REPLY)
+    const ja = normalizeReply(item.reply_ja, MAX_JAPANESE_REPLY)
+    if (!zh || !ja || seen.has(zh) || seen.has(ja)) {
+      continue
+    }
+    seen.add(zh)
+    seen.add(ja)
+    followups.push({ reply_zh: zh, reply_ja: sanitizeJapaneseReply(ja) })
+  }
+  return followups
 }
 
 function parseProactivePlan(content: string, context: AiProactiveContext): AiProactivePlan {

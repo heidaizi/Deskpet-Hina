@@ -13,6 +13,7 @@ import {
   type PresenceRuntimeState,
   type PresenceSessionState,
   type PresenceTag,
+  type PresenceWorldState,
   type RelationshipProfile,
   type ReturnEpisode,
   type SpeechState,
@@ -152,6 +153,7 @@ export interface PresenceControllerOptions {
   random?: () => number
   getRuntime: () => PresenceBaseRuntime & PresencePetSnapshot
   getScenePerformance?: (context: PresenceContextV1) => PresenceCandidate | null
+  getWorld?: () => PresenceWorldState
   utility?: (
     candidate: PresenceCandidate,
     context: PresenceContextV1,
@@ -446,6 +448,7 @@ export class PresenceController {
       this.performanceState,
       this.emotionEnabled ? this.emotion : undefined,
       this.emotionEnabled ? getRelationshipProfile(runtime.affectionLevel) : undefined,
+      this.options.getWorld?.(),
     )
     this.currentIntensity = context.runtime.intensity
     if (!context.runtime.autonomyEnabled) {

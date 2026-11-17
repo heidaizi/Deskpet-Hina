@@ -261,6 +261,21 @@ export function normalizeSettings(raw: unknown): PetSettings {
       typeof candidate.aiProactiveEnabled === 'boolean' ? candidate.aiProactiveEnabled : false,
     aiWindowTitleEnabled:
       typeof candidate.aiWindowTitleEnabled === 'boolean' ? candidate.aiWindowTitleEnabled : false,
+    waterReminderEnabled:
+      typeof candidate.waterReminderEnabled === 'boolean' ? candidate.waterReminderEnabled : true,
+    sleepReminderEnabled:
+      typeof candidate.sleepReminderEnabled === 'boolean' ? candidate.sleepReminderEnabled : true,
+    sleepTime:
+      typeof candidate.sleepTime === 'string' &&
+      /^([01]\d|2[0-3]):[0-5]\d$/.test(candidate.sleepTime)
+        ? candidate.sleepTime
+        : '23:30',
+    calendarReminderEnabled:
+      typeof candidate.calendarReminderEnabled === 'boolean'
+        ? candidate.calendarReminderEnabled
+        : true,
+    autoStickerEnabled:
+      typeof candidate.autoStickerEnabled === 'boolean' ? candidate.autoStickerEnabled : true,
     conversationMemoryEnabled:
       typeof candidate.conversationMemoryEnabled === 'boolean'
         ? candidate.conversationMemoryEnabled

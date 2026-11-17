@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import { join } from 'node:path'
+import { StickerService } from '../domain/sticker-service'
 import { loadContent } from '../domain/content-loader'
 import { state } from '../app-state'
 import { DeepSeekKeyStore } from '../domain/deepseek-key-store'
@@ -12,6 +13,7 @@ import { ensureAivisEngine } from '../domain/aivis-engine'
 import { loadGlossary } from '../domain/glossary'
 import { ConversationBuffer } from '../domain/memory/conversation-buffer'
 import { LongTermMemory } from '../domain/memory/long-term-memory'
+import { MemoryEventStore } from '../domain/memory/memory-events'
 import { createEmbeddingService } from '../domain/memory/embedding-service'
 import { UserProfile } from '../domain/memory/user-profile'
 import { RelationshipState } from '../domain/relationship-state'
@@ -53,9 +55,13 @@ export function initializePetController(): void {
   })
   state.glossary = loadGlossary(join(app.getAppPath(), 'content', 'glossary.json'))
   state.longTermMemory = new LongTermMemory(app.getPath('userData'))
+  state.memoryEvents = new MemoryEventStore(app.getPath('userData'))
   state.userProfile = new UserProfile(app.getPath('userData'))
   state.relationshipState = new RelationshipState(app.getPath('userData'))
   initOutfitRotationStore(app.getPath('userData'))
+  state.stickerService = new StickerService(
+    join(app.getAppPath(), 'assets/characters/hina-swimsuit/private/stickers'),
+  )
   const embeddings = createEmbeddingService(app.getPath('userData'))
   state.longTermMemory.setEmbedder(embeddings.embed)
   void embeddings.warmup().then(async (ready) => {
@@ -157,6 +163,16 @@ export function updateAppSettings(
   ) {
     if (snapshot.settings.rendererId !== previousRendererId && !isApplyingRotation()) {
       noteManualOutfitChange()
+    }
+    if (snapshot.settings.rendererId !== previousRendererId) {
+      const outfit = snapshot.character.renderers.find(
+        (renderer) => renderer.id === snapshot.settings.rendererId,
+      )
+      state.memoryEvents?.record({
+        kind: 'outfit',
+        summary: `换上「${outfit?.label ?? '新服装'}」`,
+        importance: 2,
+      })
     }
     sendRendererModeChange(snapshot)
   }

@@ -20,6 +20,33 @@ export interface ProfileFactView {
   pinned: boolean
 }
 
+export const MEMORY_EVENT_KINDS = [
+  'outfit',
+  'routine',
+  'sticker',
+  'chat',
+  'presence',
+  'milestone',
+] as const
+export type MemoryEventKind = (typeof MEMORY_EVENT_KINDS)[number]
+
+export const MEMORY_EVENT_KIND_LABELS: Record<MemoryEventKind, string> = {
+  outfit: '换装',
+  routine: '作息',
+  sticker: '贴纸',
+  chat: '对话',
+  presence: '陪伴',
+  milestone: '重要时刻',
+}
+
+export interface MemoryEventView {
+  id: string
+  kind: MemoryEventKind
+  at: number
+  summary: string
+  importance: number
+}
+
 export interface LongTermMemoryView {
   id: string
   text: string

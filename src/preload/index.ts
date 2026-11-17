@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer, type IpcRendererEvent } from 'electron'
 import type {
   AppSettings,
   ChatMessageView,
@@ -100,6 +100,47 @@ const api: DeskpetApi = {
       import('@shared/types').OutfitGreeting | null
     >
   },
+  getStickers() {
+    return ipcRenderer.invoke('stickers:list') as Promise<
+      import('@shared/stickers').StickerPackView
+    >
+  },
+  sendSticker(id: string) {
+    return ipcRenderer.invoke('stickers:send', id) as Promise<ChatSendResult>
+  },
+  onSticker(listener: (sticker: import('@shared/stickers').StickerView) => void) {
+    const handler = (
+      _event: IpcRendererEvent,
+      sticker: import('@shared/stickers').StickerView,
+    ): void => {
+      listener(sticker)
+    }
+    ipcRenderer.on('pet:sticker', handler)
+    return () => ipcRenderer.removeListener('pet:sticker', handler)
+  },
+  notifyChatSegmentEnded(segmentId: string) {
+    ipcRenderer.send('chat:segment-ended', segmentId)
+  },
+  notifyExpressionInterrupted(segmentId: string) {
+    ipcRenderer.send('expression:interrupted', segmentId)
+  },
+  speakOutfitGreeting(scene = 'login') {
+    return ipcRenderer.invoke('outfit:speak-greeting', scene) as Promise<boolean>
+  },
+  onChatMessage(listener: (message: ChatMessageView) => void) {
+    const handler = (_event: IpcRendererEvent, message: ChatMessageView): void => {
+      listener(message)
+    }
+    ipcRenderer.on('chat:message', handler)
+    return () => ipcRenderer.removeListener('chat:message', handler)
+  },
+  onChatSticker(listener: (message: ChatMessageView) => void) {
+    const handler = (_event: IpcRendererEvent, message: ChatMessageView): void => {
+      listener(message)
+    }
+    ipcRenderer.on('chat:sticker', handler)
+    return () => ipcRenderer.removeListener('chat:sticker', handler)
+  },
   getChatHistory() {
     return ipcRenderer.invoke('chat:history') as Promise<ChatMessageView[]>
   },
@@ -165,6 +206,11 @@ const api: DeskpetApi = {
   },
   reportPerformanceEvent(event: PerformanceLifecycleEvent) {
     ipcRenderer.send('presence:performance-event', event)
+  },
+  listMemoryEvents() {
+    return ipcRenderer.invoke('memory:events-list') as Promise<
+      import('@shared/memory').MemoryEventView[]
+    >
   },
   listEpisodicMemories() {
     return ipcRenderer.invoke('presence:memory-list') as Promise<EpisodicMemory[]>

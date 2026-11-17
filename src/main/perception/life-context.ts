@@ -13,6 +13,8 @@ export interface ScheduleItem {
   kind: 'event' | 'reminder'
   title: string
   when?: string
+  /** 距离开始还有多少分钟（仅日程）。 */
+  minutesUntil?: number
 }
 
 const CACHE_MS = 5 * 60_000
@@ -74,7 +76,7 @@ if application "Calendar" is running then
     set out to ""
     repeat with c in calendars
       repeat with e in (every event of c whose start date ≥ dayStart and start date < dayEnd)
-        set out to out & (summary of e) & "|" & (start date of e as string) & linefeed
+        set out to out & (summary of e) & "|" & (((start date of e) - (current date)) div 60) & linefeed
       end repeat
     end repeat
     return out
@@ -84,9 +86,14 @@ return ""`
   const calendarOutput = await osascript(calendarScript, 6000)
   if (calendarOutput) {
     for (const line of calendarOutput.split('\n').slice(0, 5)) {
-      const [title, when] = line.split('|')
+      const [title, minutes] = line.split('|')
+      const parsed = Number(minutes)
       if (title?.trim()) {
-        items.push({ kind: 'event', title: title.trim(), when: when?.trim() })
+        items.push({
+          kind: 'event',
+          title: title.trim(),
+          minutesUntil: Number.isFinite(parsed) ? parsed : undefined,
+        })
       }
     }
   }
@@ -132,7 +139,15 @@ export function buildSchedulePrompt(items: readonly ScheduleItem[], now = new Da
   if (events.length > 0) {
     lines.push('今天的日程：')
     for (const event of events) {
-      lines.push(`- ${event.title}${event.when ? `（${event.when}）` : ''}`)
+      lines.push(
+        `- ${event.title}${
+          event.minutesUntil !== undefined
+            ? `（约 ${Math.max(0, event.minutesUntil)} 分钟后）`
+            : event.when
+              ? `（${event.when}）`
+              : ''
+        }`,
+      )
     }
   }
   if (reminders.length > 0) {

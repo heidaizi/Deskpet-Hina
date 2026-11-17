@@ -27,6 +27,7 @@
 | 素材           | 路径                                                   | 说明                     |
 | -------------- | ------------------------------------------------------ | ------------------------ |
 | 各服装官方语音 | `private/audio/outfit/<swimsuit\|dress\|normal>/*.ogg` | 登录、返回与日常互动语音 |
+| 各服装贴纸     | `private/stickers/hina-face/*.png`                     | 手动发送与自动情绪贴纸   |
 | 固定台词原声   | `private/audio/official-denoise45/*.wav`               | 泳装固定台词             |
 | 预生成语音     | `private/audio/generated-dialogue/*.wav`               | 无官方片段时的预生成 TTS |
 
@@ -52,6 +53,9 @@ assets/characters/hina-swimsuit/private/
     │   ├── swimsuit/
     │   ├── dress/
     │   └── normal/
+    ├── stickers/           # 可选：各服装贴纸
+    │   ├── manifest.json
+    │   └── hina-face/
     ├── official-denoise45/ # 可选
     └── generated-dialogue/ # 可选
 ```

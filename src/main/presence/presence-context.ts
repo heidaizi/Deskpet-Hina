@@ -2,6 +2,7 @@ import type {
   EmotionState,
   PresenceContextV1,
   PresenceRuntimeState,
+  PresenceWorldState,
   RelationshipProfile,
   SpeechState,
 } from '../../shared/presence'
@@ -22,6 +23,7 @@ export function createPresenceContext(
   performanceState: PerformanceState,
   emotion?: EmotionState,
   relationship?: RelationshipProfile,
+  world?: PresenceWorldState,
 ): PresenceContextV1 {
   return {
     now: scene.sampledAt,
@@ -45,6 +47,7 @@ export function createPresenceContext(
     },
     ...(emotion ? { emotion } : {}),
     ...(relationship ? { relationship } : {}),
+    ...(world ? { world } : {}),
   }
 }
 

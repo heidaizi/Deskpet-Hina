@@ -16,8 +16,10 @@
 
 ```
 audio/outfit/<swimsuit|dress|normal>/*.ogg   # 各服装官方语音
-audio/official-denoise45/*.wav               # 固定台词的官方原声
+audio/official-denoise45/*.wav               # 固定台词原声
 audio/generated-dialogue/*.wav               # 预生成语音
+stickers/hina-face/*.png                     # 各服装表情包
+stickers/manifest.json                       # 贴纸清单
 ```
 
-官方语音不随仓库分发；缺少时应用会自动改用 TTS 或跳过对应语音。
+官方语音、贴纸与训练数据不随仓库分发；缺少时应用会自动改用 TTS 或隐藏贴纸入口。

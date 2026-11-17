@@ -79,7 +79,17 @@ assets/characters/hina-swimsuit/private/audio/outfit/
 每套服装的登录、返回问候与日常互动优先使用对应片段；
 某个片段缺失时该场景自动改用 TTS，不会串用其他服装的声音。
 
-### 2.4 预生成语音（可选）
+### 2.4 各服装贴纸（可选）
+
+```
+assets/characters/hina-swimsuit/private/stickers/
+├── manifest.json
+└── hina-face/*.png
+```
+
+清单格式见 [STICKERS.md](STICKERS.md)；没有素材时聊天里的「贴纸」按钮会自动隐藏。
+
+### 2.5 预生成语音（可选）
 
 ```
 assets/characters/hina-swimsuit/private/audio/generated-dialogue/*.wav
@@ -187,7 +197,8 @@ Key 使用 macOS `safeStorage` 加密保存在本地。
 
 - 手动选择泳装 / 礼服 / 常服；
 - 开启「自动轮换服装」，间隔可选 1～14 天（默认 3 天）；
-- 手动切换会重置轮换计时。
+- 手动切换会重置轮换计时；
+- 行为页提供番茄钟、喝水提醒、睡前提醒和日程提醒开关。
 
 ### 5.5 语音开关
 

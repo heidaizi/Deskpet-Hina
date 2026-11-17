@@ -1,5 +1,17 @@
-import { clearChatHistory, listChatHistory, sendChatMessage, showChatWindow } from '../chat/bridge'
+import {
+  clearChatHistory,
+  listChatHistory,
+  sendChatMessage,
+  sendSticker,
+  showChatWindow,
+} from '../chat/bridge'
 import { isChatSender } from './validators'
+import {
+  enqueueExpression,
+  EXPRESSION_PRIORITY,
+  interruptExpression,
+  settleExpressionDelivery,
+} from '../expression/expression-queue'
 import {
   getActiveLease,
   getDecisionObservationCount,
@@ -75,6 +87,9 @@ export function registerIpcHandlers(): void {
   ipcMain.on('presence:delivery-event', (event, value: unknown) => {
     if (isPetSender(event.sender) && isDeliveryLifecycleEvent(value)) {
       state.presenceController?.handleDeliveryEvent(value)
+      if (value.type === 'speech_completed' || value.type === 'speech_interrupted') {
+        settleExpressionDelivery(value.deliveryId)
+      }
       if (value.type === 'speech_interrupted') {
         releaseDecision('presence')
       }
@@ -95,6 +110,40 @@ export function registerIpcHandlers(): void {
     }
   })
 
+  ipcMain.handle('outfit:speak-greeting', (_event, scene) => {
+    const outfitId =
+      state.petController?.getSettings().rendererId ||
+      state.petController
+        ?.getSettingsSnapshot()
+        .character.renderers.find(
+          (renderer) => renderer.mode === '3d' && renderer.status === 'available',
+        )?.id ||
+      ''
+    const safeScene = scene === 'return' ? 'return' : 'login'
+    const line = getOutfitGreeting(join(app.getAppPath(), 'content'), outfitId, safeScene)
+    if (!line) {
+      return false
+    }
+    enqueueExpression({
+      source: 'greeting',
+      priority: EXPRESSION_PRIORITY.greeting,
+      ttlMs: 60_000,
+      segments: [
+        {
+          command: {
+            action: line.action,
+            expression: line.expression,
+            dialogue: line.dialogue,
+            spokenText: line.spokenText,
+            voice: line.voice,
+            speakDialogue: true,
+          },
+        },
+      ],
+    })
+    return true
+  })
+
   ipcMain.handle('outfit:greeting', (_event, scene) => {
     const outfitId =
       state.petController?.getSettings().rendererId ||
@@ -106,6 +155,30 @@ export function registerIpcHandlers(): void {
       ''
     const safeScene = scene === 'return' ? 'return' : 'login'
     return getOutfitGreeting(join(app.getAppPath(), 'content'), outfitId, safeScene)
+  })
+
+  ipcMain.handle('stickers:list', () => {
+    if (!state.stickerService) {
+      return { stickers: [], directory: '', error: '贴纸服务未初始化。' }
+    }
+    const outfitId = state.petController?.getSettings().rendererId || 'hina-swimsuit'
+    return state.stickerService.listFor(outfitId)
+  })
+
+  ipcMain.handle('stickers:send', (_event, id: unknown) => {
+    return typeof id === 'string' ? sendSticker(id) : { ok: false, error: '无效的贴纸。' }
+  })
+
+  ipcMain.on('expression:interrupted', (_event, segmentId: unknown) => {
+    if (typeof segmentId === 'string') {
+      interruptExpression(segmentId)
+    }
+  })
+
+  ipcMain.on('chat:segment-ended', (_event, segmentId: unknown) => {
+    if (typeof segmentId === 'string') {
+      settleExpressionDelivery(segmentId)
+    }
   })
 
   ipcMain.on('chat:open', () => {
@@ -228,6 +301,10 @@ export function registerIpcHandlers(): void {
     }
     state.userProfile.clear()
     return state.userProfile.list()
+  })
+
+  ipcMain.handle('memory:events-list', () => {
+    return state.memoryEvents?.list(200) ?? []
   })
 
   ipcMain.handle('memory:longterm-list', (event) => {
